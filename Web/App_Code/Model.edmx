@@ -1,0 +1,524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="portalModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="portalModelStoreContainer">
+          <EntitySet Name="PortalCategory" EntityType="portalModel.Store.PortalCategory" store:Type="Tables" store:Name="PortalCategory">
+            <DefiningQuery>SELECT 
+      [PortalCategory].[ID] AS [ID], 
+      [PortalCategory].[Name] AS [Name], 
+      [PortalCategory].[ParentID] AS [ParentID], 
+      [PortalCategory].[Seq] AS [Seq], 
+      [PortalCategory].[State] AS [State], 
+      [PortalCategory].[CreateDate] AS [CreateDate]
+      FROM [PortalCategory] AS [PortalCategory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PortalContent" EntityType="portalModel.Store.PortalContent" store:Type="Tables" store:Name="PortalContent">
+            <DefiningQuery>SELECT 
+      [PortalContent].[ID] AS [ID], 
+      [PortalContent].[Name] AS [Name], 
+      [PortalContent].[CategoryID] AS [CategoryID], 
+      [PortalContent].[DisplayName] AS [DisplayName], 
+      [PortalContent].[Description] AS [Description], 
+      [PortalContent].[Type] AS [Type], 
+      [PortalContent].[ImageURL] AS [ImageURL], 
+      [PortalContent].[ImageURL2] AS [ImageURL2], 
+      [PortalContent].[URL] AS [URL], 
+      [PortalContent].[State] AS [State], 
+      [PortalContent].[CreateDate] AS [CreateDate], 
+      [PortalContent].[Extend1] AS [Extend1], 
+      [PortalContent].[Extend2] AS [Extend2], 
+      [PortalContent].[Extend3] AS [Extend3]
+      FROM [PortalContent] AS [PortalContent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PortalDocument" EntityType="portalModel.Store.PortalDocument" store:Type="Tables" store:Name="PortalDocument">
+            <DefiningQuery>SELECT 
+      [PortalDocument].[ID] AS [ID], 
+      [PortalDocument].[Name] AS [Name], 
+      [PortalDocument].[DisplayName] AS [DisplayName], 
+      [PortalDocument].[PortalMenuID] AS [PortalMenuID], 
+      [PortalDocument].[PortalMenuCode] AS [PortalMenuCode], 
+      [PortalDocument].[URL] AS [URL], 
+      [PortalDocument].[Description] AS [Description], 
+      [PortalDocument].[ImageURL] AS [ImageURL], 
+      [PortalDocument].[ImageURL2] AS [ImageURL2], 
+      [PortalDocument].[Seq] AS [Seq], 
+      [PortalDocument].[State] AS [State], 
+      [PortalDocument].[CreateDate] AS [CreateDate], 
+      [PortalDocument].[Extend1] AS [Extend1], 
+      [PortalDocument].[Extend2] AS [Extend2], 
+      [PortalDocument].[Extend3] AS [Extend3]
+      FROM [PortalDocument] AS [PortalDocument]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PortalManager" EntityType="portalModel.Store.PortalManager" store:Type="Tables" store:Name="PortalManager">
+            <DefiningQuery>SELECT 
+      [PortalManager].[ID] AS [ID], 
+      [PortalManager].[UserName] AS [UserName], 
+      [PortalManager].[DisplayName] AS [DisplayName], 
+      [PortalManager].[Password] AS [Password], 
+      [PortalManager].[State] AS [State], 
+      [PortalManager].[CreateDate] AS [CreateDate]
+      FROM [PortalManager] AS [PortalManager]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PortalMenu" EntityType="portalModel.Store.PortalMenu" store:Type="Tables" store:Name="PortalMenu">
+            <DefiningQuery>SELECT 
+      [PortalMenu].[ID] AS [ID], 
+      [PortalMenu].[Name] AS [Name], 
+      [PortalMenu].[Code] AS [Code], 
+      [PortalMenu].[Description] AS [Description], 
+      [PortalMenu].[Type] AS [Type], 
+      [PortalMenu].[ParentID] AS [ParentID], 
+      [PortalMenu].[ParentCode] AS [ParentCode], 
+      [PortalMenu].[DisplayName] AS [DisplayName], 
+      [PortalMenu].[URL] AS [URL], 
+      [PortalMenu].[ImageUrl] AS [ImageUrl], 
+      [PortalMenu].[Seq] AS [Seq], 
+      [PortalMenu].[State] AS [State], 
+      [PortalMenu].[CreateDate] AS [CreateDate]
+      FROM [PortalMenu] AS [PortalMenu]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PortalUser" EntityType="portalModel.Store.PortalUser" store:Type="Tables" store:Name="PortalUser">
+            <DefiningQuery>SELECT 
+      [PortalUser].[ID] AS [ID], 
+      [PortalUser].[UserName] AS [UserName], 
+      [PortalUser].[DisplayName] AS [DisplayName], 
+      [PortalUser].[Password] AS [Password], 
+      [PortalUser].[State] AS [State], 
+      [PortalUser].[CreateDate] AS [CreateDate]
+      FROM [PortalUser] AS [PortalUser]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalCategory”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="Seq" Type="int" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalContent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalContent">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="Extend1" />
+            <PropertyRef Name="Extend2" />
+            <PropertyRef Name="Extend3" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="4000" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ImageURL2" Type="nvarchar" MaxLength="1024" />
+          <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Extend1" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Extend2" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Extend3" Type="nvarchar" Nullable="false" MaxLength="1024" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalDocument”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PortalMenuID" />
+            <PropertyRef Name="PortalMenuCode" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="ImageURL" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="PortalMenuID" Type="int" Nullable="false" />
+          <Property Name="PortalMenuCode" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="4000" />
+          <Property Name="ImageURL" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ImageURL2" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Seq" Type="int" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Extend1" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Extend2" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Extend3" Type="nvarchar" MaxLength="1024" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalManager”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalManager">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalMenu”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="ParentCode" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="ImageUrl" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2048" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="ParentCode" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ImageUrl" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Seq" Type="int" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.PortalUser”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="PortalUser">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortalModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PortalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PortalCategory" EntityType="PortalModel.PortalCategory" />
+          <EntitySet Name="PortalContent" EntityType="PortalModel.PortalContent" />
+          <EntitySet Name="PortalDocument" EntityType="PortalModel.PortalDocument" />
+          <EntitySet Name="PortalManager" EntityType="PortalModel.PortalManager" />
+          <EntitySet Name="PortalUser" EntityType="PortalModel.PortalUser" />
+          <EntitySet Name="PortalMenu" EntityType="PortalModel.PortalMenu" />
+        </EntityContainer>
+        <EntityType Name="PortalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" Nullable="false" />
+          <Property Name="Seq" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortalContent">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+            <PropertyRef Name="Extend1" />
+            <PropertyRef Name="Extend2" />
+            <PropertyRef Name="Extend3" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL2" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Extend1" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Extend2" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Extend3" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PortalDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="PortalMenuID" />
+            <PropertyRef Name="PortalMenuCode" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="ImageURL" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="PortalMenuID" Type="Int32" Nullable="false" />
+          <Property Name="PortalMenuCode" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ImageURL2" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Seq" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Extend1" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Extend2" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Extend3" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PortalManager">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortalUser">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="DisplayName" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortalMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="ParentCode" />
+            <PropertyRef Name="URL" />
+            <PropertyRef Name="ImageUrl" />
+            <PropertyRef Name="Seq" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="CreateDate" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" />
+          <Property Type="String" Name="ParentCode" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DisplayName" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUrl" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Seq" Nullable="false" />
+          <Property Type="Boolean" Name="State" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="portalModelStoreContainer" CdmEntityContainer="PortalEntities">
+          <EntitySetMapping Name="PortalCategory">
+            <EntityTypeMapping TypeName="PortalModel.PortalCategory">
+              <MappingFragment StoreEntitySet="PortalCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalContent">
+            <EntityTypeMapping TypeName="PortalModel.PortalContent">
+              <MappingFragment StoreEntitySet="PortalContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageURL2" ColumnName="ImageURL2" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Extend1" ColumnName="Extend1" />
+                <ScalarProperty Name="Extend2" ColumnName="Extend2" />
+                <ScalarProperty Name="Extend3" ColumnName="Extend3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalDocument">
+            <EntityTypeMapping TypeName="PortalModel.PortalDocument">
+              <MappingFragment StoreEntitySet="PortalDocument">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="PortalMenuID" ColumnName="PortalMenuID" />
+                <ScalarProperty Name="PortalMenuCode" ColumnName="PortalMenuCode" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageURL2" ColumnName="ImageURL2" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Extend1" ColumnName="Extend1" />
+                <ScalarProperty Name="Extend2" ColumnName="Extend2" />
+                <ScalarProperty Name="Extend3" ColumnName="Extend3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalManager">
+            <EntityTypeMapping TypeName="PortalModel.PortalManager">
+              <MappingFragment StoreEntitySet="PortalManager">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalUser">
+            <EntityTypeMapping TypeName="PortalModel.PortalUser">
+              <MappingFragment StoreEntitySet="PortalUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalMenu">
+            <EntityTypeMapping TypeName="PortalModel.PortalMenu">
+              <MappingFragment StoreEntitySet="PortalMenu">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="PortalModel.PortalCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.16105224609375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.PortalContent" Width="1.5" PointX="2.75" PointY="0.75" Height="3.6892097981770826" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.PortalDocument" Width="1.5" PointX="4.75" PointY="0.75" Height="3.8802294921874996" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.PortalManager" Width="1.5" PointX="0.75" PointY="5.75" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.PortalUser" Width="1.5" PointX="4.75" PointY="5.75" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.PortalMenu" Width="1.5" PointX="7.375" PointY="0.75" Height="3.4981901041666674" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,56 @@
+﻿body
+{
+    background: #f1f1f1;
+    color: #444;
+    display: block;
+}
+h1
+{
+    text-align: center;
+}
+.message
+{
+    color: #f00;
+    font-size: 12px;
+}
+
+/*登录页样式*/
+#loginPanel
+{
+    padding-top: 12%;
+}
+#loginPanel form
+{
+    background: #fff;
+    margin: auto;
+    height: 220px;
+    width: 320px;
+    padding: 7px 24px 46px;
+    font-family: 微软雅黑;
+    font-size: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+#loginPanel .textbox
+{
+    background: #fbfbfb;
+    padding: 3px;
+    width: 240px;
+    margin-left: 7px;
+    margin-top: 7px;
+    height: 30px;
+    border: 1px solid #ddd;
+}
+#loginPanel .submit
+{
+    text-align: center;
+}
+#loginPanel .submit input
+{
+    margin-top: 7px;
+    padding: 0px 12px,2px,12px;
+    height: 30px;
+    background: #2ea2cc;
+    border: 1px solid #0074a2;
+    color: #fff;
+}
