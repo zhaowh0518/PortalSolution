@@ -45,6 +45,15 @@ public class PortalMenuBusiness : BaseBuiness
         }
     }
     /// <summary>
+    /// 根据ID得到唯一的菜单
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public PortalMenu GetPortalMenu(int id)
+    {
+        return DBContext.PortalMenu.Where(p => p.ID == id).SingleOrDefault();
+    }
+    /// <summary>
     /// 添加菜单
     /// </summary>
     /// <param name="item"></param>

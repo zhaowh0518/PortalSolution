@@ -30,6 +30,25 @@ public class PortalDocumentBusiness : BaseBuiness
     /// 获取指定菜单下以及菜单的子类下的所有文档
     /// </summary>
     /// <returns></returns>
+    public List<PortalDocument> GetMenuPortalDocumentList(int id)
+    {
+        var c = from p in DBContext.PortalDocument
+                join q in DBContext.PortalMenu on p.PortalMenuID equals q.ID
+                where p.State == true & (q.ID == id | q.ParentID == id)
+                select p;
+        if (c != null && c.Count() > 0)
+        {
+            return c.ToList();
+        }
+        else
+        {
+            return new List<PortalDocument>();
+        }
+    }
+    /// <summary>
+    /// 获取指定菜单下以及菜单的子类下的所有文档
+    /// </summary>
+    /// <returns></returns>
     public List<PortalDocument> GetMenuPortalDocumentList(string menuCode)
     {
         var c = from p in DBContext.PortalDocument
@@ -44,6 +63,15 @@ public class PortalDocumentBusiness : BaseBuiness
         {
             return new List<PortalDocument>();
         }
+    }
+    /// <summary>
+    /// 获取文档
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public PortalDocument GetPortalDocument(int id)
+    {
+        return DBContext.PortalDocument.Where(p => p.ID == id).SingleOrDefault();
     }
     /// <summary>
     /// 添加文档
