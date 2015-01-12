@@ -6,16 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="portalModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="portalModelStoreContainer">
-          <EntitySet Name="PortalCategory" EntityType="portalModel.Store.PortalCategory" store:Type="Tables" store:Name="PortalCategory">
-            <DefiningQuery>SELECT 
-      [PortalCategory].[ID] AS [ID], 
-      [PortalCategory].[Name] AS [Name], 
-      [PortalCategory].[ParentID] AS [ParentID], 
-      [PortalCategory].[Seq] AS [Seq], 
-      [PortalCategory].[State] AS [State], 
-      [PortalCategory].[CreateDate] AS [CreateDate]
-      FROM [PortalCategory] AS [PortalCategory]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="PortalCategory" EntityType="portalModel.Store.PortalCategory" store:Type="Tables" />
           <EntitySet Name="PortalContent" EntityType="portalModel.Store.PortalContent" store:Type="Tables" store:Name="PortalContent">
             <DefiningQuery>SELECT 
       [PortalContent].[ID] AS [ID], 
@@ -90,25 +81,26 @@
       [PortalUser].[CreateDate] AS [CreateDate]
       FROM [PortalUser] AS [PortalUser]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="SysConfig" EntityType="portalModel.Store.SysConfig" store:Type="Tables" store:Name="SysConfig">
+            <DefiningQuery>SELECT 
+      [SysConfig].[ID] AS [ID], 
+      [SysConfig].[Name] AS [Name], 
+      [SysConfig].[Code] AS [Code], 
+      [SysConfig].[Value] AS [Value], 
+      [SysConfig].[Description] AS [Description]
+      FROM [SysConfig] AS [SysConfig]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-        <!--生成过程中发现错误:
-      警告 6002: 表/视图“main.PortalCategory”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
-      -->
         <EntityType Name="PortalCategory">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="ParentID" />
-            <PropertyRef Name="Seq" />
-            <PropertyRef Name="State" />
-            <PropertyRef Name="CreateDate" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1024" />
-          <Property Name="ParentID" Type="int" Nullable="false" />
-          <Property Name="Seq" Type="int" Nullable="false" />
-          <Property Name="State" Type="bit" Nullable="false" />
-          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Seq" Type="int" />
+          <Property Name="State" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
       警告 6002: 表/视图“main.PortalContent”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
@@ -243,34 +235,35 @@
           <Property Name="State" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“main.SysConfig”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="SysConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+        </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PortalModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="PortalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PortalCategory" EntityType="PortalModel.PortalCategory" />
           <EntitySet Name="PortalContent" EntityType="PortalModel.PortalContent" />
           <EntitySet Name="PortalDocument" EntityType="PortalModel.PortalDocument" />
           <EntitySet Name="PortalManager" EntityType="PortalModel.PortalManager" />
           <EntitySet Name="PortalUser" EntityType="PortalModel.PortalUser" />
           <EntitySet Name="PortalMenu" EntityType="PortalModel.PortalMenu" />
+          <EntitySet Name="SysConfig" EntityType="PortalModel.SysConfig" />
+          <EntitySet Name="PortalCategory" EntityType="PortalModel.PortalCategory" />
         </EntityContainer>
-        <EntityType Name="PortalCategory">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="ParentID" />
-            <PropertyRef Name="Seq" />
-            <PropertyRef Name="State" />
-            <PropertyRef Name="CreateDate" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="ParentID" Type="Int32" Nullable="false" />
-          <Property Name="Seq" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Boolean" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
-        </EntityType>
         <EntityType Name="PortalContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -389,24 +382,36 @@
           <Property Type="Boolean" Name="State" Nullable="false" />
           <Property Type="DateTime" Name="CreateDate" Nullable="false" />
         </EntityType>
+        <EntityType Name="SysConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PortalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ParentID" />
+          <Property Type="Int32" Name="Seq" />
+          <Property Type="Boolean" Name="State" />
+          <Property Type="DateTime" Name="CreateDate" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="portalModelStoreContainer" CdmEntityContainer="PortalEntities">
-          <EntitySetMapping Name="PortalCategory">
-            <EntityTypeMapping TypeName="PortalModel.PortalCategory">
-              <MappingFragment StoreEntitySet="PortalCategory">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Seq" ColumnName="Seq" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PortalContent">
             <EntityTypeMapping TypeName="PortalModel.PortalContent">
               <MappingFragment StoreEntitySet="PortalContent">
@@ -491,6 +496,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SysConfig">
+            <EntityTypeMapping TypeName="PortalModel.SysConfig">
+              <MappingFragment StoreEntitySet="SysConfig">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalCategory">
+            <EntityTypeMapping TypeName="PortalModel.PortalCategory">
+              <MappingFragment StoreEntitySet="PortalCategory">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -512,12 +540,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model">
-        <EntityTypeShape EntityType="PortalModel.PortalCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.16105224609375" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.PortalContent" Width="1.5" PointX="2.75" PointY="0.75" Height="3.6892097981770826" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.PortalDocument" Width="1.5" PointX="4.75" PointY="0.75" Height="3.8802294921874996" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.PortalManager" Width="1.5" PointX="0.75" PointY="5.75" Height="2.1610522460937496" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.PortalUser" Width="1.5" PointX="4.75" PointY="5.75" Height="2.1610522460937496" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.PortalMenu" Width="1.5" PointX="7.375" PointY="0.75" Height="3.4981901041666674" />
+        <EntityTypeShape EntityType="PortalModel.SysConfig" Width="1.5" PointX="7.375" PointY="5.75" Height="1.9900325520833331" />
+        <EntityTypeShape EntityType="PortalModel.PortalCategory" Width="1.5" PointX="0.5" PointY="2.375" Height="2.1610522460937496" />
       </Diagram>
     </Diagrams>
   </Designer>

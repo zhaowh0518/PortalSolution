@@ -9,9 +9,10 @@ using PortalModel;
 /// </summary>
 public class BaseBuiness
 {
+    private static PortalEntities _db = new PortalEntities();
     /// <summary>
     /// 数据库连接
     /// </summary>
-    public PortalEntities DBContext { get { return new PortalEntities(); } }
+    public static PortalEntities DBContext { get { return _db; } }
 
 }

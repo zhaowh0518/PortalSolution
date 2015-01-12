@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>登录</title>
-    <link type="text/css" rel="stylesheet" href="~/Content/Admin.css" />
+    <link type="text/css" rel="stylesheet" href="~/Styles/Admin.css" />
 </head>
 <body>
     <div id="loginPanel">
