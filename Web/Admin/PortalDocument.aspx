@@ -48,6 +48,14 @@
                     </tr>
                     <tr>
                         <td>
+                            简介：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox" Width="530px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             描述：
                         </td>
                         <td>

@@ -54,7 +54,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         {
             int idx = fileImage.PostedFile.FileName.LastIndexOf(".");
             string suffix = fileImage.PostedFile.FileName.Substring(idx);//获得上传的图片的后缀名 
-            fileName = string.Format("{0}.{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), suffix);
+            fileName = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), suffix);
             fileImage.PostedFile.SaveAs(string.Format("{0}\\Resources\\Images\\{1}", AppDomain.CurrentDomain.BaseDirectory, fileName));
         }
         return fileName;
@@ -66,6 +66,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtName.Text = doc.Name;
         txtSeq.Text = doc.Seq.ToString();
         txtURL.Text = doc.URL;
+        txtDisplayName.Text = doc.DisplayName;
         eWebEditor1.Value = doc.Description;
         hiddenImageURL.Value = string.Format("../Resources/Images/{0}", doc.ImageURL);
     }
@@ -92,10 +93,18 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
                 doc.URL = txtURL.Text;
                 doc.State = cbState.Checked;
                 doc.Description = eWebEditor1.Value;
-                doc.ImageURL = SaveImage();
+                doc.DisplayName = txtDisplayName.Text;
+                if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
+                {
+                    doc.ImageURL = SaveImage();
+                }
+                else
+                {
+                    doc.ImageURL = hiddenImageURL.Value;
+                }
                 if (string.IsNullOrEmpty(hiddenID.Value)) //添加
                 {
-                    _portalDocumentBusiness.AddPortalDocument(doc);
+                    hiddenID.Value = _portalDocumentBusiness.AddPortalDocument(doc).ToString();
                 }
                 else
                 {

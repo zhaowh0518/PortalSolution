@@ -26,6 +26,8 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
         PortalMenu menu = _portalMenuBusiness.GetPortalMenu(id);
         txtName.Text = menu.Name;
         txtSeq.Text = menu.Seq.ToString();
+        txtCode.Text = menu.Code;
+        txtURL.Text = menu.URL;
         cbState.Checked = (bool)menu.State;
     }
     protected void btnAdd_Click(object sender, EventArgs e)

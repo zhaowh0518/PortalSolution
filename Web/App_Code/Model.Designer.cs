@@ -176,6 +176,22 @@ namespace PortalModel
             }
         }
         private ObjectSet<PortalDocument> _PortalDocument;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalComment> PortalComment
+        {
+            get
+            {
+                if ((_PortalComment == null))
+                {
+                    _PortalComment = base.CreateObjectSet<PortalComment>("PortalComment");
+                }
+                return _PortalComment;
+            }
+        }
+        private ObjectSet<PortalComment> _PortalComment;
 
         #endregion
 
@@ -235,6 +251,14 @@ namespace PortalModel
         public void AddToPortalDocument(PortalDocument portalDocument)
         {
             base.AddObject("PortalDocument", portalDocument);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalComment EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalComment(PortalComment portalComment)
+        {
+            base.AddObject("PortalComment", portalComment);
         }
 
         #endregion
@@ -416,6 +440,207 @@ namespace PortalModel
         private Nullable<global::System.DateTime> _CreateDate;
         partial void OnCreateDateChanging(Nullable<global::System.DateTime> value);
         partial void OnCreateDateChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PortalModel", Name="PortalComment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PortalComment : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 PortalComment 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        public static PortalComment CreatePortalComment(global::System.Int32 id)
+        {
+            PortalComment portalComment = new PortalComment();
+            portalComment.ID = id;
+            return portalComment;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserID;
+        partial void OnUserIDChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ContentID
+        {
+            get
+            {
+                return _ContentID;
+            }
+            set
+            {
+                OnContentIDChanging(value);
+                ReportPropertyChanging("ContentID");
+                _ContentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentID");
+                OnContentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ContentID;
+        partial void OnContentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Comment
+        {
+            get
+            {
+                return _Comment;
+            }
+            set
+            {
+                OnCommentChanging(value);
+                ReportPropertyChanging("Comment");
+                _Comment = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Comment");
+                OnCommentChanged();
+            }
+        }
+        private global::System.String _Comment;
+        partial void OnCommentChanging(global::System.String value);
+        partial void OnCommentChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreateDate
+        {
+            get
+            {
+                return _CreateDate;
+            }
+            set
+            {
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreateDate;
+        partial void OnCreateDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreateDateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Type;
+        partial void OnTypeChanging(Nullable<global::System.Int32> value);
+        partial void OnTypeChanged();
 
         #endregion
 

@@ -74,7 +74,7 @@ public class PortalDocumentBusiness : BaseBuiness
         return DBContext.PortalDocument.Where(p => p.ID == id).SingleOrDefault();
     }
     /// <summary>
-    /// 添加文档
+    /// 添加文档,返回文档的ID
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
@@ -90,8 +90,11 @@ public class PortalDocumentBusiness : BaseBuiness
             item.ID = c.ID + 1;
         }
         item.CreateDate = DateTime.Now;
+        //处理PortalMenuCode
+        item.PortalMenuCode = new PortalMenuBusiness().GetPortalMenu(item.PortalMenuID).Code;
         DBContext.PortalDocument.AddObject(item);
-        return DBContext.SaveChanges();
+        DBContext.SaveChanges();
+        return item.ID;
     }
     /// <summary>
     /// 更新文档

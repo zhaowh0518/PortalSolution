@@ -54,7 +54,7 @@ public class PortalMenuBusiness : BaseBuiness
         return DBContext.PortalMenu.Where(p => p.ID == id).SingleOrDefault();
     }
     /// <summary>
-    /// 添加菜单
+    /// 添加菜单,返回菜单的ID
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
@@ -70,8 +70,11 @@ public class PortalMenuBusiness : BaseBuiness
             item.ID = c.ID + 1;
         }
         item.CreateDate = DateTime.Now;
+        //处理ParentCode
+        item.ParentCode = GetPortalMenu(item.ParentID).Code;
         DBContext.PortalMenu.AddObject(item);
-        return DBContext.SaveChanges();
+        DBContext.SaveChanges();
+        return item.ID;
     }
     /// <summary>
     /// 更新菜单
