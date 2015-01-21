@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="loginPanel">
-        <form action="/Web/Login" method="post" onsubmit="return doLogin(this)" runat="server">
+        <form id="form1" runat="server">
         <div>
             <h1>
                 欢迎登录！
@@ -16,17 +16,17 @@
             <p>
                 <label for="txtUserName" class="lbTitle">
                     用户名:</label>
-                <input type="text" id="txtUserName" name="txtUserName" class="textbox" />
+                <input type="text" id="txtUserName" name="txtUserName" class="textbox" runat="server" />
             </p>
             <p>
                 <label for="txtPassword" class="lbTitle">
                     密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
-                <input type="password" id="txtPassword" name="txtPassword" class="textbox" />
+                <input type="password" id="txtPassword" name="txtPassword" class="textbox" runat="server" />
             </p>
             <p class="submit">
-                <input type="submit" value="登  录" />
+                <asp:Button ID="btnLogin" runat="server" Text="登  录" OnClick="btnLogin_Click" />
             </p>
-            <p class="message" id="message">
+            <p class="message" id="message" runat="server">
             </p>
         </div>
         </form>

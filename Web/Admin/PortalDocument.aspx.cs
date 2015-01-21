@@ -68,7 +68,8 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtURL.Text = doc.URL;
         txtDisplayName.Text = doc.DisplayName;
         eWebEditor1.Value = doc.Description;
-        hiddenImageURL.Value = string.Format("../Resources/Images/{0}", doc.ImageURL);
+        hiddenImageURL.Value = doc.ImageURL;
+        linkViewImage.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, doc.ImageURL);
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -122,7 +123,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         ShowListState();
-        gvDocumentList.DataBind();
+        Bind(Convert.ToInt32(Request["id"]));
     }
     protected void gvDocumentList_RowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -157,5 +158,10 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
             //删除按钮
             ((LinkButton)e.Row.Cells[0].Controls[2]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：" + e.Row.Cells[1].Text + " 吗?')");
         }
+    }
+    protected void lbtnViewImage_Click(object sender, EventArgs e)
+    {
+        string url = string.Format("../Resources/Images/{0}", hiddenImageURL.Value);
+        Response.Redirect(url);
     }
 }

@@ -24,7 +24,7 @@ public class BasePage : System.Web.UI.Page
     /// <summary>
     /// 图片路径的前半部分URL
     /// </summary>
-    public string ImageURL { get { return "../Resources/Images/"; } }
+    public string ImageURL { get { return ConstantUtility.Site.ImageURLPath; } }
 
     public BasePage()
     {

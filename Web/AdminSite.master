@@ -20,7 +20,7 @@
                 </h1>
             </div>
             <div class="loginDisplay">
-                欢迎您，<span class="bold"></span>!
+                欢迎您，<span class="bold"><%=Session[ConstantUtility.AdminConstant.UserNameKey]==null?string.Empty:Session[ConstantUtility.AdminConstant.UserNameKey].ToString() %></span>!
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"

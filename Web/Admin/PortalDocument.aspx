@@ -69,8 +69,8 @@
                             图片：
                         </td>
                         <td>
-                            <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="400px" />&nbsp;&nbsp;<asp:LinkButton
-                                ID="lbtnViewImage" runat="server">查看</asp:LinkButton>
+                            <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="400px" />&nbsp;&nbsp;
+                            <a href="" target="_blank" id="linkViewImage" runat="server">查看</a>
                             <asp:HiddenField ID="hiddenImageURL" runat="server" />
                         </td>
                     </tr>

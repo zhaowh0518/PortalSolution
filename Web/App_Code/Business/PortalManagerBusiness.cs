@@ -13,19 +13,12 @@ public class PortalManagerBusiness : BaseBuiness
     /// 管理员登陆
     /// </summary>
     /// <returns></returns>
-    public List<PortalManager> GetPortalManager(string userName, string pwd)
+    public PortalManager GetPortalManager(string userName, string pwd)
     {
         var c = from p in DBContext.PortalManager
                 where p.UserName == userName & p.Password == pwd
                 select p;
-        if (c != null && c.Count() > 0)
-        {
-            return c.ToList();
-        }
-        else
-        {
-            return new List<PortalManager>();
-        }
+        return c.SingleOrDefault();
     }
     /// <summary>
     /// 添加管理员
