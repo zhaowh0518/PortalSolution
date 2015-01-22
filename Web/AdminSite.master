@@ -28,6 +28,7 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Admin/PortalMenu.aspx" Text="栏目管理" />
                         <asp:MenuItem NavigateUrl="~/Admin/PortalDocument.aspx" Text="内容管理" />
+                        <asp:MenuItem NavigateUrl="~/Admin/PortalResource.aspx" Text="资源管理" />
                         <asp:MenuItem NavigateUrl="~/Admin/SysConfig.aspx" Text="系统配置" />
                     </Items>
                 </asp:Menu>

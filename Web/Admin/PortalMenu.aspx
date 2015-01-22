@@ -1,23 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.master" AutoEventWireup="true"
     CodeFile="PortalMenu.aspx.cs" Inherits="Admin_PortalMenu" %>
 
-<%@ Register Src="../UserControl/wucCategoryList.ascx" TagName="wucCategoryList"
-    TagPrefix="uc1" %>
-<%@ Register Src="../UserControl/wucMenuList.ascx" TagName="wucMenuList" TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="divNavList">
-        <uc2:wucMenuList ID="wucMenuList1" runat="server" />
+        <ucML:wucMenuList ID="wucMenuList1" runat="server" />
     </div>
     <div class="divContent">
         <div class="divTitle">
             栏目管理
         </div>
         <div class="divAction">
-            <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" />&nbsp;&nbsp;
-            <asp:Button ID="btnUpdate" runat="server" Text="更新" OnClick="btnUpdate_Click" />&nbsp;&nbsp;
-            <asp:Button ID="btnDelete" runat="server" Text="删除" OnClick="btnDelete_Click" Style="height: 21px" />&nbsp;&nbsp;
+            <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" CssClass="btn" />&nbsp;&nbsp;
+            <asp:Button ID="btnUpdate" runat="server" Text="更新" OnClick="btnUpdate_Click" CssClass="btn" />&nbsp;&nbsp;
+            <asp:Button ID="btnDelete" runat="server" Text="删除" OnClick="btnDelete_Click" CssClass="btn" />&nbsp;&nbsp;
         </div>
         <div class="divEdit">
             <table>

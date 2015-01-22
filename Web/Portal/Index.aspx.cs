@@ -19,7 +19,7 @@ public partial class Portal_Index : BasePage
     /// <summary>
     /// 获取页面所需的数据
     /// </summary>
-    private void GetData()
+    protected override void GetData()
     {
         PortalMenuList = _portalMenuBuiness.GetPortalMenuList();
         PortalDocumentList = _portalDocumentBuiness.GetMenuPortalDocumentList("Index");

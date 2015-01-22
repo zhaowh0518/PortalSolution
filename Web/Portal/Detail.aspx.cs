@@ -36,7 +36,7 @@ public partial class Portal_Detail : BasePage
                 }
             }
         }
-        catch (Exception ex)
+        catch
         {
         }
     }
@@ -62,7 +62,7 @@ public partial class Portal_Detail : BasePage
             _portalCommentBusiness.AddPortalComment(comment);
             Response.Redirect(Request.RawUrl);
         }
-        catch (Exception ex)
+        catch
         {
 
         }

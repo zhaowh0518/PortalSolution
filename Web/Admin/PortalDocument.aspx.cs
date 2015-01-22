@@ -47,17 +47,19 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         gvDocumentList.DataBind();
 
     }
-    private string SaveImage()
+    /// <summary>
+    /// 清空文本框，并设置默认值
+    /// </summary>
+    private void NewDoc()
     {
-        string fileName = string.Empty;
-        if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
-        {
-            int idx = fileImage.PostedFile.FileName.LastIndexOf(".");
-            string suffix = fileImage.PostedFile.FileName.Substring(idx);//获得上传的图片的后缀名 
-            fileName = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), suffix);
-            fileImage.PostedFile.SaveAs(string.Format("{0}\\Resources\\Images\\{1}", AppDomain.CurrentDomain.BaseDirectory, fileName));
-        }
-        return fileName;
+        txtName.Text = string.Empty;
+        txtSeq.Text = "100";
+        txtURL.Text = string.Empty;
+        txtDisplayName.Text = string.Empty;
+        richEditor.Text = string.Empty;
+        hiddenImageURL.Value = string.Empty;
+        linkViewImage.HRef = string.Empty;
+        cbState.Checked = true;
     }
 
     private void ShowDoc(int id)
@@ -67,14 +69,16 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtSeq.Text = doc.Seq.ToString();
         txtURL.Text = doc.URL;
         txtDisplayName.Text = doc.DisplayName;
-        eWebEditor1.Value = doc.Description;
+        richEditor.Text = doc.Description;
         hiddenImageURL.Value = doc.ImageURL;
         linkViewImage.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, doc.ImageURL);
+        cbState.Checked = doc.State;
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         hiddenID.Value = string.Empty;
+        NewDoc();
         ShowEidtState();
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -93,11 +97,11 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
                 doc.Seq = Convert.ToInt32(txtSeq.Text);
                 doc.URL = txtURL.Text;
                 doc.State = cbState.Checked;
-                doc.Description = eWebEditor1.Value;
+                doc.Description = richEditor.Text;
                 doc.DisplayName = txtDisplayName.Text;
                 if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
                 {
-                    doc.ImageURL = SaveImage();
+                    doc.ImageURL = FileUtility.SaveImage(fileImage);
                 }
                 else
                 {
@@ -123,6 +127,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         ShowListState();
+        lbMessage.Text = string.Empty;
         Bind(Convert.ToInt32(Request["id"]));
     }
     protected void gvDocumentList_RowEditing(object sender, GridViewEditEventArgs e)

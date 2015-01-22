@@ -1,25 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.master" AutoEventWireup="true"
     CodeFile="PortalDocument.aspx.cs" Inherits="Admin_PortalDocument" ValidateRequest="false"
-    Theme="AdminTheme" %>
+    EnableEventValidation="false" Theme="AdminTheme" %>
 
-<%@ Register Src="../UserControl/wucCategoryList.ascx" TagName="wucCategoryList"
-    TagPrefix="uc1" %>
-<%@ Register Src="../UserControl/wucMenuList.ascx" TagName="wucMenuList" TagPrefix="uc2" %>
-<%@ Register Assembly="eWebEditorControl" Namespace="eWebEditorControl" TagPrefix="eWebEditorControl" %>
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="divNavList">
-        <uc2:wucMenuList ID="wucMenuList1" runat="server" />
+        <ucML:wucMenuList ID="wucMenuList1" runat="server" />
     </div>
     <div class="divContent">
         <div class="divTitle">
             内容管理
         </div>
         <div class="divAction">
-            <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" />&nbsp;&nbsp;
-            <asp:Button ID="btnSave" runat="server" Text="保存" OnClick="btnSave_Click" />&nbsp;&nbsp;
-            <asp:Button ID="btnCancel" runat="server" Text="返回" OnClick="btnCancel_Click" />&nbsp;&nbsp;
+            <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" CssClass="btn" />&nbsp;&nbsp;
+            <asp:Button ID="btnSave" runat="server" Text="保存" OnClick="btnSave_Click" CssClass="btn" />&nbsp;&nbsp;
+            <asp:Button ID="btnCancel" runat="server" Text="返回" OnClick="btnCancel_Click" CssClass="btn" />&nbsp;&nbsp;
+        </div>
+        <div class="divMessage">
+            <asp:Label ID="lbMessage" runat="server"></asp:Label>
         </div>
         <div class="divEdit">
             <asp:GridView ID="gvDocumentList" runat="server" SkinID="gridviewSkin" AutoGenerateColumns="false"
@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <asp:HiddenField ID="hiddenID" runat="server" />
-                            <asp:TextBox ID="txtName" runat="server" CssClass="textbox" Width="530px"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -51,7 +51,7 @@
                             简介：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox" Width="530px"></asp:TextBox>
+                            <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -59,9 +59,9 @@
                             描述：
                         </td>
                         <td>
-                            <eWebEditorControl:eWebEditor ID="eWebEditor1" runat="server" Skin="office2003" Width="550px"
-                                Height="220px" BasePath="../ewebeditor/">
-                            </eWebEditorControl:eWebEditor>
+                            <CKEditor:CKEditorControl ID="richEditor" runat="server" BasePath="../Library/ckeditor/"
+                                Width="600px" Skin="office2003">
+                            </CKEditor:CKEditorControl>
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +69,7 @@
                             图片：
                         </td>
                         <td>
-                            <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="400px" />&nbsp;&nbsp;
+                            <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="500px" />&nbsp;&nbsp;
                             <a href="" target="_blank" id="linkViewImage" runat="server">查看</a>
                             <asp:HiddenField ID="hiddenImageURL" runat="server" />
                         </td>
@@ -79,7 +79,7 @@
                             链接：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox" Width="530px"></asp:TextBox>
+                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -94,9 +94,6 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </div>
-        <div class="divMessage">
-            <asp:Label ID="lbMessage" runat="server"></asp:Label>
         </div>
     </div>
 </asp:Content>
