@@ -5,7 +5,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="divNavList">
-        <ucCL:wucCategoryList ID="wucCategoryList1" runat="server" />
+        <asp:TreeView ID="tvCategoryList" runat="server">
+        </asp:TreeView>
     </div>
     <div class="divContent">
         <div class="divTitle">

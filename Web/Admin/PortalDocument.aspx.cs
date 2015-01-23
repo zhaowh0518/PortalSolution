@@ -18,6 +18,8 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
             {
                 Bind(Convert.ToInt32(Request["id"]));
             }
+            BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
+            tvMenuList.ExpandAll();
             ShowListState();
         }
     }

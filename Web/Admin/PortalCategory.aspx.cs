@@ -17,6 +17,7 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
             if (!string.IsNullOrEmpty(Request["id"]))
             {
                 Bind(Convert.ToInt32(Request["id"]));
+                BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
             }
         }
     }
@@ -43,7 +44,8 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
             category.State = cbState.Checked;
             category.ParentID = parentID;
             _portalCategoryBusiness.AddPortalCategory(category);
-            wucCategoryList1.DataBind();
+            BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
+            tvCategoryList.ExpandAll();
             lbMessage.Text = "添加成功！";
         }
         catch (Exception ex)
@@ -60,7 +62,8 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
             category.Seq = Convert.ToInt32(txtSeq.Text);
             category.State = cbState.Checked;
             _portalCategoryBusiness.UpdatePortalCategory(category);
-            wucCategoryList1.DataBind();
+            BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
+            tvCategoryList.ExpandAll();
             lbMessage.Text = "更新成功！";
         }
         catch (Exception ex)
@@ -73,6 +76,8 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
         try
         {
             _portalCategoryBusiness.DeletePortalCategory(Convert.ToInt32(Request["id"]));
+            BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
+            tvCategoryList.ExpandAll();
             lbMessage.Text = "删除成功！";
         }
         catch (Exception ex)

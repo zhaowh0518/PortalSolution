@@ -18,6 +18,8 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
             {
                 Bind(Convert.ToInt32(Request["id"]));
             }
+            BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
+            tvMenuList.ExpandAll();
         }
     }
 
@@ -47,6 +49,8 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
             menu.State = cbState.Checked;
             menu.ParentID = parentID;
             _portalMenuBusiness.AddPortalMenu(menu);
+            BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
+            tvMenuList.ExpandAll();
             lbMessage.Text = "添加成功！";
         }
         catch (Exception ex)
@@ -65,6 +69,8 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
             menu.Seq = Convert.ToInt32(txtSeq.Text);
             menu.State = cbState.Checked;
             _portalMenuBusiness.UpdatePortalMenu(menu);
+            BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
+            tvMenuList.ExpandAll();
             lbMessage.Text = "更新成功！";
         }
         catch (Exception ex)
@@ -77,6 +83,8 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
         try
         {
             _portalMenuBusiness.DeletePortalMenu(Convert.ToInt32(Request["id"]));
+            BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
+            tvMenuList.ExpandAll();
             lbMessage.Text = "删除成功！";
         }
         catch (Exception ex)

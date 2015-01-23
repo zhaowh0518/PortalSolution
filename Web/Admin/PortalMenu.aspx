@@ -5,7 +5,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="divNavList">
-        <ucML:wucMenuList ID="wucMenuList1" runat="server" />
+        <asp:TreeView ID="tvMenuList" runat="server">
+        </asp:TreeView>
     </div>
     <div class="divContent">
         <div class="divTitle">
