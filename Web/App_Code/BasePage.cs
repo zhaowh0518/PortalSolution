@@ -11,6 +11,9 @@ public class BasePage : System.Web.UI.Page
 {
     protected PortalMenuBusiness _portalMenuBuiness = new PortalMenuBusiness();
     protected PortalDocumentBusiness _portalDocumentBuiness = new PortalDocumentBusiness();
+    protected PortalContentBusiness _portalContentBusiness = new PortalContentBusiness();
+    protected PortalContentItemBusiness _portalContentItemBusiness = new PortalContentItemBusiness();
+    protected PortalMenuItemBusiness _portalMenuItemBusiness = new PortalMenuItemBusiness();
 
 
     /// <summary>

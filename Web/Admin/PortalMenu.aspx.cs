@@ -30,6 +30,7 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
         txtSeq.Text = menu.Seq.ToString();
         txtCode.Text = menu.Code;
         txtURL.Text = menu.URL;
+        ddlMenuType.SelectedValue = menu.Type.ToString();
         cbState.Checked = (bool)menu.State;
     }
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -48,6 +49,7 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
             menu.Seq = Convert.ToInt32(txtSeq.Text);
             menu.State = cbState.Checked;
             menu.ParentID = parentID;
+            menu.Type = Convert.ToInt32(ddlMenuType.SelectedValue);
             _portalMenuBusiness.AddPortalMenu(menu);
             BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
             tvMenuList.ExpandAll();
@@ -68,6 +70,7 @@ public partial class Admin_PortalMenu : System.Web.UI.Page
             menu.URL = txtURL.Text;
             menu.Seq = Convert.ToInt32(txtSeq.Text);
             menu.State = cbState.Checked;
+            menu.Type = Convert.ToInt32(ddlMenuType.SelectedValue);
             _portalMenuBusiness.UpdatePortalMenu(menu);
             BindControlsUtility.BindMenuTree(null, tvMenuList, null, Request.Path);
             tvMenuList.ExpandAll();

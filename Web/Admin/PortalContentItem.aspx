@@ -1,40 +1,47 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.master" AutoEventWireup="true"
-    CodeFile="PortalDocument.aspx.cs" Inherits="Admin_PortalDocument" ValidateRequest="false"
-    EnableEventValidation="false" Theme="AdminTheme" %>
+    CodeFile="PortalContentItem.aspx.cs" Inherits="Admin_PortalContentItem" Theme="AdminTheme" %>
 
-<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="divNavList">
-        <asp:TreeView ID="tvMenuList" runat="server">
-        </asp:TreeView>
+        <div id="divContentInfo">
+            <p>
+                内容名称：<br />
+                <%=CurrentPortalCuurent.Name %><br />
+            </p>
+            <p>
+                内容简介：<br />
+                <%=CurrentPortalCuurent.DisplayName %><br />
+            </p>
+            <p>
+                创建时间：<br />
+                <%=CurrentPortalCuurent.CreateDate %><br />
+            </p>
+        </div>
     </div>
     <div class="divContent">
         <div class="divTitle">
-            文档管理<div class="selectNodeInfo">
-                <%=Request["name"] %></div>
+            内容集管理
         </div>
         <div class="divAction">
-            <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" CssClass="btn" />&nbsp;&nbsp;
-            <asp:Button ID="btnSave" runat="server" Text="保存" OnClick="btnSave_Click" CssClass="btn" />&nbsp;&nbsp;
-            <asp:Button ID="btnCancel" runat="server" Text="返回" OnClick="btnCancel_Click" CssClass="btn" />&nbsp;&nbsp;
+            <asp:Button ID="btnAdd" runat="server" Text="添加" CssClass="btn" OnClick="btnAdd_Click" />&nbsp;&nbsp;
+            <asp:Button ID="btnSave" runat="server" Text="保存" CssClass="btn" OnClick="btnSave_Click" />&nbsp;&nbsp;
+            <asp:Button ID="btnCancel" runat="server" Text="返回" CssClass="btn" OnClick="btnCancel_Click" />&nbsp;&nbsp;
         </div>
         <div class="divMessage">
             <asp:Label ID="lbMessage" runat="server"></asp:Label>
         </div>
         <div class="divEdit">
-            <asp:GridView ID="gvDocumentList" runat="server" SkinID="gridviewSkin" AutoGenerateColumns="false"
-                DataKeyNames="ID" OnRowEditing="gvDocumentList_RowEditing" OnRowDeleting="gvDocumentList_RowDeleting"
-                OnRowDataBound="gvDocumentList_RowDataBound">
+            <asp:GridView ID="gvContentItemList" runat="server" SkinID="gridviewSkin" AutoGenerateColumns="False"
+                DataKeyNames="ID" OnRowDataBound="gvContentItemList_RowDataBound" OnRowDeleting="gvContentItemList_RowDeleting"
+                OnRowEditing="gvContentItemList_RowEditing">
                 <Columns>
                     <asp:CommandField ShowEditButton="True" HeaderText="操作" EditText="编辑" DeleteText="删除"
-                        ShowDeleteButton="true" ItemStyle-HorizontalAlign="Center" />
+                        ShowDeleteButton="true" ItemStyle-HorizontalAlign="Center"></asp:CommandField>
                     <asp:BoundField DataField="Name" HeaderText="名称" ReadOnly="True" SortExpression="Name" />
-                    <asp:BoundField DataField="Seq" HeaderText="序号" SortExpression="Seq" ItemStyle-HorizontalAlign="Center" />
-                    <asp:BoundField DataField="State" HeaderText="状态" SortExpression="State" ItemStyle-HorizontalAlign="Center" />
-                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate"
-                        ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="State" HeaderText="状态" ReadOnly="True" SortExpression="State" />
+                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate" />
                 </Columns>
             </asp:GridView>
             <asp:Panel ID="panelEdit" runat="server">
@@ -61,19 +68,28 @@
                             描述：
                         </td>
                         <td>
-                            <CKEditor:CKEditorControl ID="richEditor" runat="server" BasePath="../Library/ckeditor/"
-                                Width="595px" Skin="office2003">
-                            </CKEditor:CKEditorControl>
+                            <asp:TextBox ID="txtDesciption" TextMode="MultiLine" runat="server" Width="580px"
+                                CssClass="textbox" Height="180px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            图片：
+                            图1：
                         </td>
                         <td>
                             <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="550px" />&nbsp;&nbsp;
                             <a href="" target="_blank" id="linkViewImage" runat="server">查看</a>
                             <asp:HiddenField ID="hiddenImageURL" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            图2：
+                        </td>
+                        <td>
+                            <asp:FileUpload ID="fileImage2" runat="server" Height="30px" Width="550px" />&nbsp;&nbsp;
+                            <a href="" target="_blank" id="linkViewImage2" runat="server">查看</a>
+                            <asp:HiddenField ID="hiddenImageURL2" runat="server" />
                         </td>
                     </tr>
                     <tr>
@@ -86,10 +102,10 @@
                     </tr>
                     <tr>
                         <td>
-                            顺序：
+                            集数：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSeq" runat="server" Text="100" CssClass="textbox"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:TextBox ID="txtSeq" runat="server" Text="1" CssClass="textbox"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
                             状态：&nbsp;&nbsp;
                             <asp:CheckBox ID="cbState" runat="server" Checked="true" />
                         </td>

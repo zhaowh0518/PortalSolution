@@ -27,6 +27,25 @@ public class PortalContentBusiness : BaseBuiness
         }
     }
     /// <summary>
+    /// 获取某一分类的内容信息
+    /// </summary>
+    /// <param name="categoryID">分类ID</param>
+    /// <returns></returns>
+    public List<PortalContent> GetPortalContentList(int categoryID)
+    {
+        var c = from p in DBContext.PortalContent
+                where p.CategoryID == categoryID
+                select p;
+        if (c != null && c.Count() > 0)
+        {
+            return c.ToList();
+        }
+        else
+        {
+            return new List<PortalContent>();
+        }
+    }
+    /// <summary>
     /// 获取状态为1的内容
     /// </summary>
     /// <returns></returns>
@@ -43,6 +62,15 @@ public class PortalContentBusiness : BaseBuiness
         {
             return new List<PortalContent>();
         }
+    }
+    /// <summary>
+    /// 获取内容
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public PortalContent GetPortalContent(int id)
+    {
+        return DBContext.PortalContent.Where(p => p.ID == id).SingleOrDefault();
     }
     /// <summary>
     /// 添加内容
@@ -62,7 +90,8 @@ public class PortalContentBusiness : BaseBuiness
         }
         item.CreateDate = DateTime.Now;
         DBContext.PortalContent.AddObject(item);
-        return DBContext.SaveChanges();
+        DBContext.SaveChanges();
+        return item.ID;
     }
     /// <summary>
     /// 更新内容
@@ -80,6 +109,7 @@ public class PortalContentBusiness : BaseBuiness
         c.State = item.State;
         c.Type = item.Type;
         c.URL = item.URL;
+        c.IsSeries = item.IsSeries;
         return DBContext.SaveChanges();
     }
     /// <summary>

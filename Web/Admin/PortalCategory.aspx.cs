@@ -17,8 +17,8 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
             if (!string.IsNullOrEmpty(Request["id"]))
             {
                 Bind(Convert.ToInt32(Request["id"]));
-                BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
             }
+            BindControlsUtility.BindCategoryTree(null, tvCategoryList, null, Request.Path);
         }
     }
 

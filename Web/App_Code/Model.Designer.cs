@@ -68,22 +68,6 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalContent> PortalContent
-        {
-            get
-            {
-                if ((_PortalContent == null))
-                {
-                    _PortalContent = base.CreateObjectSet<PortalContent>("PortalContent");
-                }
-                return _PortalContent;
-            }
-        }
-        private ObjectSet<PortalContent> _PortalContent;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<PortalManager> PortalManager
         {
             get
@@ -192,18 +176,58 @@ namespace PortalModel
             }
         }
         private ObjectSet<PortalComment> _PortalComment;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalContent> PortalContent
+        {
+            get
+            {
+                if ((_PortalContent == null))
+                {
+                    _PortalContent = base.CreateObjectSet<PortalContent>("PortalContent");
+                }
+                return _PortalContent;
+            }
+        }
+        private ObjectSet<PortalContent> _PortalContent;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalMenuItem> PortalMenuItem
+        {
+            get
+            {
+                if ((_PortalMenuItem == null))
+                {
+                    _PortalMenuItem = base.CreateObjectSet<PortalMenuItem>("PortalMenuItem");
+                }
+                return _PortalMenuItem;
+            }
+        }
+        private ObjectSet<PortalMenuItem> _PortalMenuItem;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalContentItem> PortalContentItem
+        {
+            get
+            {
+                if ((_PortalContentItem == null))
+                {
+                    _PortalContentItem = base.CreateObjectSet<PortalContentItem>("PortalContentItem");
+                }
+                return _PortalContentItem;
+            }
+        }
+        private ObjectSet<PortalContentItem> _PortalContentItem;
 
         #endregion
 
         #region AddTo 方法
-    
-        /// <summary>
-        /// 用于向 PortalContent EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalContent(PortalContent portalContent)
-        {
-            base.AddObject("PortalContent", portalContent);
-        }
     
         /// <summary>
         /// 用于向 PortalManager EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
@@ -259,6 +283,30 @@ namespace PortalModel
         public void AddToPortalComment(PortalComment portalComment)
         {
             base.AddObject("PortalComment", portalComment);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalContent EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalContent(PortalContent portalContent)
+        {
+            base.AddObject("PortalContent", portalContent);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalMenuItem EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalMenuItem(PortalMenuItem portalMenuItem)
+        {
+            base.AddObject("PortalMenuItem", portalMenuItem);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalContentItem EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalContentItem(PortalContentItem portalContentItem)
+        {
+            base.AddObject("PortalContentItem", portalContentItem);
         }
 
         #endregion
@@ -665,13 +713,11 @@ namespace PortalModel
         /// <param name="categoryID">CategoryID 属性的初始值。</param>
         /// <param name="description">Description 属性的初始值。</param>
         /// <param name="type">Type 属性的初始值。</param>
+        /// <param name="isSeries">IsSeries 属性的初始值。</param>
         /// <param name="uRL">URL 属性的初始值。</param>
         /// <param name="state">State 属性的初始值。</param>
         /// <param name="createDate">CreateDate 属性的初始值。</param>
-        /// <param name="extend1">Extend1 属性的初始值。</param>
-        /// <param name="extend2">Extend2 属性的初始值。</param>
-        /// <param name="extend3">Extend3 属性的初始值。</param>
-        public static PortalContent CreatePortalContent(global::System.Int32 id, global::System.String name, global::System.Int32 categoryID, global::System.String description, global::System.Int32 type, global::System.String uRL, global::System.Boolean state, global::System.DateTime createDate, global::System.String extend1, global::System.String extend2, global::System.String extend3)
+        public static PortalContent CreatePortalContent(global::System.Int32 id, global::System.String name, global::System.Int32 categoryID, global::System.String description, global::System.Int32 type, global::System.Boolean isSeries, global::System.String uRL, global::System.Boolean state, global::System.DateTime createDate)
         {
             PortalContent portalContent = new PortalContent();
             portalContent.ID = id;
@@ -679,12 +725,10 @@ namespace PortalModel
             portalContent.CategoryID = categoryID;
             portalContent.Description = description;
             portalContent.Type = type;
+            portalContent.IsSeries = isSeries;
             portalContent.URL = uRL;
             portalContent.State = state;
             portalContent.CreateDate = createDate;
-            portalContent.Extend1 = extend1;
-            portalContent.Extend2 = extend2;
-            portalContent.Extend3 = extend3;
             return portalContent;
         }
 
@@ -722,7 +766,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Name
         {
@@ -732,14 +776,11 @@ namespace PortalModel
             }
             set
             {
-                if (_Name != value)
-                {
-                    OnNameChanging(value);
-                    ReportPropertyChanging("Name");
-                    _Name = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Name");
-                    OnNameChanged();
-                }
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
         private global::System.String _Name;
@@ -749,7 +790,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 CategoryID
         {
@@ -759,14 +800,11 @@ namespace PortalModel
             }
             set
             {
-                if (_CategoryID != value)
-                {
-                    OnCategoryIDChanging(value);
-                    ReportPropertyChanging("CategoryID");
-                    _CategoryID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CategoryID");
-                    OnCategoryIDChanged();
-                }
+                OnCategoryIDChanging(value);
+                ReportPropertyChanging("CategoryID");
+                _CategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CategoryID");
+                OnCategoryIDChanged();
             }
         }
         private global::System.Int32 _CategoryID;
@@ -800,7 +838,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -810,14 +848,11 @@ namespace PortalModel
             }
             set
             {
-                if (_Description != value)
-                {
-                    OnDescriptionChanging(value);
-                    ReportPropertyChanging("Description");
-                    _Description = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Description");
-                    OnDescriptionChanged();
-                }
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
             }
         }
         private global::System.String _Description;
@@ -827,7 +862,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 Type
         {
@@ -837,19 +872,40 @@ namespace PortalModel
             }
             set
             {
-                if (_Type != value)
-                {
-                    OnTypeChanging(value);
-                    ReportPropertyChanging("Type");
-                    _Type = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Type");
-                    OnTypeChanged();
-                }
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
             }
         }
         private global::System.Int32 _Type;
         partial void OnTypeChanging(global::System.Int32 value);
         partial void OnTypeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsSeries
+        {
+            get
+            {
+                return _IsSeries;
+            }
+            set
+            {
+                OnIsSeriesChanging(value);
+                ReportPropertyChanging("IsSeries");
+                _IsSeries = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsSeries");
+                OnIsSeriesChanged();
+            }
+        }
+        private global::System.Boolean _IsSeries;
+        partial void OnIsSeriesChanging(global::System.Boolean value);
+        partial void OnIsSeriesChanged();
     
         /// <summary>
         /// 没有元数据文档可用。
@@ -902,7 +958,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String URL
         {
@@ -912,14 +968,11 @@ namespace PortalModel
             }
             set
             {
-                if (_URL != value)
-                {
-                    OnURLChanging(value);
-                    ReportPropertyChanging("URL");
-                    _URL = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("URL");
-                    OnURLChanged();
-                }
+                OnURLChanging(value);
+                ReportPropertyChanging("URL");
+                _URL = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("URL");
+                OnURLChanged();
             }
         }
         private global::System.String _URL;
@@ -929,7 +982,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Boolean State
         {
@@ -939,14 +992,11 @@ namespace PortalModel
             }
             set
             {
-                if (_State != value)
-                {
-                    OnStateChanging(value);
-                    ReportPropertyChanging("State");
-                    _State = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("State");
-                    OnStateChanged();
-                }
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State");
+                OnStateChanged();
             }
         }
         private global::System.Boolean _State;
@@ -956,7 +1006,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime CreateDate
         {
@@ -966,14 +1016,11 @@ namespace PortalModel
             }
             set
             {
-                if (_CreateDate != value)
-                {
-                    OnCreateDateChanging(value);
-                    ReportPropertyChanging("CreateDate");
-                    _CreateDate = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CreateDate");
-                    OnCreateDateChanged();
-                }
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
             }
         }
         private global::System.DateTime _CreateDate;
@@ -983,7 +1030,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Extend1
         {
@@ -993,14 +1040,11 @@ namespace PortalModel
             }
             set
             {
-                if (_Extend1 != value)
-                {
-                    OnExtend1Changing(value);
-                    ReportPropertyChanging("Extend1");
-                    _Extend1 = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Extend1");
-                    OnExtend1Changed();
-                }
+                OnExtend1Changing(value);
+                ReportPropertyChanging("Extend1");
+                _Extend1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend1");
+                OnExtend1Changed();
             }
         }
         private global::System.String _Extend1;
@@ -1010,7 +1054,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Extend2
         {
@@ -1020,14 +1064,11 @@ namespace PortalModel
             }
             set
             {
-                if (_Extend2 != value)
-                {
-                    OnExtend2Changing(value);
-                    ReportPropertyChanging("Extend2");
-                    _Extend2 = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Extend2");
-                    OnExtend2Changed();
-                }
+                OnExtend2Changing(value);
+                ReportPropertyChanging("Extend2");
+                _Extend2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend2");
+                OnExtend2Changed();
             }
         }
         private global::System.String _Extend2;
@@ -1037,7 +1078,7 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Extend3
         {
@@ -1047,19 +1088,333 @@ namespace PortalModel
             }
             set
             {
-                if (_Extend3 != value)
-                {
-                    OnExtend3Changing(value);
-                    ReportPropertyChanging("Extend3");
-                    _Extend3 = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Extend3");
-                    OnExtend3Changed();
-                }
+                OnExtend3Changing(value);
+                ReportPropertyChanging("Extend3");
+                _Extend3 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend3");
+                OnExtend3Changed();
             }
         }
         private global::System.String _Extend3;
         partial void OnExtend3Changing(global::System.String value);
         partial void OnExtend3Changed();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PortalModel", Name="PortalContentItem")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PortalContentItem : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 PortalContentItem 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="name">Name 属性的初始值。</param>
+        /// <param name="displayName">DisplayName 属性的初始值。</param>
+        /// <param name="contentID">ContentID 属性的初始值。</param>
+        /// <param name="imageURL">ImageURL 属性的初始值。</param>
+        /// <param name="imageURL2">ImageURL2 属性的初始值。</param>
+        /// <param name="uRL">URL 属性的初始值。</param>
+        /// <param name="description">Description 属性的初始值。</param>
+        /// <param name="state">State 属性的初始值。</param>
+        /// <param name="seq">Seq 属性的初始值。</param>
+        /// <param name="createDate">CreateDate 属性的初始值。</param>
+        public static PortalContentItem CreatePortalContentItem(global::System.Int32 id, global::System.String name, global::System.String displayName, global::System.Int32 contentID, global::System.String imageURL, global::System.String imageURL2, global::System.String uRL, global::System.String description, global::System.Boolean state, global::System.Int32 seq, global::System.DateTime createDate)
+        {
+            PortalContentItem portalContentItem = new PortalContentItem();
+            portalContentItem.ID = id;
+            portalContentItem.Name = name;
+            portalContentItem.DisplayName = displayName;
+            portalContentItem.ContentID = contentID;
+            portalContentItem.ImageURL = imageURL;
+            portalContentItem.ImageURL2 = imageURL2;
+            portalContentItem.URL = uRL;
+            portalContentItem.Description = description;
+            portalContentItem.State = state;
+            portalContentItem.Seq = seq;
+            portalContentItem.CreateDate = createDate;
+            return portalContentItem;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DisplayName
+        {
+            get
+            {
+                return _DisplayName;
+            }
+            set
+            {
+                OnDisplayNameChanging(value);
+                ReportPropertyChanging("DisplayName");
+                _DisplayName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("DisplayName");
+                OnDisplayNameChanged();
+            }
+        }
+        private global::System.String _DisplayName;
+        partial void OnDisplayNameChanging(global::System.String value);
+        partial void OnDisplayNameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContentID
+        {
+            get
+            {
+                return _ContentID;
+            }
+            set
+            {
+                OnContentIDChanging(value);
+                ReportPropertyChanging("ContentID");
+                _ContentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentID");
+                OnContentIDChanged();
+            }
+        }
+        private global::System.Int32 _ContentID;
+        partial void OnContentIDChanging(global::System.Int32 value);
+        partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ImageURL
+        {
+            get
+            {
+                return _ImageURL;
+            }
+            set
+            {
+                OnImageURLChanging(value);
+                ReportPropertyChanging("ImageURL");
+                _ImageURL = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ImageURL");
+                OnImageURLChanged();
+            }
+        }
+        private global::System.String _ImageURL;
+        partial void OnImageURLChanging(global::System.String value);
+        partial void OnImageURLChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ImageURL2
+        {
+            get
+            {
+                return _ImageURL2;
+            }
+            set
+            {
+                OnImageURL2Changing(value);
+                ReportPropertyChanging("ImageURL2");
+                _ImageURL2 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ImageURL2");
+                OnImageURL2Changed();
+            }
+        }
+        private global::System.String _ImageURL2;
+        partial void OnImageURL2Changing(global::System.String value);
+        partial void OnImageURL2Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String URL
+        {
+            get
+            {
+                return _URL;
+            }
+            set
+            {
+                OnURLChanging(value);
+                ReportPropertyChanging("URL");
+                _URL = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("URL");
+                OnURLChanged();
+            }
+        }
+        private global::System.String _URL;
+        partial void OnURLChanging(global::System.String value);
+        partial void OnURLChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.Boolean _State;
+        partial void OnStateChanging(global::System.Boolean value);
+        partial void OnStateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Seq
+        {
+            get
+            {
+                return _Seq;
+            }
+            set
+            {
+                OnSeqChanging(value);
+                ReportPropertyChanging("Seq");
+                _Seq = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Seq");
+                OnSeqChanged();
+            }
+        }
+        private global::System.Int32 _Seq;
+        partial void OnSeqChanging(global::System.Int32 value);
+        partial void OnSeqChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreateDate
+        {
+            get
+            {
+                return _CreateDate;
+            }
+            set
+            {
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
+            }
+        }
+        private global::System.DateTime _CreateDate;
+        partial void OnCreateDateChanging(global::System.DateTime value);
+        partial void OnCreateDateChanged();
 
         #endregion
 
@@ -1950,6 +2305,219 @@ namespace PortalModel
         private global::System.String _ImageUrl;
         partial void OnImageUrlChanging(global::System.String value);
         partial void OnImageUrlChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Seq
+        {
+            get
+            {
+                return _Seq;
+            }
+            set
+            {
+                OnSeqChanging(value);
+                ReportPropertyChanging("Seq");
+                _Seq = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Seq");
+                OnSeqChanged();
+            }
+        }
+        private global::System.Int32 _Seq;
+        partial void OnSeqChanging(global::System.Int32 value);
+        partial void OnSeqChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.Boolean _State;
+        partial void OnStateChanging(global::System.Boolean value);
+        partial void OnStateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreateDate
+        {
+            get
+            {
+                return _CreateDate;
+            }
+            set
+            {
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
+            }
+        }
+        private global::System.DateTime _CreateDate;
+        partial void OnCreateDateChanging(global::System.DateTime value);
+        partial void OnCreateDateChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PortalModel", Name="PortalMenuItem")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PortalMenuItem : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 PortalMenuItem 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="menuID">MenuID 属性的初始值。</param>
+        /// <param name="contentID">ContentID 属性的初始值。</param>
+        /// <param name="contentName">ContentName 属性的初始值。</param>
+        /// <param name="seq">Seq 属性的初始值。</param>
+        /// <param name="state">State 属性的初始值。</param>
+        /// <param name="createDate">CreateDate 属性的初始值。</param>
+        public static PortalMenuItem CreatePortalMenuItem(global::System.Int32 id, global::System.Int32 menuID, global::System.Int32 contentID, global::System.String contentName, global::System.Int32 seq, global::System.Boolean state, global::System.DateTime createDate)
+        {
+            PortalMenuItem portalMenuItem = new PortalMenuItem();
+            portalMenuItem.ID = id;
+            portalMenuItem.MenuID = menuID;
+            portalMenuItem.ContentID = contentID;
+            portalMenuItem.ContentName = contentName;
+            portalMenuItem.Seq = seq;
+            portalMenuItem.State = state;
+            portalMenuItem.CreateDate = createDate;
+            return portalMenuItem;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MenuID
+        {
+            get
+            {
+                return _MenuID;
+            }
+            set
+            {
+                OnMenuIDChanging(value);
+                ReportPropertyChanging("MenuID");
+                _MenuID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("MenuID");
+                OnMenuIDChanged();
+            }
+        }
+        private global::System.Int32 _MenuID;
+        partial void OnMenuIDChanging(global::System.Int32 value);
+        partial void OnMenuIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContentID
+        {
+            get
+            {
+                return _ContentID;
+            }
+            set
+            {
+                OnContentIDChanging(value);
+                ReportPropertyChanging("ContentID");
+                _ContentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentID");
+                OnContentIDChanged();
+            }
+        }
+        private global::System.Int32 _ContentID;
+        partial void OnContentIDChanging(global::System.Int32 value);
+        partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ContentName
+        {
+            get
+            {
+                return _ContentName;
+            }
+            set
+            {
+                OnContentNameChanging(value);
+                ReportPropertyChanging("ContentName");
+                _ContentName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ContentName");
+                OnContentNameChanged();
+            }
+        }
+        private global::System.String _ContentName;
+        partial void OnContentNameChanging(global::System.String value);
+        partial void OnContentNameChanged();
     
         /// <summary>
         /// 没有元数据文档可用。

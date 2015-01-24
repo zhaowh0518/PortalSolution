@@ -10,7 +10,8 @@
     </div>
     <div class="divContent">
         <div class="divTitle">
-            内容分类管理
+            内容分类管理<div class="selectNodeInfo">
+                <%=Request["name"] %></div>
         </div>
         <div class="divAction">
             <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" CssClass="btn" />&nbsp;&nbsp;

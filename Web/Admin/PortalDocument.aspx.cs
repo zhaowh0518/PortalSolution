@@ -55,7 +55,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
     private void NewDoc()
     {
         txtName.Text = string.Empty;
-        txtSeq.Text = "100";
+        txtSeq.Text = ConstantUtility.AdminConstant.DefaultSeq.ToString();
         txtURL.Text = string.Empty;
         txtDisplayName.Text = string.Empty;
         richEditor.Text = string.Empty;

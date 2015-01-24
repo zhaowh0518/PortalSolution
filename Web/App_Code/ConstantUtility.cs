@@ -26,5 +26,9 @@ public static class ConstantUtility
         /// 用户名
         /// </summary>
         public static string UserNameKey { get { return "ADMIN_USERNAME"; } }
+        /// <summary>
+        /// 默认排序号，100
+        /// </summary>
+        public static int DefaultSeq { get { return 100; } }
     }
 }

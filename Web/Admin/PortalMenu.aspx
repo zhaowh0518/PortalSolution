@@ -10,7 +10,8 @@
     </div>
     <div class="divContent">
         <div class="divTitle">
-            栏目管理
+            栏目管理<div class="selectNodeInfo">
+                <%=Request["name"] %></div>
         </div>
         <div class="divAction">
             <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="btnAdd_Click" CssClass="btn" />&nbsp;&nbsp;
@@ -33,6 +34,18 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtCode" runat="server" CssClass="textbox"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        类型：
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlMenuType" runat="server" CssClass="ddl">
+                            <asp:ListItem Selected="True" Value="0">父菜单</asp:ListItem>
+                            <asp:ListItem Value="1">内容菜单</asp:ListItem>
+                            <asp:ListItem Value="2">文档菜单</asp:ListItem>
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
