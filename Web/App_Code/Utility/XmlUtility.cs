@@ -75,15 +75,22 @@ public static class XmlUtility
     /// </summary>
     /// <param name="list"></param>
     /// <returns></returns>
-    public static string DictionaryToXml(Dictionary<string, string> list)
+    public static string DictionaryToXml(Dictionary<string, string> list, string rootName = "xml")
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("<xml>");
+        sb.AppendFormat("<{0}>", rootName);
         foreach (var item in list)
         {
-            sb.AppendFormat("<{0}><![CDATA[{1}]]></{0}>", item.Key, item.Value);
+            if (item.Value.Contains("<")) //有子元素，是xml
+            {
+                sb.AppendFormat("<{0}>{1}</{0}>", item.Key, item.Value);
+            }
+            else
+            {
+                sb.AppendFormat("<{0}><![CDATA[{1}]]></{0}>", item.Key, item.Value);
+            }
         }
-        sb.Append("</xml>");
+        sb.AppendFormat("</{0}>", rootName);
         return sb.ToString();
     }
 }

@@ -17,7 +17,8 @@ public class WeinXin
     /// <summary>
     /// 获取access token
     /// </summary>
-    public static string url_access_token = "https://api.weixin.qq.com/cgi-bin/token";
+    public static string url_access_token = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
+    public static string url_user_info = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang=zh_CN";
     #endregion
 
     public string access_token = string.Empty;
@@ -52,7 +53,7 @@ public class WeinXin
     /// </summary>
     private void GetAccessToken()
     {
-        string url = string.Format("{0}?grant_type=client_credential&appid={1}&secret={2}", url_access_token, appid, secret);
+        string url = string.Format(url_access_token, appid, secret);
         string result = RequestUtility.Get(url);
         if (!string.IsNullOrEmpty(result))
         {
@@ -71,14 +72,43 @@ public class WeinXin
     public string ResponseMsg(string reqMsg)
     {
         string repStr = string.Empty;
-        Dictionary<string, string> reqParms = XmlUtility.XmlToDictionary(reqMsg);
-        Dictionary<string, string> repParms = new Dictionary<string, string>();
-        repParms.Add("ToUserName", reqParms["FromUserName"]);
-        repParms.Add("FromUserName", reqParms["ToUserName"]);
-        repParms.Add("CreateTime", DateTime.Now.Ticks.ToString());
-        repParms.Add("MsgType", "text");
-        repParms.Add("Content", "欢迎使用！");
-        repStr = XmlUtility.DictionaryToXml(repParms);
+        if (!string.IsNullOrEmpty(reqMsg))
+        {
+            Dictionary<string, string> reqParms = XmlUtility.XmlToDictionary(reqMsg);
+            Dictionary<string, string> repParms = new Dictionary<string, string>();
+            repParms.Add("ToUserName", reqParms["FromUserName"]);
+            repParms.Add("FromUserName", reqParms["ToUserName"]);
+            repParms.Add("CreateTime", DateTime.Now.Ticks.ToString());
+            //repParms.Add("MsgType", "text");
+            //repParms.Add("Content", "欢迎与袁老师一起交流！<a href='http://182.92.155.19/portal/index.aspx'>点击进入</a>");
+            repParms.Add("MsgType", "news");
+            List<PortalModel.PortalDocument> docList = new PortalDocumentBusiness().GetMenuPortalDocumentList("Index");
+            docList = docList.Where(p => p.PortalMenuCode == "Index_NewWorks").ToList();
+            Dictionary<string, string> article = new Dictionary<string, string>();
+            string articleListXml = string.Empty;
+            foreach (var item in docList)
+            {
+                article.Clear();
+                article.Add("Title", item.Name);
+                article.Add("Description", item.Description);
+                article.Add("PicUrl", string.Format("http://182.92.155.19/Resources/Images/{0}", item.ImageURL));
+                article.Add("Url", string.Format("http://182.92.155.19/Portal/{0}", item.URL));
+                articleListXml += XmlUtility.DictionaryToXml(article, "item");
+            }
+            repParms.Add("ArticleCount", docList.Count.ToString());
+            repParms.Add("Articles", articleListXml);
+
+            repStr = XmlUtility.DictionaryToXml(repParms);
+        }
         return repStr;
+    }
+    /// <summary>
+    /// 获取用户信息
+    /// </summary>
+    /// <param name="openID"></param>
+    private void GetUserInfo(string openID)
+    {
+        string url = string.Format(url_user_info, access_token, openID);
+        string result = RequestUtility.Get(url);
     }
 }
