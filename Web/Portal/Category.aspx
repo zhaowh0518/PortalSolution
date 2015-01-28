@@ -5,9 +5,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row " id="thumbnails_container">
-        <div class="col-md-6 col-xs-6 top20">
-            <a href="avdio.html" class="btn btn-primary">视频</a> <a href="avdio2.html" class="btn btn-default">
-                音频</a></div>
+        <div class="col-md-6 col-xs-6 top20" id="divCategory">
+            <a href="Category.aspx?code=Video" class="btn btn-primary">视频</a>&nbsp;&nbsp;<a href="Category.aspx?code=Audio"
+                class="btn btn-default"> 音频</a>&nbsp;&nbsp;<a href="Category.aspx?code=Book" class="btn btn-default">
+                    书籍</a></div>
     </div>
     <div class="row" id="thumbnails_container">
         <div class="col-md-12 ">
@@ -15,96 +16,47 @@
                 连载中的作品</h3>
         </div>
         <div class="row">
+            <%
+                List<PortalModel.PortalContent> inProcessContentList = ContentList.Where(p => p.CategoryCode == CategoryCode + "_InProcess").ToList();
+                foreach (var item in inProcessContentList)
+                {
+
+            %>
             <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="avdiolist.html" class="thumbnail">
-                    <img src="images/fm01.jpg" alt="Model Girl 5" class="img-responsive">
+                <a href="<%=item.URL %>" class="thumbnail">
+                    <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
                     <p>
-                        腾飞说三国</p>
+                        <%=item.Name %></p>
                 </a>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm02.jpg" alt="Model Girl 6" class="img-responsive">
-                    <p>
-                        一代天骄成吉思汗</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm03.jpg" alt="Model Girl 7" class="img-responsive">
-                    <p>
-                        探寻渐逝的印记</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
+            <%
+                }
+            %>
         </div>
         <div class="col-md-12">
             <h3>
                 已完结节的作品</h3>
         </div>
         <div class="row">
+            <%
+                List<PortalModel.PortalContent> finishedContentList = ContentList.Where(p => p.CategoryCode == CategoryCode + "_Finished").ToList();
+                foreach (var item in finishedContentList)
+                {
+
+            %>
             <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm01.jpg" alt="Model Girl 5" class="img-responsive">
+                <a href="<%=item.URL %>" class="thumbnail">
+                    <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
                     <p>
-                        腾飞说三国</p>
+                        <%=item.Name %></p>
                 </a>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm02.jpg" alt="Model Girl 6" class="img-responsive">
-                    <p>
-                        一代天骄成吉思汗</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm03.jpg" alt="Model Girl 7" class="img-responsive">
-                    <p>
-                        探寻渐逝的印记</p>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="images/fm04.jpg" alt="Model Girl 8" class="img-responsive">
-                    <p>
-                        塞北三朝之西夏</p>
-                </a>
-            </div>
+            <%
+                }
+            %>
         </div>
     </div>
+    <script type="text/javascript">
+        setActiveCategory(); //选中导航菜单
+    </script>
 </asp:Content>

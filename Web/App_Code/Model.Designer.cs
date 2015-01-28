@@ -116,22 +116,6 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalCategory> PortalCategory
-        {
-            get
-            {
-                if ((_PortalCategory == null))
-                {
-                    _PortalCategory = base.CreateObjectSet<PortalCategory>("PortalCategory");
-                }
-                return _PortalCategory;
-            }
-        }
-        private ObjectSet<PortalCategory> _PortalCategory;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<PortalMenu> PortalMenu
         {
             get
@@ -180,22 +164,6 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalContent> PortalContent
-        {
-            get
-            {
-                if ((_PortalContent == null))
-                {
-                    _PortalContent = base.CreateObjectSet<PortalContent>("PortalContent");
-                }
-                return _PortalContent;
-            }
-        }
-        private ObjectSet<PortalContent> _PortalContent;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<PortalMenuItem> PortalMenuItem
         {
             get
@@ -224,6 +192,38 @@ namespace PortalModel
             }
         }
         private ObjectSet<PortalContentItem> _PortalContentItem;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalCategory> PortalCategory
+        {
+            get
+            {
+                if ((_PortalCategory == null))
+                {
+                    _PortalCategory = base.CreateObjectSet<PortalCategory>("PortalCategory");
+                }
+                return _PortalCategory;
+            }
+        }
+        private ObjectSet<PortalCategory> _PortalCategory;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalContent> PortalContent
+        {
+            get
+            {
+                if ((_PortalContent == null))
+                {
+                    _PortalContent = base.CreateObjectSet<PortalContent>("PortalContent");
+                }
+                return _PortalContent;
+            }
+        }
+        private ObjectSet<PortalContent> _PortalContent;
 
         #endregion
 
@@ -254,14 +254,6 @@ namespace PortalModel
         }
     
         /// <summary>
-        /// 用于向 PortalCategory EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalCategory(PortalCategory portalCategory)
-        {
-            base.AddObject("PortalCategory", portalCategory);
-        }
-    
-        /// <summary>
         /// 用于向 PortalMenu EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
         /// </summary>
         public void AddToPortalMenu(PortalMenu portalMenu)
@@ -286,14 +278,6 @@ namespace PortalModel
         }
     
         /// <summary>
-        /// 用于向 PortalContent EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalContent(PortalContent portalContent)
-        {
-            base.AddObject("PortalContent", portalContent);
-        }
-    
-        /// <summary>
         /// 用于向 PortalMenuItem EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
         /// </summary>
         public void AddToPortalMenuItem(PortalMenuItem portalMenuItem)
@@ -307,6 +291,22 @@ namespace PortalModel
         public void AddToPortalContentItem(PortalContentItem portalContentItem)
         {
             base.AddObject("PortalContentItem", portalContentItem);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalCategory EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalCategory(PortalCategory portalCategory)
+        {
+            base.AddObject("PortalCategory", portalCategory);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalContent EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalContent(PortalContent portalContent)
+        {
+            base.AddObject("PortalContent", portalContent);
         }
 
         #endregion
@@ -392,6 +392,30 @@ namespace PortalModel
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
     
         /// <summary>
         /// 没有元数据文档可用。
@@ -810,6 +834,30 @@ namespace PortalModel
         private global::System.Int32 _CategoryID;
         partial void OnCategoryIDChanging(global::System.Int32 value);
         partial void OnCategoryIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CategoryCode
+        {
+            get
+            {
+                return _CategoryCode;
+            }
+            set
+            {
+                OnCategoryCodeChanging(value);
+                ReportPropertyChanging("CategoryCode");
+                _CategoryCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CategoryCode");
+                OnCategoryCodeChanged();
+            }
+        }
+        private global::System.String _CategoryCode;
+        partial void OnCategoryCodeChanging(global::System.String value);
+        partial void OnCategoryCodeChanged();
     
         /// <summary>
         /// 没有元数据文档可用。
@@ -1415,6 +1463,78 @@ namespace PortalModel
         private global::System.DateTime _CreateDate;
         partial void OnCreateDateChanging(global::System.DateTime value);
         partial void OnCreateDateChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Extend1
+        {
+            get
+            {
+                return _Extend1;
+            }
+            set
+            {
+                OnExtend1Changing(value);
+                ReportPropertyChanging("Extend1");
+                _Extend1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend1");
+                OnExtend1Changed();
+            }
+        }
+        private global::System.String _Extend1;
+        partial void OnExtend1Changing(global::System.String value);
+        partial void OnExtend1Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Extend2
+        {
+            get
+            {
+                return _Extend2;
+            }
+            set
+            {
+                OnExtend2Changing(value);
+                ReportPropertyChanging("Extend2");
+                _Extend2 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend2");
+                OnExtend2Changed();
+            }
+        }
+        private global::System.String _Extend2;
+        partial void OnExtend2Changing(global::System.String value);
+        partial void OnExtend2Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Extend3
+        {
+            get
+            {
+                return _Extend3;
+            }
+            set
+            {
+                OnExtend3Changing(value);
+                ReportPropertyChanging("Extend3");
+                _Extend3 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Extend3");
+                OnExtend3Changed();
+            }
+        }
+        private global::System.String _Extend3;
+        partial void OnExtend3Changing(global::System.String value);
+        partial void OnExtend3Changed();
 
         #endregion
 

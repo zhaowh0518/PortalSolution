@@ -26,6 +26,7 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
     {
         PortalCategory category = _portalCategoryBusiness.GetPortalCategory(id);
         txtName.Text = category.Name;
+        txtCode.Text = category.Code;
         txtSeq.Text = category.Seq.ToString();
         cbState.Checked = (bool)category.State;
     }
@@ -40,6 +41,7 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
             }
             PortalCategory category = new PortalCategory();
             category.Name = txtName.Text;
+            category.Code = txtCode.Text;
             category.Seq = Convert.ToInt32(txtSeq.Text);
             category.State = cbState.Checked;
             category.ParentID = parentID;
@@ -59,6 +61,7 @@ public partial class Admin_PortalCategory : System.Web.UI.Page
         {
             PortalCategory category = _portalCategoryBusiness.GetPortalCategory(Convert.ToInt32(Request["id"]));
             category.Name = txtName.Text;
+            category.Code = txtCode.Text;
             category.Seq = Convert.ToInt32(txtSeq.Text);
             category.State = cbState.Checked;
             _portalCategoryBusiness.UpdatePortalCategory(category);

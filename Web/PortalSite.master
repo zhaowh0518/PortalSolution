@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="css/audioplayer.css" />
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/portal.js"></script>
     <!-- HTML 5 shim for IE backwards compatibility -->
     <!-- [if lt IE 9]> 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"> 		</script> 		<![endif]-->
+    <!--
     <script>         // https://github.com/twbs/bootstrap/issues/9774
         function refresh() {
             var container = document.getElementById('home');
@@ -28,8 +30,7 @@
             container.removeChild(masthead);
             container.insertBefore(masthead, content);
         }     </script>
-    <script>         /*         VIEWPORT BUG FIX         iOS viewport scaling bug fix, by @mathias, @cheeaun and @jdalton         */
-        (function (doc) { var addEvent = 'addEventListener', type = 'gesturestart', qsa = 'querySelectorAll', scales = [1, 1], meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : []; function fix() { meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1]; doc.removeEventListener(type, fix, true); } if ((meta = meta[meta.length - 1]) && addEvent in doc) { fix(); scales = [.25, 1.6]; doc[addEvent](type, fix, true); } } (document));     </script>
+    -->
     <script>         /*站点统计*/
         var _hmt = _hmt || [];
         (function () {
@@ -38,60 +39,37 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();     </script>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
 </head>
 <body onresize="refresh()">
     <div id="main_container">
         <div class="container" id="home">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-                <!-- 轮播（Carousel）指标 -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- 轮播（Carousel）项目 -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="images/header_image1.jpg" alt="First slide">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_image1.jpg" alt="Second slide">
-                    </div>
-                    <div class="item">
-                        <img src="images/header_image1.jpg" alt="Third slide">
-                    </div>
-                </div>
-                <!-- 轮播（Carousel）导航 -->
-                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-            </div>
-            <script>                 $(function () {
-    // 初始化轮播
-    $(".start-slide").click(function () {
-        $("#myCarousel").carousel('cycle');
-    });
-});             </script>
+            <asp:ContentPlaceHolder ID="head" runat="server">
+            </asp:ContentPlaceHolder>
             <div class="masthead" id="masthead">
-                <ul class="nav nav-justified menu123 navbar-fixed-top">
-                    <li class="active"><a href="Index.aspx">首页</a></li>
-                    <li><a href="Category.aspx">影音</a></li>
-                    <li><a href="BBS.aspx">社区</a></li>
-                    <li><a href="me.html">我的</a></li>
+                <ul class="nav nav-justified menu123 navbar-fixed-top" id="ulNav">
+                    <li id="Index" class="active"><a href="Index.aspx">首页</a></li>
+                    <li id="Category"><a href="Category.aspx?code=Video">影音</a></li>
+                    <li id="BBS"><a href="BBS.aspx">社区</a></li>
+                    <li id="My"><a href="me.html">我的</a></li>
                 </ul>
             </div>
-            <!-- 		        -->
+            <!-- 		       
+-->
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
             <div class="copyrights">
-                Collect from <a href="#">Website Template</a></div>
-            <footer class="container">     <div class="credit row">               <div class="col-md-6 col-md-offset-3">         <div id="templatemo_footer"> Copyright © 2015 <a href="#">TAIXUECHUANMEI</a> | YUANQUAN <a href="#" target="_blank" title="袁圈">袁圈</a></div>       </div>     </div>   </footer>
+            </div>
+            <footer class="container"> <div class="credit
+row"> <div class="col-md-6 col-md-offset-3"> <div id="templatemo_footer"> Copyright
+© 2015 <a href="#">TAIXUECHUANMEI</a> | YUANQUAN <a href="#" target="_blank" title="袁圈">袁圈</a></div>
+</div> </div> </footer>
         </div>
-        <script src="js/audioplayer.js"></script>
     </div>
     <script type='text/javascript' src='js/logging.js'></script>
+    <script type="text/javascript">
+        setActiveMenu(); //选中导航菜单
+    </script>
 </body>
 </html>

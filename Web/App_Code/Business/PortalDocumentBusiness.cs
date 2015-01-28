@@ -94,14 +94,14 @@ public class PortalDocumentBusiness : BaseBuiness
         item.PortalMenuCode = new PortalMenuBusiness().GetPortalMenu(item.PortalMenuID).Code;
         DBContext.PortalDocument.AddObject(item);
         DBContext.SaveChanges();
+        DBContext.Refresh(System.Data.Objects.RefreshMode.StoreWins, DBContext.PortalDocument);
         return item.ID;
     }
     /// <summary>
     /// 更新文档
     /// </summary>
     /// <param name="item"></param>
-    /// <returns></returns>
-    public int UpdatePortalDocument(PortalDocument item)
+    public void UpdatePortalDocument(PortalDocument item)
     {
         var c = DBContext.PortalDocument.Where(p => p.ID == item.ID).SingleOrDefault();
         c.ImageURL = item.ImageURL;
@@ -115,7 +115,8 @@ public class PortalDocumentBusiness : BaseBuiness
         c.Extend1 = item.Extend1;
         c.Extend2 = item.Extend2;
         c.Extend3 = item.Extend3;
-        return DBContext.SaveChanges();
+        DBContext.SaveChanges();
+        DBContext.Refresh(System.Data.Objects.RefreshMode.StoreWins, DBContext.PortalDocument);
     }
     /// <summary>
     /// 删除文档

@@ -13,7 +13,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         {
             if (Session[ConstantUtility.AdminConstant.UserIDKey] == null)
             {
-                //Response.Redirect("Login.aspx");
+                Response.Redirect("Login.aspx");
             }
         }
     }

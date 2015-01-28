@@ -154,13 +154,13 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             //State
-            if (e.Row.Cells[3].Text == "True")
+            if (e.Row.Cells[4].Text == "True")
             {
-                e.Row.Cells[3].Text = "上线";
+                e.Row.Cells[4].Text = "上线";
             }
             else
             {
-                e.Row.Cells[3].Text = "下线";
+                e.Row.Cells[4].Text = "下线";
             }
             //删除按钮
             ((LinkButton)e.Row.Cells[0].Controls[2]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：" + e.Row.Cells[1].Text + " 吗?')");

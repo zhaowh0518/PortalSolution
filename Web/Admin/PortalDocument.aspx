@@ -30,6 +30,7 @@
                 <Columns>
                     <asp:CommandField ShowEditButton="True" HeaderText="操作" EditText="编辑" DeleteText="删除"
                         ShowDeleteButton="true" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="ID" HeaderText="编号" ReadOnly="True" SortExpression="ID" />
                     <asp:BoundField DataField="Name" HeaderText="名称" ReadOnly="True" SortExpression="Name" />
                     <asp:BoundField DataField="Seq" HeaderText="序号" SortExpression="Seq" ItemStyle-HorizontalAlign="Center" />
                     <asp:BoundField DataField="State" HeaderText="状态" SortExpression="State" ItemStyle-HorizontalAlign="Center" />

@@ -54,6 +54,15 @@ public class PortalCategoryBusiness : BaseBuiness
         return DBContext.PortalCategory.Where(p => p.ID == id).SingleOrDefault();
     }
     /// <summary>
+    /// 根据Code获取唯一的内容分类
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public PortalCategory GetPortalCategory(string code)
+    {
+        return DBContext.PortalCategory.Where(p => p.Code == code).SingleOrDefault();
+    }
+    /// <summary>
     /// 添加内容分类
     /// </summary>
     /// <param name="item"></param>
@@ -85,6 +94,7 @@ public class PortalCategoryBusiness : BaseBuiness
         c.ParentID = item.ParentID;
         c.Seq = item.Seq;
         c.State = item.State;
+        c.Code = item.Code;
         return DBContext.SaveChanges();
     }
     /// <summary>

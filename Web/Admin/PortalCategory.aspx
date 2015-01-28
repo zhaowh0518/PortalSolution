@@ -30,6 +30,14 @@
                 </tr>
                 <tr>
                     <td>
+                        编码：
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtCode" runat="server" CssClass="textbox"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         顺序：
                     </td>
                     <td>

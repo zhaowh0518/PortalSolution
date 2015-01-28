@@ -41,7 +41,7 @@ public partial class Admin_PortalContentItem : BasePage
         panelEdit.Visible = false;
         btnAdd.Visible = true;
         btnSave.Visible = false;
-        btnCancel.Visible = false;
+        btnCancel.Text = "返回";
     }
     private void ShowEidtState()
     {
@@ -49,7 +49,7 @@ public partial class Admin_PortalContentItem : BasePage
         panelEdit.Visible = true;
         btnAdd.Visible = false;
         btnSave.Visible = true;
-        btnCancel.Visible = true;
+        btnCancel.Text = "取消";
     }
     private void ShowContentItem(int id)
     {
@@ -114,9 +114,16 @@ public partial class Admin_PortalContentItem : BasePage
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        BindContentItemList();
-        lbMessage.Text = string.Empty;
-        ShowListState();
+        if (btnCancel.Text == "取消")
+        {
+            BindContentItemList();
+            lbMessage.Text = string.Empty;
+            ShowListState();
+        }
+        else
+        {
+            Response.Redirect("~/Admin/PortalContent.aspx");
+        }
     }
     #endregion
 

@@ -80,6 +80,7 @@ public partial class Admin_PortalContent : BasePage
         PortalContent content = new PortalContent();
         content.Name = txtName.Text;
         content.CategoryID = Convert.ToInt32(Request["id"]);
+        content.CategoryCode = Request["code"];
         content.Description = txtDesciption.Text;
         content.DisplayName = txtDisplayName.Text;
         content.URL = txtURL.Text;
@@ -102,7 +103,6 @@ public partial class Admin_PortalContent : BasePage
             content.ImageURL2 = hiddenImageURL2.Value;
         }
 
-
         if (string.IsNullOrEmpty(hiddenID.Value)) //添加
         {
             hiddenID.Value = _portalContentBusiness.AddPortalContent(content).ToString();
@@ -110,6 +110,11 @@ public partial class Admin_PortalContent : BasePage
         else
         {
             content.ID = Convert.ToInt32(hiddenID.Value);
+            //如果有内容集用户不填链接默认去List.aspx页面,需要添加后再保存
+            if (string.IsNullOrEmpty(txtURL.Text) && cbIsSeries.Checked)
+            {
+                txtURL.Text = string.Format("List.aspx?contentid={0}", content.ID);
+            }
             _portalContentBusiness.UpdatePortalContent(content);
         }
         lbMessage.Text = "保存成功！";

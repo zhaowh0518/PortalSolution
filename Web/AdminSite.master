@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>内容管理系统</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/Admin.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
@@ -33,6 +33,7 @@
                         <asp:MenuItem NavigateUrl="~/Admin/PortalDocument.aspx" Text="菜单文档" />
                         <asp:MenuItem NavigateUrl="~/Admin/PortalResource.aspx" Text="资源管理" />
                         <asp:MenuItem NavigateUrl="~/Admin/SysConfig.aspx" Text="系统配置" />
+                        <asp:MenuItem NavigateUrl="~/Portal/Index.aspx" Text="前台网站" Target="_blank" />
                     </Items>
                 </asp:Menu>
             </div>

@@ -73,7 +73,7 @@ public class BindControlsUtility
         foreach (var item in dataSource.Where(p => p.ParentID == parentID).OrderBy(p => p.Seq).ToList())
         {
             TreeNode node = new TreeNode();
-            node.NavigateUrl = string.Format("{0}?id={1}&name={2}", urlPath, item.ID, item.Name);
+            node.NavigateUrl = string.Format("{0}?id={1}&name={2}&code={3}", urlPath, item.ID, item.Name, item.Code);
             node.Text = item.Name;
             node.Value = item.ID.ToString();
             //添加根节点

@@ -46,6 +46,27 @@ public class PortalContentBusiness : BaseBuiness
         }
     }
     /// <summary>
+    /// 根据Code获取某一分类及其子类的内容信息
+    /// </summary>
+    /// <param name="categoryCode">分类编码</param>
+    /// <returns></returns>
+    public List<PortalContent> GetPortalContentList(string categoryCode)
+    {
+        PortalCategory category = new PortalCategoryBusiness().GetPortalCategory(categoryCode);
+        var c = from p in DBContext.PortalContent
+                join q in DBContext.PortalCategory on p.CategoryID equals q.ID
+                where q.Code == category.Code | q.ParentID == category.ID
+                select p;
+        if (c != null && c.Count() > 0)
+        {
+            return c.ToList();
+        }
+        else
+        {
+            return new List<PortalContent>();
+        }
+    }
+    /// <summary>
     /// 获取状态为1的内容
     /// </summary>
     /// <returns></returns>
@@ -110,6 +131,7 @@ public class PortalContentBusiness : BaseBuiness
         c.Type = item.Type;
         c.URL = item.URL;
         c.IsSeries = item.IsSeries;
+        c.CategoryCode = item.CategoryCode;
         return DBContext.SaveChanges();
     }
     /// <summary>
