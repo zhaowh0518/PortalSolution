@@ -77,47 +77,62 @@ public partial class Admin_PortalContent : BasePage
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        PortalContent content = new PortalContent();
-        content.Name = txtName.Text;
-        content.CategoryID = Convert.ToInt32(Request["id"]);
-        content.CategoryCode = Request["code"];
-        content.Description = txtDesciption.Text;
-        content.DisplayName = txtDisplayName.Text;
-        content.URL = txtURL.Text;
-        content.State = cbState.Checked;
-        content.IsSeries = cbIsSeries.Checked;
-        if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
+        try
         {
-            content.ImageURL = FileUtility.SaveImage(fileImage);
-        }
-        else
-        {
-            content.ImageURL = hiddenImageURL.Value;
-        }
-        if (fileImage2.PostedFile != null && fileImage2.PostedFile.ContentLength > 0)
-        {
-            content.ImageURL2 = FileUtility.SaveImage(fileImage2);
-        }
-        else
-        {
-            content.ImageURL2 = hiddenImageURL2.Value;
-        }
-
-        if (string.IsNullOrEmpty(hiddenID.Value)) //添加
-        {
-            hiddenID.Value = _portalContentBusiness.AddPortalContent(content).ToString();
-        }
-        else
-        {
-            content.ID = Convert.ToInt32(hiddenID.Value);
-            //如果有内容集用户不填链接默认去List.aspx页面,需要添加后再保存
-            if (string.IsNullOrEmpty(txtURL.Text) && cbIsSeries.Checked)
+            PortalContent content = new PortalContent();
+            content.Name = txtName.Text;
+            content.CategoryID = Convert.ToInt32(Request["id"]);
+            content.CategoryCode = Request["code"];
+            content.Description = txtDesciption.Text;
+            content.DisplayName = txtDisplayName.Text;
+            content.URL = txtURL.Text;
+            content.State = cbState.Checked;
+            content.IsSeries = cbIsSeries.Checked;
+            if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
             {
-                txtURL.Text = string.Format("List.aspx?contentid={0}", content.ID);
+                content.ImageURL = FileUtility.SaveImage(fileImage);
             }
-            _portalContentBusiness.UpdatePortalContent(content);
+            else
+            {
+                content.ImageURL = hiddenImageURL.Value;
+            }
+            if (fileImage2.PostedFile != null && fileImage2.PostedFile.ContentLength > 0)
+            {
+                content.ImageURL2 = FileUtility.SaveImage(fileImage2);
+            }
+            else
+            {
+                content.ImageURL2 = hiddenImageURL2.Value;
+            }
+
+            if (string.IsNullOrEmpty(hiddenID.Value)) //添加
+            {
+                hiddenID.Value = _portalContentBusiness.AddPortalContent(content).ToString();
+            }
+            else
+            {
+                content.ID = Convert.ToInt32(hiddenID.Value);
+                //如果有内容集用户不填链接默认去List.aspx页面,需要添加后再保存
+                if (string.IsNullOrEmpty(txtURL.Text) && cbIsSeries.Checked)
+                {
+                    txtURL.Text = string.Format("List.aspx?contentid={0}", content.ID);
+                }
+                _portalContentBusiness.UpdatePortalContent(content);
+            }
+            lbMessage.Text = "保存成功！";
         }
-        lbMessage.Text = "保存成功！";
+        catch (Exception ex)
+        {
+            if (ex.InnerException == null)
+            {
+                lbMessage.Text = "保存失败，详细信息：" + ex.Message;
+
+            }
+            else
+            {
+                lbMessage.Text = "保存失败，详细信息：" + ex.InnerException.Message;
+            }
+        }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
