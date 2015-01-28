@@ -92,7 +92,8 @@ public class WeinXin
                 article.Add("Title", item.Name);
                 article.Add("Description", item.Description);
                 article.Add("PicUrl", string.Format("http://182.92.155.19/Resources/Images/{0}", item.ImageURL));
-                article.Add("Url", string.Format("http://182.92.155.19/Portal/{0}", item.URL));
+                //article.Add("Url", string.Format("http://182.92.155.19/Portal/{0}", item.URL));
+                article.Add("Url", string.Format("http://www.tonsfeit.com/weixin/webAuth.aspx"));
                 articleListXml += XmlUtility.DictionaryToXml(article, "item");
             }
             repParms.Add("ArticleCount", docList.Count.ToString());

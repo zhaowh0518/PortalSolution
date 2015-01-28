@@ -12,22 +12,24 @@ public partial class Weixin_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        WeinxinWeb wxWeb = new WeinxinWeb();
+        string redirect_url = "http://182.92.155.19/weixin/webauth.aspx";
+        Response.Redirect(wxWeb.GetAuthorizeUrl(redirect_url, "auth"));
+    }
+
+    private void ValidateServer()
+    {
+        Response.Write(Request["echostr"]);
+    }
+
+    private void Get()
+    {
         string msg = string.Empty;
         byte[] buffer = new byte[(int)Request.InputStream.Length];
         Request.InputStream.Read(buffer, 0, (int)Request.InputStream.Length);
         msg = System.Text.UTF8Encoding.UTF8.GetString(buffer);
 
-        msg = @"<xml>
-  <ToUserName><![CDATA[gh_903d2b8a0569]]></ToUserName>
-  <FromUserName><![CDATA[oF3isuJzivPMXxZObv2rtWdG2jWo]]></FromUserName>
-  <CreateTime>1422195077</CreateTime>
-  <MsgType><![CDATA[text]]></MsgType>
-  <Content><![CDATA[test]]></Content>
-  <MsgId>6108281344449796456</MsgId>
-</xml>";
-
         Response.Write(wx.ResponseMsg(msg));
         Response.End();
     }
-
 }
