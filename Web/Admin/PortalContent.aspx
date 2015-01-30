@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.master" AutoEventWireup="true"
-    CodeFile="PortalContent.aspx.cs" Inherits="Admin_PortalContent" Theme="AdminTheme" %>
+    CodeFile="PortalContent.aspx.cs" Inherits="Admin_PortalContent" Theme="AdminTheme"
+    ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -38,11 +39,13 @@
                         ShowDeleteButton="true" ItemStyle-HorizontalAlign="Center">
                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                     </asp:CommandField>
+                    <asp:BoundField DataField="ID" HeaderText="编号" ReadOnly="True" SortExpression="ID" />
                     <asp:BoundField DataField="Name" HeaderText="名称" ReadOnly="True" SortExpression="Name" />
                     <asp:BoundField DataField="State" HeaderText="状态" ReadOnly="True" SortExpression="State" />
-                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate" />
+                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate"
+                        DataFormatString="{0:yyyy-MM-dd}" />
                     <asp:BoundField DataField="IsSeries" HeaderText="是否是系列" SortExpression="IsSeries" />
-                    <asp:HyperLinkField DataNavigateUrlFields="ID,Name" DataNavigateUrlFormatString="PortalContentItem.aspx?id={0}&amp;name={1}"
+                    <asp:HyperLinkField DataNavigateUrlFields="ID,Name" DataNavigateUrlFormatString="PortalContentItem.aspx?id={0}"
                         HeaderText="内容集" Text="设置内容集" ItemStyle-HorizontalAlign="Center" />
                 </Columns>
             </asp:GridView>
@@ -104,14 +107,12 @@
                     </tr>
                     <tr>
                         <td>
-                            状态：
+                            其他：
                         </td>
                         <td>
-                            <asp:CheckBox ID="cbState" runat="server" Checked="true" Style="float: left" />
-                            <asp:Panel ID="panelIsSeries" runat="server" Style="float: right">
-                                是否是系列：&nbsp;&nbsp;
-                                <asp:CheckBox ID="cbIsSeries" runat="server" />
-                            </asp:Panel>
+                            <asp:CheckBox ID="cbState" runat="server" Checked="true" Text="用户可见" />&nbsp;&nbsp;
+                            <asp:CheckBox ID="cbBizStatus" runat="server" Text="作品完成" />&nbsp;&nbsp;
+                            <asp:CheckBox ID="cbIsSeries" runat="server" Text="有内容集" />
                         </td>
                     </tr>
                 </table>
@@ -122,13 +123,14 @@
         <div id="divDialog">
             <div id="divDialogContent">
                 <h2>
-                    请选择菜单：</h2>
+                    请选择要推荐的菜单：</h2>
                 <hr />
+                <!--
                 <div class="message">
-                    * 推荐到文档类菜单（蓝色）为复制内容<br />
-                    * 推荐到内容类菜单（绿色）为引用内容
+                    * 推荐到文档类菜单（蓝色）为复制内容 * 推荐到内容类菜单（绿色）为引用内容
                     <hr />
                 </div>
+                -->
                 <div id="divSelectMenuList">
                     <asp:TreeView ID="tvMenuList" runat="server">
                     </asp:TreeView>

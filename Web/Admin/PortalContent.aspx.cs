@@ -47,6 +47,17 @@ public partial class Admin_PortalContent : BasePage
         btnSave.Visible = true;
         btnCancel.Visible = true;
     }
+    private void NewContent()
+    {
+        txtName.Text = string.Empty;
+        txtDisplayName.Text = string.Empty;
+        txtDesciption.Text = string.Empty;
+        txtURL.Text = string.Empty;
+
+        cbState.Checked = true;
+        cbBizStatus.Checked = false;
+        cbIsSeries.Checked = false;
+    }
     private void ShowContent(int id)
     {
         PortalContent content = _portalContentBusiness.GetPortalContent(id);
@@ -72,6 +83,7 @@ public partial class Admin_PortalContent : BasePage
         }
         else
         {
+            NewContent();
             ShowEidtState();
         }
     }
@@ -123,15 +135,7 @@ public partial class Admin_PortalContent : BasePage
         }
         catch (Exception ex)
         {
-            if (ex.InnerException == null)
-            {
-                lbMessage.Text = "保存失败，详细信息：" + ex.Message;
-
-            }
-            else
-            {
-                lbMessage.Text = "保存失败，详细信息：" + ex.InnerException.Message;
-            }
+            lbMessage.Text = "保存失败，详细信息：" + GetErrorMessage(ex);
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
@@ -150,44 +154,51 @@ public partial class Admin_PortalContent : BasePage
         {
             int contentID = 0;
             List<PortalMenuItem> menuItemList = new List<PortalMenuItem>();
-            foreach (TreeNode menuNode in tvMenuList.CheckedNodes)
+            try
             {
-                PortalMenu menu = _portalMenuBuiness.GetPortalMenu(Convert.ToInt32(menuNode.Value));
-                for (int i = 0; i < gvContentList.Rows.Count; i++)
+                foreach (TreeNode menuNode in tvMenuList.CheckedNodes)
                 {
-                    CheckBox chkSelect = gvContentList.Rows[i].FindControl("chkSelect") as CheckBox;
-                    if (chkSelect.Checked)
+                    PortalMenu menu = _portalMenuBuiness.GetPortalMenu(Convert.ToInt32(menuNode.Value));
+                    for (int i = 0; i < gvContentList.Rows.Count; i++)
                     {
-                        contentID = Convert.ToInt32(gvContentList.DataKeys[i].Value);
-                        if (menu.Type == 1) //内容菜单
+                        CheckBox chkSelect = gvContentList.Rows[i].FindControl("chkSelect") as CheckBox;
+                        if (chkSelect.Checked)
                         {
-                            PortalMenuItem item = new PortalMenuItem();
-                            item.ContentID = contentID;
-                            item.MenuID = menu.ID;
-                            item.ContentName = gvContentList.Rows[i].Cells[2].Text;
-                            menuItemList.Add(item);
-                        }
-                        else if (menu.Type == 2) //文档菜单
-                        {
-                            PortalDocument doc = new PortalDocument();
-                            PortalContent content = _portalContentBusiness.GetPortalContent(contentID);
-                            doc.Name = content.Name;
-                            doc.Description = content.Description;
-                            doc.DisplayName = content.DisplayName;
-                            doc.ImageURL = content.ImageURL;
-                            doc.ImageURL2 = content.ImageURL2;
-                            doc.PortalMenuID = menu.ID;
-                            doc.PortalMenuCode = menu.Code;
-                            doc.State = true;
-                            doc.Seq = ConstantUtility.AdminConstant.DefaultSeq;
-                            doc.URL = content.URL;
-                            _portalDocumentBuiness.AddPortalDocument(doc);
+                            contentID = Convert.ToInt32(gvContentList.DataKeys[i].Value);
+                            if (menu.Type == 1) //内容菜单
+                            {
+                                PortalMenuItem item = new PortalMenuItem();
+                                item.ContentID = contentID;
+                                item.MenuID = menu.ID;
+                                item.ContentName = gvContentList.Rows[i].Cells[2].Text;
+                                menuItemList.Add(item);
+                            }
+                            else if (menu.Type == 2) //文档菜单
+                            {
+                                PortalDocument doc = new PortalDocument();
+                                PortalContent content = _portalContentBusiness.GetPortalContent(contentID);
+                                doc.Name = content.Name;
+                                doc.Description = content.Description;
+                                doc.DisplayName = content.DisplayName;
+                                doc.ImageURL = content.ImageURL;
+                                doc.ImageURL2 = content.ImageURL2;
+                                doc.PortalMenuID = menu.ID;
+                                doc.PortalMenuCode = menu.Code;
+                                doc.State = true;
+                                doc.Seq = ConstantUtility.AdminConstant.DefaultSeq;
+                                doc.URL = content.URL;
+                                _portalDocumentBuiness.AddPortalDocument(doc);
+                            }
                         }
                     }
                 }
+                _portalMenuItemBusiness.AddPortalMenuItem(menuItemList);
+                lbMessage.Text = "推荐成功";
             }
-            _portalMenuItemBusiness.AddPortalMenuItem(menuItemList);
-            lbMessage.Text = "推荐成功";
+            catch (Exception ex)
+            {
+                lbMessage.Text = "推荐失败，错误信息：" + GetErrorMessage(ex);
+            }
         }
     }
     #endregion
@@ -205,13 +216,13 @@ public partial class Admin_PortalContent : BasePage
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             //State
-            if (e.Row.Cells[3].Text == "True")
+            if (e.Row.Cells[4].Text == "True")
             {
-                e.Row.Cells[3].Text = "上线";
+                e.Row.Cells[4].Text = "上线";
             }
             else
             {
-                e.Row.Cells[3].Text = "下线";
+                e.Row.Cells[4].Text = "下线";
             }
             //删除按钮
             ((LinkButton)e.Row.Cells[1].Controls[2]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：" + e.Row.Cells[2].Text + " 吗?')");

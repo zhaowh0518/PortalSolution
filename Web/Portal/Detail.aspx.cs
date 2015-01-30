@@ -8,63 +8,62 @@ using PortalModel;
 
 public partial class Portal_Detail : BasePage
 {
-    public PortalMenu CurrentPortalMenu = new PortalMenu();
-    public PortalDocument CurrentPortalDocument = new PortalDocument();
-    public List<PortalComment> CurrentPortalCommentList = new List<PortalComment>();
+    public Program CurrentProgram = new Program();
 
-    private PortalCommentBusiness _portalCommentBusiness = new PortalCommentBusiness();
+    private int userID = 0;
+    private string userName = string.Empty;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
-        {
-            GetData();
-        }
+        GetData();
     }
 
     protected override void GetData()
     {
         try
         {
-            if (!string.IsNullOrEmpty(Request["id"]))
+            if (!string.IsNullOrEmpty(Request["id"]) && !string.IsNullOrEmpty(Request["type"]))
             {
-                CurrentPortalDocument = _portalDocumentBuiness.GetPortalDocument(Convert.ToInt32(Request["id"]));
-                if (CurrentPortalDocument != null)
+                int id = Convert.ToInt32(Request["id"]);
+                int type = Convert.ToInt32(Request["type"]);
+                CurrentProgram = Program.GetProgram(id, type);
+                if (CurrentProgram != null)
                 {
-                    CurrentPortalMenu = _portalMenuBuiness.GetPortalMenu(CurrentPortalDocument.PortalMenuID);
-                    CurrentPortalCommentList = _portalCommentBusiness.GetPortalCommentList(CurrentPortalDocument.ID);
+                    ShowActInfo();
+                }
+                else
+                {
+                    CurrentProgram = new Program();
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
+            //txtComment.InnerText = ex.Message;
         }
+    }
+    protected void btnFeel_Click(object sender, EventArgs e)
+    {
+        btnFeel.Enabled = false;
+        CurrentProgram.AddFeel(userID);
+        ShowActInfo();
+    }
+    protected void btnFavorite_Click(object sender, EventArgs e)
+    {
+        btnFavorite.Enabled = false;
+        CurrentProgram.AddFavorite(userID);
+        ShowActInfo();
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        try
+        if (!string.IsNullOrEmpty(txtComment.InnerText))
         {
-            PortalComment comment = new PortalComment();
-            comment.Comment = txtComment.InnerText;
-            comment.ContentID = Convert.ToInt32(Request["id"]);
-            if (Session["UserID"] != null)
-            {
-                comment.UserID = Convert.ToInt32(Session["UserID"]);
-            }
-            if (Session["UserName"] != null)
-            {
-                comment.UserName = Session["UserName"].ToString();
-            }
-            else
-            {
-                comment.UserName = "匿名";
-            }
-            _portalCommentBusiness.AddPortalComment(comment);
-            Response.Redirect(Request.RawUrl);
+            CurrentProgram.AddComment(userID, userName, txtComment.InnerText);
         }
-        catch
-        {
-
-        }
+    }
+    private void ShowActInfo()
+    {
+        btnFeel.Text = string.Format("点赞  {0}", CurrentProgram.FeelCount);
+        btnFavorite.Text = string.Format("收藏  {0}", CurrentProgram.FavoriteCount);
     }
 }

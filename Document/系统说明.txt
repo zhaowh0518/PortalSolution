@@ -29,3 +29,10 @@
 
 八、前台网站
 1.功能：连接到前台网站
+
+
+视频连接地址示例：
+<embed src="http://player.youku.com/player.php/sid/XODUzNjk2NzUy/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+
+音频连接地址示例：
+<embed src="http://app.yuantengfei.org/ytf/upload/mp3/zhg/5.mp3" width="480" height="40" type="audio/mpeg" volume="0" loop="-1" autostart="0"> </embed>

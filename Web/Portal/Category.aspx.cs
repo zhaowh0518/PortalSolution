@@ -9,10 +9,6 @@ using PortalModel;
 public partial class Portal_Category : BasePage
 {
     /// <summary>
-    /// 当前分类的编码
-    /// </summary>
-    public string CategoryCode = string.Empty;
-    /// <summary>
     /// 当前分类下的所有内容
     /// </summary>
     public List<PortalContent> ContentList = new List<PortalContent>();
@@ -21,10 +17,9 @@ public partial class Portal_Category : BasePage
     {
         if (!Page.IsPostBack)
         {
-            CategoryCode = Request["code"];
-            if (!string.IsNullOrEmpty(CategoryCode))
+            if (!string.IsNullOrEmpty(Request["code"]))
             {
-                ContentList = _portalContentBusiness.GetPortalContentList(CategoryCode);
+                ContentList = _portalContentBusiness.GetPortalContentList(Request["code"]);
             }
         }
     }

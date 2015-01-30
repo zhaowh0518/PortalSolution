@@ -125,6 +125,7 @@ public class BindControlsUtility
             {
                 node.Text = string.Format("<font color='black'>{0}</font>", item.Name);
             }
+            node.Selected = false;
             //添加根节点
             if (parentNode == null)
             {

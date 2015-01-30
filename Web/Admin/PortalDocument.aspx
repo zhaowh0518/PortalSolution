@@ -91,8 +91,8 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtSeq" runat="server" Text="100" CssClass="textbox"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
-                            状态：&nbsp;&nbsp;
-                            <asp:CheckBox ID="cbState" runat="server" Checked="true" />
+                            &nbsp;&nbsp;
+                            <asp:CheckBox ID="cbState" runat="server" Checked="true" Text="用户可见" />
                         </td>
                     </tr>
                 </table>

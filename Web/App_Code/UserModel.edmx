@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="UserModelStoreContainer">
+          <EntitySet Name="PortalCategory" EntityType="UserModel.Store.PortalCategory" store:Type="Tables" />
+          <EntitySet Name="UserAct" EntityType="UserModel.Store.UserAct" store:Type="Tables" />
+          <EntitySet Name="UserComment" EntityType="UserModel.Store.UserComment" store:Type="Tables" />
+          <EntitySet Name="UserFavorite" EntityType="UserModel.Store.UserFavorite" store:Type="Tables" />
+          <EntitySet Name="UserFeel" EntityType="UserModel.Store.UserFeel" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="UserModel.Store.UserInfo" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="PortalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Seq" Type="int" />
+          <Property Name="State" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserAct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="ActType" Type="int" Nullable="false" />
+          <Property Name="ActCount" Type="int" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="int" />
+          <Property Name="Comment" Type="nvarchar" Nullable="false" MaxLength="4000" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFavorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="ContentName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentImageURL" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentSummary" Type="nvarchar" MaxLength="1024" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFeel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="Feeling" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Pwd" Type="varchar" MaxLength="1024" />
+          <Property Name="OpenID" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="Summary" Type="nvarchar" Nullable="false" MaxLength="2048" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="province" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="HeadImgUrl" Type="varchar" MaxLength="1024" />
+          <Property Name="SubscribeTime" Type="datetime" />
+          <Property Name="UnionID" Type="varchar" MaxLength="1024" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="UserEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PortalCategory" EntityType="UserModel.PortalCategory" />
+          <EntitySet Name="UserAct" EntityType="UserModel.UserAct" />
+          <EntitySet Name="UserComment" EntityType="UserModel.UserComment" />
+          <EntitySet Name="UserFavorite" EntityType="UserModel.UserFavorite" />
+          <EntitySet Name="UserFeel" EntityType="UserModel.UserFeel" />
+          <EntitySet Name="UserInfo" EntityType="UserModel.UserInfo" />
+        </EntityContainer>
+        <EntityType Name="PortalCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Seq" Type="Int32" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="UserAct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <Property Name="ActType" Type="Int32" Nullable="false" />
+          <Property Name="ActCount" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="Int32" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFavorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <Property Name="ContentName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ContentImageURL" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="ContentSummary" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFeel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="Int32" Nullable="false" />
+          <Property Name="Feeling" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Pwd" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="OpenID" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="NickName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="Summary" Type="String" Nullable="false" MaxLength="2048" Unicode="true" FixedLength="false" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="province" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HeadImgUrl" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="SubscribeTime" Type="DateTime" />
+          <Property Name="UnionID" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserModelStoreContainer" CdmEntityContainer="UserEntities">
+          <EntitySetMapping Name="PortalCategory">
+            <EntityTypeMapping TypeName="UserModel.PortalCategory">
+              <MappingFragment StoreEntitySet="PortalCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAct">
+            <EntityTypeMapping TypeName="UserModel.UserAct">
+              <MappingFragment StoreEntitySet="UserAct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ActType" ColumnName="ActType" />
+                <ScalarProperty Name="ActCount" ColumnName="ActCount" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComment">
+            <EntityTypeMapping TypeName="UserModel.UserComment">
+              <MappingFragment StoreEntitySet="UserComment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFavorite">
+            <EntityTypeMapping TypeName="UserModel.UserFavorite">
+              <MappingFragment StoreEntitySet="UserFavorite">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+                <ScalarProperty Name="ContentImageURL" ColumnName="ContentImageURL" />
+                <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFeel">
+            <EntityTypeMapping TypeName="UserModel.UserFeel">
+              <MappingFragment StoreEntitySet="UserFeel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="UserModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="HeadImgUrl" ColumnName="HeadImgUrl" />
+                <ScalarProperty Name="SubscribeTime" ColumnName="SubscribeTime" />
+                <ScalarProperty Name="UnionID" ColumnName="UnionID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="UserModel">
+        <EntityTypeShape EntityType="UserModel.PortalCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserAct" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserComment" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserFavorite" Width="1.5" PointX="0.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserFeel" Width="1.5" PointX="2.75" PointY="4.75" Height="2.1610522460937496" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserInfo" Width="1.5" PointX="4.75" PointY="4.75" Height="3.8802294921874996" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

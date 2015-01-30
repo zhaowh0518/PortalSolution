@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminSite.master" AutoEventWireup="true"
-    CodeFile="PortalContentItem.aspx.cs" Inherits="Admin_PortalContentItem" Theme="AdminTheme" %>
+    CodeFile="PortalContentItem.aspx.cs" Inherits="Admin_PortalContentItem" Theme="AdminTheme"
+    ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -10,13 +11,15 @@
                 内容名称：<br />
                 <%=CurrentPortalCuurent.Name %><br />
             </p>
+            <hr />
             <p>
                 内容简介：<br />
                 <%=CurrentPortalCuurent.DisplayName %><br />
             </p>
+            <hr />
             <p>
                 创建时间：<br />
-                <%=CurrentPortalCuurent.CreateDate %><br />
+                <%=CurrentPortalCuurent.CreateDate.ToString("yyyy-MM-dd") %><br />
             </p>
         </div>
     </div>
@@ -39,9 +42,11 @@
                 <Columns>
                     <asp:CommandField ShowEditButton="True" HeaderText="操作" EditText="编辑" DeleteText="删除"
                         ShowDeleteButton="true" ItemStyle-HorizontalAlign="Center"></asp:CommandField>
+                    <asp:BoundField DataField="ID" HeaderText="编号" ReadOnly="True" SortExpression="ID" />
                     <asp:BoundField DataField="Name" HeaderText="名称" ReadOnly="True" SortExpression="Name" />
                     <asp:BoundField DataField="State" HeaderText="状态" ReadOnly="True" SortExpression="State" />
-                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate" />
+                    <asp:BoundField DataField="CreateDate" HeaderText="创建时间" SortExpression="CreateDate"
+                        DataFormatString="{0:yyyy-MM-dd}" />
                 </Columns>
             </asp:GridView>
             <asp:Panel ID="panelEdit" runat="server">
@@ -61,6 +66,17 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            类型：
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlType" runat="server" CssClass="ddl" Width="585px">
+                                <asp:ListItem Selected="True" Text="视频" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="音频" Value="1"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -102,12 +118,13 @@
                     </tr>
                     <tr>
                         <td>
-                            集数：
+                            其他：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSeq" runat="server" Text="1" CssClass="textbox"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
-                            状态：&nbsp;&nbsp;
-                            <asp:CheckBox ID="cbState" runat="server" Checked="true" />
+                            集数：
+                            <asp:TextBox ID="txtSeq" runat="server" Text="1" CssClass="textbox" Width="30px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;
+                            <asp:CheckBox ID="cbState" runat="server" Checked="true" Text="用户可见" />
                         </td>
                     </tr>
                 </table>

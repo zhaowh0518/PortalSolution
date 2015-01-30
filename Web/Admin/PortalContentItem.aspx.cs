@@ -63,6 +63,7 @@ public partial class Admin_PortalContentItem : BasePage
         hiddenImageURL2.Value = item.ImageURL2;
         linkViewImage2.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, item.ImageURL2);
         cbState.Checked = item.State;
+        ddlType.SelectedValue = item.Type.ToString();
         txtSeq.Text = item.Seq.ToString();
     }
     #endregion
@@ -75,42 +76,50 @@ public partial class Admin_PortalContentItem : BasePage
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        PortalContentItem item = new PortalContentItem();
-        item.Name = txtName.Text;
-        item.ContentID = Convert.ToInt32(Request["id"]);
-        item.Description = txtDesciption.Text;
-        item.DisplayName = txtDisplayName.Text;
-        item.URL = txtURL.Text;
-        item.State = cbState.Checked;
-        item.Seq = Convert.ToInt32(txtSeq.Text);
-        if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
+        try
         {
-            item.ImageURL = FileUtility.SaveImage(fileImage);
-        }
-        else
-        {
-            item.ImageURL = hiddenImageURL.Value;
-        }
-        if (fileImage2.PostedFile != null && fileImage2.PostedFile.ContentLength > 0)
-        {
-            item.ImageURL2 = FileUtility.SaveImage(fileImage2);
-        }
-        else
-        {
-            item.ImageURL2 = hiddenImageURL2.Value;
-        }
+            PortalContentItem item = new PortalContentItem();
+            item.Name = txtName.Text;
+            item.ContentID = Convert.ToInt32(Request["id"]);
+            item.Description = txtDesciption.Text;
+            item.DisplayName = txtDisplayName.Text;
+            item.URL = txtURL.Text;
+            item.State = cbState.Checked;
+            item.Seq = Convert.ToInt32(txtSeq.Text);
+            item.Type = Convert.ToInt32(ddlType.SelectedValue);
+            if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
+            {
+                item.ImageURL = FileUtility.SaveImage(fileImage);
+            }
+            else
+            {
+                item.ImageURL = hiddenImageURL.Value;
+            }
+            if (fileImage2.PostedFile != null && fileImage2.PostedFile.ContentLength > 0)
+            {
+                item.ImageURL2 = FileUtility.SaveImage(fileImage2);
+            }
+            else
+            {
+                item.ImageURL2 = hiddenImageURL2.Value;
+            }
 
 
-        if (string.IsNullOrEmpty(hiddenID.Value)) //添加
-        {
-            hiddenID.Value = _portalContentItemBusiness.AddPortalContentItem(item).ToString();
+            if (string.IsNullOrEmpty(hiddenID.Value)) //添加
+            {
+                hiddenID.Value = _portalContentItemBusiness.AddPortalContentItem(item).ToString();
+            }
+            else
+            {
+                item.ID = Convert.ToInt32(hiddenID.Value);
+                _portalContentItemBusiness.UpdatePortalContentItem(item);
+            }
+            lbMessage.Text = "保存成功！";
         }
-        else
+        catch (Exception ex)
         {
-            item.ID = Convert.ToInt32(hiddenID.Value);
-            _portalContentItemBusiness.UpdatePortalContentItem(item);
+            lbMessage.Text = "保存失败，详细信息：" + GetErrorMessage(ex);
         }
-        lbMessage.Text = "保存成功！";
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
@@ -140,13 +149,13 @@ public partial class Admin_PortalContentItem : BasePage
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             //State
-            if (e.Row.Cells[2].Text == "True")
+            if (e.Row.Cells[3].Text == "True")
             {
-                e.Row.Cells[2].Text = "上线";
+                e.Row.Cells[3].Text = "上线";
             }
             else
             {
-                e.Row.Cells[2].Text = "下线";
+                e.Row.Cells[3].Text = "下线";
             }
             //删除按钮
             ((LinkButton)e.Row.Cells[0].Controls[2]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：" + e.Row.Cells[1].Text + " 吗?')");

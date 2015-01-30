@@ -41,4 +41,13 @@ public class BasePage : System.Web.UI.Page
         PortalMenuList = new List<PortalMenu>();
         PortalDocumentList = new List<PortalDocument>();
     }
+    /// <summary>
+    /// 提取异常信息
+    /// </summary>
+    /// <param name="ex"></param>
+    /// <returns></returns>
+    protected string GetErrorMessage(Exception ex)
+    {
+        return ex.InnerException == null ? ex.Message : ex.InnerException.Message;
+    }
 }

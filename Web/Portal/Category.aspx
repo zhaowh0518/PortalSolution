@@ -7,8 +7,7 @@
     <div class="row " id="thumbnails_container">
         <div class="col-md-6 col-xs-6 top20" id="divCategory">
             <a href="Category.aspx?code=Video" class="btn btn-primary">视频</a>&nbsp;&nbsp;<a href="Category.aspx?code=Audio"
-                class="btn btn-default"> 音频</a>&nbsp;&nbsp;<a href="Category.aspx?code=Book" class="btn btn-default">
-                    书籍</a></div>
+                class="btn btn-default"> 音频</a></div>
     </div>
     <div class="row" id="thumbnails_container">
         <div class="col-md-12 ">
@@ -17,7 +16,7 @@
         </div>
         <div class="row">
             <%
-                List<PortalModel.PortalContent> inProcessContentList = ContentList.Where(p => p.CategoryCode == CategoryCode + "_InProcess").ToList();
+                List<PortalModel.PortalContent> inProcessContentList = ContentList.Where(p => p.BizStatus == 0).ToList();
                 foreach (var item in inProcessContentList)
                 {
 
@@ -39,7 +38,7 @@
         </div>
         <div class="row">
             <%
-                List<PortalModel.PortalContent> finishedContentList = ContentList.Where(p => p.CategoryCode == CategoryCode + "_Finished").ToList();
+                List<PortalModel.PortalContent> finishedContentList = ContentList.Where(p => p.BizStatus == 1).ToList();
                 foreach (var item in finishedContentList)
                 {
 

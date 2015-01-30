@@ -4,22 +4,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <form id="Form1" runat="server">
     <div class="row" id="thumbnails_container">
         <div class="col-md-12 clear0">
             <h3>
-                <%=CurrentPortalMenu.Name%></h3>
+                <%=CurrentProgram.ParentName%></h3>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 clear0">
             <div class="preview_footer_container">
                 <div class="footer_item section_box2 col-xs-12 col-sm-12 col-md-12">
                     <div class="  time01 bot10">
-                        发表于:<%=CurrentPortalDocument.CreateDate%><span class="right"></span></div>
+                        发表于:<%=CurrentProgram.CreateDate%><span class="right"></span></div>
                     <div class="col-xs-12 col-sm-12 col-md-12  clear0 fontxiao bot20 ">
                         <div class="col-xs-6 col-sm-8 col-md-8 clear0 fontbt">
-                            <%=CurrentPortalDocument.Name%></div>
+                            <%=CurrentProgram.Name%></div>
+                        <div class="right">
+                            <asp:Button runat="server" Text="点攒" CssClass="btn btn-default" ID="btnFeel" OnClick="btnFeel_Click" />
+                            <asp:Button runat="server" Text="收藏" CssClass="btn btn-default" ID="btnFavorite"
+                                OnClick="btnFavorite_Click" />
+                        </div>
+                    </div>
+                    <div class="clear">
+                        &nbsp;
                     </div>
                     <div>
-                        <%=Server.HtmlDecode(CurrentPortalDocument.Description)%>
+                        <%=CurrentProgram.ContentType ==2 ? string.Empty : CurrentProgram.URL%></div>
+                    <div>
+                        <%=Server.HtmlDecode(CurrentProgram.Description)%>
                     </div>
                     <div class="col-xs-12 col-md-12 clear0 bot30">
                         <a class="zf001 sm0">转发：</a>
@@ -38,18 +49,16 @@
                         评论</h3>
                 </div>
                 <div class="form-group left-inner-addon bot60">
-                    <form runat="server" id="formComment">
                     <span class="glyphicon glyphicon-comment"></span>
                     <textarea name="message" runat="server" rows="6" class="form-control" id="txtComment"
                         placeholder="请输入评论..."></textarea>
                     <br>
                     <asp:Button runat="server" Text="发表" CssClass="btn btn-primary right" ID="btnSubmit"
                         OnClick="btnSubmit_Click" />
-                    </form>
                 </div>
                 <%
                     int counter = 0;
-                    foreach (var item in CurrentPortalCommentList)
+                    foreach (var item in CurrentProgram.CommentList)
                     {
                         counter++;
 
@@ -71,4 +80,5 @@
             </div>
         </div>
     </div>
+    </form>
 </asp:Content>

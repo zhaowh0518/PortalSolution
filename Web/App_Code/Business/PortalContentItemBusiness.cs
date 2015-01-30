@@ -72,6 +72,7 @@ public class PortalContentItemBusiness : BaseBuiness
         c.Description = item.Description;
         c.DisplayName = item.DisplayName;
         c.Name = item.Name;
+        c.Type = item.Type;
         c.State = item.State;
         c.URL = item.URL;
         c.Seq = item.Seq;
