@@ -115,6 +115,7 @@ public class PortalDocumentBusiness : BaseBuiness
         c.Extend1 = item.Extend1;
         c.Extend2 = item.Extend2;
         c.Extend3 = item.Extend3;
+        c.Type = item.Type;
         DBContext.SaveChanges();
         DBContext.Refresh(System.Data.Objects.RefreshMode.StoreWins, DBContext.PortalDocument);
     }

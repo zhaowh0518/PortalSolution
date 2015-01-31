@@ -53,6 +53,7 @@ public partial class Admin_PortalContent : BasePage
         txtDisplayName.Text = string.Empty;
         txtDesciption.Text = string.Empty;
         txtURL.Text = string.Empty;
+        txtExtend1.Text = string.Empty;
 
         cbState.Checked = true;
         cbBizStatus.Checked = false;
@@ -65,10 +66,12 @@ public partial class Admin_PortalContent : BasePage
         txtDisplayName.Text = content.DisplayName;
         txtDesciption.Text = content.Description;
         txtURL.Text = content.URL;
+        txtExtend1.Text = content.Extend1;
         hiddenImageURL.Value = content.ImageURL;
         linkViewImage.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, content.ImageURL);
         hiddenImageURL2.Value = content.ImageURL2;
         linkViewImage2.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, content.ImageURL2);
+        ddlType.SelectedValue = content.Type.ToString();
         cbState.Checked = content.State;
         cbIsSeries.Checked = content.IsSeries;
     }
@@ -100,6 +103,8 @@ public partial class Admin_PortalContent : BasePage
             content.URL = txtURL.Text;
             content.State = cbState.Checked;
             content.IsSeries = cbIsSeries.Checked;
+            content.Extend1 = txtExtend1.Text;
+            content.Type = Convert.ToInt32(ddlType.SelectedValue);
             if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
             {
                 content.ImageURL = FileUtility.SaveImage(fileImage);

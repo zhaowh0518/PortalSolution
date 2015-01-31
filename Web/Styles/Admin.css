@@ -18,17 +18,6 @@ h1
     width: 60px;
     height: 30px;
 }
-.ddl
-{
-    padding: 3px;
-    width: 250px;
-    margin-left: 7px;
-    margin-top: 7px;
-    height: 35px;
-    border: 1px solid #ddd;
-    line-height: 30px;
-    font-size: 16px;
-}
 .selectNodeInfo
 {
     float: right;
@@ -37,7 +26,7 @@ h1
 }
 .hidden
 {
-    visibility: hidden;
+    display: none;
 }
 /*登录页样式*/
 #loginPanel
@@ -85,14 +74,14 @@ h1
 .divNavList
 {
     width: 200px;
-    height: 600px;
+    height: 598px;
     float: left;
     border: 1px solid #ddd;
 }
 .divContent
 {
     width: 680px;
-    height: 600px;
+    height: 598px;
     border: 1px solid #ddd;
     float: left;
     background: #fff;
@@ -110,7 +99,7 @@ h1
 }
 .divAction
 {
-    padding: 7px;
+    padding: 3px;
     width: 400px;
     float: left;
 }
@@ -127,13 +116,30 @@ h1
 .divEdit .textbox
 {
     padding: 3px;
-    width: 240px;
+    width: 580px;
     margin-left: 7px;
-    margin-top: 7px;
     height: 30px;
     border: 1px solid #ddd;
     line-height: 30px;
     font-size: 16px;
+}
+.divEdit .select
+{
+    padding: 3px;
+    width: 585px;
+    margin-left: 7px;
+    height: 35px;
+    border: 1px solid #ddd;
+    line-height: 30px;
+    font-size: 16px;
+}
+.divEdit .file
+{
+    padding: 3px;
+    width: 530px;
+    margin-left: 7px;
+    margin-top: 3px;
+    height: 30px;
 }
 .divMessage
 {

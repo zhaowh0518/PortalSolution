@@ -65,6 +65,7 @@ public partial class Admin_PortalContentItem : BasePage
         cbState.Checked = item.State;
         ddlType.SelectedValue = item.Type.ToString();
         txtSeq.Text = item.Seq.ToString();
+        txtExtend1.Text = item.Extend1;
     }
     #endregion
 
@@ -84,6 +85,7 @@ public partial class Admin_PortalContentItem : BasePage
             item.Description = txtDesciption.Text;
             item.DisplayName = txtDisplayName.Text;
             item.URL = txtURL.Text;
+            item.Extend1 = txtExtend1.Text;
             item.State = cbState.Checked;
             item.Seq = Convert.ToInt32(txtSeq.Text);
             item.Type = Convert.ToInt32(ddlType.SelectedValue);

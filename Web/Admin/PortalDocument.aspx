@@ -46,7 +46,7 @@
                         </td>
                         <td>
                             <asp:HiddenField ID="hiddenID" runat="server" />
-                            <asp:TextBox ID="txtName" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" CssClass="textbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -54,7 +54,19 @@
                             简介：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
+                            <asp:TextBox ID="txtDisplayName" runat="server" CssClass="textbox"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            类型：
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlType" runat="server" CssClass="select">
+                                <asp:ListItem Selected="True" Text="视频" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="音频" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="HTML" Value="2"></asp:ListItem>
+                            </asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -72,9 +84,17 @@
                             图片：
                         </td>
                         <td>
-                            <asp:FileUpload ID="fileImage" runat="server" Height="30px" Width="550px" />&nbsp;&nbsp;
-                            <a href="" target="_blank" id="linkViewImage" runat="server">查看</a>
+                            <asp:FileUpload ID="fileImage" runat="server" CssClass="file" />&nbsp;&nbsp; <a href=""
+                                target="_blank" id="linkViewImage" runat="server">查看</a>
                             <asp:HiddenField ID="hiddenImageURL" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            代码：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtExtend1" runat="server" CssClass="textbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +102,7 @@
                             链接：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox" Width="580px"></asp:TextBox>
+                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -90,7 +110,7 @@
                             顺序：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtSeq" runat="server" Text="100" CssClass="textbox"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:TextBox ID="txtSeq" runat="server" Text="100" CssClass="textbox" Width="100px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;
                             <asp:CheckBox ID="cbState" runat="server" Checked="true" Text="用户可见" />
                         </td>

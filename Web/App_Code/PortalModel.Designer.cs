@@ -116,22 +116,6 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalDocument> PortalDocument
-        {
-            get
-            {
-                if ((_PortalDocument == null))
-                {
-                    _PortalDocument = base.CreateObjectSet<PortalDocument>("PortalDocument");
-                }
-                return _PortalDocument;
-            }
-        }
-        private ObjectSet<PortalDocument> _PortalDocument;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<PortalMenuItem> PortalMenuItem
         {
             get
@@ -192,6 +176,22 @@ namespace PortalModel
             }
         }
         private ObjectSet<PortalContentItem> _PortalContentItem;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalDocument> PortalDocument
+        {
+            get
+            {
+                if ((_PortalDocument == null))
+                {
+                    _PortalDocument = base.CreateObjectSet<PortalDocument>("PortalDocument");
+                }
+                return _PortalDocument;
+            }
+        }
+        private ObjectSet<PortalDocument> _PortalDocument;
 
         #endregion
 
@@ -219,14 +219,6 @@ namespace PortalModel
         public void AddToPortalMenu(PortalMenu portalMenu)
         {
             base.AddObject("PortalMenu", portalMenu);
-        }
-    
-        /// <summary>
-        /// 用于向 PortalDocument EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalDocument(PortalDocument portalDocument)
-        {
-            base.AddObject("PortalDocument", portalDocument);
         }
     
         /// <summary>
@@ -259,6 +251,14 @@ namespace PortalModel
         public void AddToPortalContentItem(PortalContentItem portalContentItem)
         {
             base.AddObject("PortalContentItem", portalContentItem);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalDocument EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalDocument(PortalDocument portalDocument)
+        {
+            base.AddObject("PortalDocument", portalDocument);
         }
 
         #endregion
@@ -1354,15 +1354,17 @@ namespace PortalModel
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="name">Name 属性的初始值。</param>
         /// <param name="portalMenuID">PortalMenuID 属性的初始值。</param>
+        /// <param name="type">Type 属性的初始值。</param>
         /// <param name="seq">Seq 属性的初始值。</param>
         /// <param name="state">State 属性的初始值。</param>
         /// <param name="createDate">CreateDate 属性的初始值。</param>
-        public static PortalDocument CreatePortalDocument(global::System.Int32 id, global::System.String name, global::System.Int32 portalMenuID, global::System.Int32 seq, global::System.Boolean state, global::System.DateTime createDate)
+        public static PortalDocument CreatePortalDocument(global::System.Int32 id, global::System.String name, global::System.Int32 portalMenuID, global::System.Int32 type, global::System.Int32 seq, global::System.Boolean state, global::System.DateTime createDate)
         {
             PortalDocument portalDocument = new PortalDocument();
             portalDocument.ID = id;
             portalDocument.Name = name;
             portalDocument.PortalMenuID = portalMenuID;
+            portalDocument.Type = type;
             portalDocument.Seq = seq;
             portalDocument.State = state;
             portalDocument.CreateDate = createDate;
@@ -1495,6 +1497,30 @@ namespace PortalModel
         private global::System.String _PortalMenuCode;
         partial void OnPortalMenuCodeChanging(global::System.String value);
         partial void OnPortalMenuCodeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.Int32 _Type;
+        partial void OnTypeChanging(global::System.Int32 value);
+        partial void OnTypeChanged();
     
         /// <summary>
         /// 没有元数据文档可用。

@@ -64,6 +64,7 @@ public partial class Portal_Detail : BasePage
         try
         {
             CurrentProgram.AddFeel(CurrentUserID);
+            CurrentProgram.FeelCount++;
             ShowActInfo();
         }
         catch (Exception ex)
@@ -78,6 +79,7 @@ public partial class Portal_Detail : BasePage
         try
         {
             CurrentProgram.AddFavorite(CurrentUserID);
+            CurrentProgram.FavoriteCount++;
             ShowActInfo();
         }
         catch (Exception ex)
@@ -115,6 +117,12 @@ public partial class Portal_Detail : BasePage
         {
             btnFavorite.Enabled = false;
         }
+        if (CurrentProgram.ID == 0)
+        {
+            btnFavorite.Enabled = false;
+            btnFeel.Enabled = false;
+            btnSubmit.Enabled = false;
+        }
     }
 
     private void CheckUser()
@@ -150,7 +158,7 @@ public partial class Portal_Detail : BasePage
                     userInfo.UnionID = wxUser.unionid;
                     userInfo.Summary = string.Empty;
                     int userID = new UserBusiness().AddSycUser(userInfo);
-                    //LogUtility.WriteLog("finished add", "");
+
                     //在Session中记录用户信息
                     Session[ConstantUtility.Portal.UserIDKey] = userID;
                     Session[ConstantUtility.Portal.UserNameKey] = userInfo.NickName;

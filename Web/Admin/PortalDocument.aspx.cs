@@ -58,10 +58,12 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtSeq.Text = ConstantUtility.AdminConstant.DefaultSeq.ToString();
         txtURL.Text = string.Empty;
         txtDisplayName.Text = string.Empty;
+        txtExtend1.Text = string.Empty;
         richEditor.Text = string.Empty;
         hiddenImageURL.Value = string.Empty;
         linkViewImage.HRef = string.Empty;
         cbState.Checked = true;
+        ddlType.SelectedIndex = 0;
     }
 
     private void ShowDoc(int id)
@@ -71,10 +73,12 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtSeq.Text = doc.Seq.ToString();
         txtURL.Text = doc.URL;
         txtDisplayName.Text = doc.DisplayName;
+        txtExtend1.Text = doc.Extend1;
         richEditor.Text = doc.Description;
         hiddenImageURL.Value = doc.ImageURL;
         linkViewImage.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, doc.ImageURL);
         cbState.Checked = doc.State;
+        ddlType.SelectedValue = doc.Type.ToString();
     }
 
     protected void btnAdd_Click(object sender, EventArgs e)
@@ -101,6 +105,8 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
                 doc.State = cbState.Checked;
                 doc.Description = richEditor.Text;
                 doc.DisplayName = txtDisplayName.Text;
+                doc.Extend1 = txtExtend1.Text;
+                doc.Type = Convert.ToInt32(ddlType.SelectedValue);
                 if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
                 {
                     doc.ImageURL = FileUtility.SaveImage(fileImage);

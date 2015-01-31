@@ -35,6 +35,7 @@ public class Program
     public string ImageURL { get; set; }
     public string ImageURL2 { get; set; }
     public string URL { get; set; }
+    public string Code { get; set; }
     public DateTime CreateDate { get; set; }
 
     public int FeelCount { get; set; }
@@ -86,6 +87,7 @@ public class Program
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
         URL = item.URL;
+        Code = item.Extend1;
         ContentType = item.Type;
         CreateDate = item.CreateDate;
 
@@ -100,6 +102,7 @@ public class Program
         Description = item.Description;
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
+        Code = item.Extend1;
         URL = item.URL;
         ContentType = (int)item.Type;
         CreateDate = item.CreateDate;
@@ -115,6 +118,7 @@ public class Program
         Description = item.Description;
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
+        Code = item.Extend1;
         URL = item.URL;
         CreateDate = item.CreateDate;
         ContentType = 2;
