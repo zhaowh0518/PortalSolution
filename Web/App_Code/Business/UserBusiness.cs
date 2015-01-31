@@ -66,11 +66,7 @@ public class UserBusiness
         DBContext.UserComment.AddObject(item);
         DBContext.SaveChanges();
 
-        UserAct act = new UserAct();
-        act.ActType = Convert.ToInt32(ActType.Comment);
-        act.ContentID = item.ContentID;
-        act.ContentType = (int)item.ContentType;
-        AddAct(act);
+        AddAct(item.UserID, item.ContentID, (int)item.ContentType, (int)ActType.Comment);
     }
     /// <summary>
     /// 获取某条类容下的评论 
@@ -113,11 +109,7 @@ public class UserBusiness
             DBContext.UserFavorite.AddObject(item);
             DBContext.SaveChanges();
 
-            UserAct act = new UserAct();
-            act.ActType = Convert.ToInt32(ActType.Favorite);
-            act.ContentID = item.ContentID;
-            act.ContentType = item.ContentType;
-            AddAct(act);
+            AddAct(item.UserID, item.ContentID, item.ContentType, (int)ActType.Favorite);
             return true;
         }
         return false;
@@ -161,11 +153,7 @@ public class UserBusiness
             DBContext.UserFeel.AddObject(item);
             DBContext.SaveChanges();
 
-            UserAct act = new UserAct();
-            act.ActType = Convert.ToInt32(ActType.Feel);
-            act.ContentID = item.ContentID;
-            act.ContentType = (int)item.ContentType;
-            AddAct(act);
+            AddAct(item.UserID, item.ContentID, item.ContentType, (int)ActType.Feel);
             return true;
         }
         return false;
@@ -174,30 +162,23 @@ public class UserBusiness
 
     #region UserAct
     /// <summary>
-    /// 添加用户互动相关的信息,记录的是互动次数
+    /// 添加用户互动相关的信息,记录的是用户有那些互动
     /// </summary>
     /// <param name="item"></param>
-    private void AddAct(UserAct item)
+    private void AddUserAct(UserAct item)
     {
         var a = from p in DBContext.UserAct
                 where p.UserID == item.UserID & p.ContentID == item.ContentID
                     & p.ContentType == item.ContentType & p.ActType == item.ActType
                 select p;
-        if (a != null && a.Count() > 0)
-        {
-            var b = a.SingleOrDefault();
-            b.UpdateDate = DateTime.Now;
-            b.ActCount += 1;
-        }
-        else
+        if (a == null || a.Count() == 0)
         {
             var c = DBContext.UserAct.OrderByDescending(p => p.ID).FirstOrDefault();
             item.ID = c == null ? 1 : c.ID + 1;
-            item.ActCount = 1;
-            item.UpdateDate = DateTime.Now;
+            item.CreateDate = DateTime.Now;
             DBContext.UserAct.AddObject(item);
+            DBContext.SaveChanges();
         }
-        DBContext.SaveChanges();
     }
     /// <summary>
     /// 获取某条类容下的所有的互动数据 
@@ -205,7 +186,7 @@ public class UserBusiness
     /// <param name="contentid"></param>
     /// <param name="contenttype"></param>
     /// <returns></returns>
-    public List<UserAct> GetActList(int contentID, int contentType)
+    public List<UserAct> GetUserActList(int contentID, int contentType)
     {
         var c = from p in DBContext.UserAct
                 where p.ContentID == contentID & p.ContentType == contentType
@@ -220,4 +201,69 @@ public class UserBusiness
         }
     }
     #endregion
+
+    #region UserProgramAct
+    /// <summary>
+    /// 记录内容互动的次数
+    /// </summary>
+    /// <param name="item"></param>
+    private void AddProgramAct(UserProgramAct item)
+    {
+        var a = from p in DBContext.UserProgramAct
+                where p.ContentID == item.ContentID
+                    & p.ContentType == item.ContentType & p.ActType == item.ActType
+                select p;
+        if (a == null || a.Count() == 0)
+        {
+            var c = DBContext.UserProgramAct.OrderByDescending(p => p.ID).FirstOrDefault();
+            item.ID = c == null ? 1 : c.ID + 1;
+            item.UpdateDate = DateTime.Now;
+            item.ActCount = 1;
+            DBContext.UserProgramAct.AddObject(item);
+        }
+        else
+        {
+            var c = a.SingleOrDefault();
+            c.UpdateDate = DateTime.Now;
+            c.ActCount += 1;
+        }
+        DBContext.SaveChanges();
+    }
+    /// <summary>
+    /// 获取某条类容下的所有的互动数次数信息 
+    /// </summary>
+    /// <param name="contentid"></param>
+    /// <param name="contenttype"></param>
+    /// <returns></returns>
+    public List<UserProgramAct> GetProgramActList(int contentID, int contentType)
+    {
+        var c = from p in DBContext.UserProgramAct
+                where p.ContentID == contentID & p.ContentType == contentType
+                select p;
+        if (c != null && c.Count() > 0)
+        {
+            return c.ToList();
+        }
+        else
+        {
+            return new List<UserProgramAct>();
+        }
+    }
+    #endregion
+
+    private void AddAct(int userID, int contentID, int contentType, int actType)
+    {
+        UserAct act = new UserAct();
+        act.ActType = actType;
+        act.ContentID = contentID;
+        act.ContentType = contentType;
+        act.UserID = userID;
+        AddUserAct(act);
+
+        UserProgramAct programAct = new UserProgramAct();
+        programAct.ActType = actType;
+        programAct.ContentID = contentID;
+        programAct.ContentType = contentType;
+        AddProgramAct(programAct);
+    }
 }

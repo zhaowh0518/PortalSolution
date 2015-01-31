@@ -33,6 +33,7 @@ public class WeinxinWeb
     {
 
     }
+    #region Get URL
     /// <summary>
     /// 获取弹出授权页面的地址
     /// </summary>
@@ -48,20 +49,42 @@ public class WeinxinWeb
     /// </summary>
     /// <param name="code"></param>
     /// <returns></returns>
-    public string GetAccessTokenUrl(string code)
+    private string GetAccessTokenUrl(string code)
     {
         return string.Format(url_access_token, appid, secret, code);
-    }
-    public WXWebAccessToken GetAccessToken(string msg)
-    {
-        return JsonUtility.JsonDeserialize<WXWebAccessToken>(msg);
     }
     /// <summary>
     /// 获取用户信息的Url
     /// </summary>
     /// <returns></returns>
-    public string GetUserInfoUrl(string access_token, string openID)
+    private string GetUserInfoUrl(string access_token, string openID)
     {
         return string.Format(url_get_userinfo, access_token, openID);
+    }
+    #endregion
+
+    /// <summary>
+    /// 获取access token
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    public WXWebAccessToken GetAccessToken(string code)
+    {
+        string url = GetAccessTokenUrl(code);
+        string result = RequestUtility.Get(url);
+        WXWebAccessToken token = JsonUtility.JsonDeserialize<WXWebAccessToken>(result);
+        return token;
+    }
+    /// <summary>
+    /// 获取用户信息
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    public WXUserInfo GetUserInfo(WXWebAccessToken token)
+    {
+        string url = GetUserInfoUrl(token.access_token, token.openid);
+        string result = RequestUtility.Get(url);
+        WXUserInfo userInfo = JsonUtility.JsonDeserialize<WXUserInfo>(result);
+        return userInfo;
     }
 }

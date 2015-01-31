@@ -4,27 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="UserModelStoreContainer">
-          <EntitySet Name="PortalCategory" EntityType="UserModel.Store.PortalCategory" store:Type="Tables" />
           <EntitySet Name="UserAct" EntityType="UserModel.Store.UserAct" store:Type="Tables" />
           <EntitySet Name="UserComment" EntityType="UserModel.Store.UserComment" store:Type="Tables" />
           <EntitySet Name="UserFavorite" EntityType="UserModel.Store.UserFavorite" store:Type="Tables" />
           <EntitySet Name="UserFeel" EntityType="UserModel.Store.UserFeel" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="UserModel.Store.UserInfo" store:Type="Tables" />
+          <EntitySet Name="UserProgramAct" EntityType="UserModel.Store.UserProgramAct" store:Type="Tables" />
         </EntityContainer>
-        <EntityType Name="PortalCategory">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="1024" />
-          <Property Name="Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="ParentID" Type="int" />
-          <Property Name="Seq" Type="int" />
-          <Property Name="State" Type="bit" />
-          <Property Name="CreateDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="UserAct">
           <Key>
             <PropertyRef Name="ID" />
@@ -34,8 +22,7 @@
           <Property Name="ContentID" Type="int" Nullable="false" />
           <Property Name="ContentType" Type="int" Nullable="false" />
           <Property Name="ActType" Type="int" Nullable="false" />
-          <Property Name="ActCount" Type="int" Nullable="false" />
-          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="UserComment">
           <Key>
@@ -95,43 +82,29 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="State" Type="bit" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityType Name="UserProgramAct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="ActType" Type="int" Nullable="false" />
+          <Property Name="ActCount" Type="int" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="UserEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PortalCategory" EntityType="UserModel.PortalCategory" />
-          <EntitySet Name="UserAct" EntityType="UserModel.UserAct" />
           <EntitySet Name="UserComment" EntityType="UserModel.UserComment" />
           <EntitySet Name="UserFavorite" EntityType="UserModel.UserFavorite" />
           <EntitySet Name="UserFeel" EntityType="UserModel.UserFeel" />
           <EntitySet Name="UserInfo" EntityType="UserModel.UserInfo" />
+          <EntitySet Name="UserAct" EntityType="UserModel.UserAct" />
+          <EntitySet Name="UserProgramAct" EntityType="UserModel.UserProgramAct" />
         </EntityContainer>
-        <EntityType Name="PortalCategory">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="Code" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ParentID" Type="Int32" />
-          <Property Name="Seq" Type="Int32" />
-          <Property Name="State" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" />
-        </EntityType>
-        <EntityType Name="UserAct">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ContentID" Type="Int32" Nullable="false" />
-          <Property Name="ContentType" Type="Int32" Nullable="false" />
-          <Property Name="ActType" Type="Int32" Nullable="false" />
-          <Property Name="ActCount" Type="Int32" Nullable="false" />
-          <Property Name="UpdateDate" Type="DateTime" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserComment">
           <Key>
             <PropertyRef Name="ID" />
@@ -190,38 +163,34 @@
           <Property Name="CreateDate" Type="DateTime" Nullable="false" />
           <Property Name="State" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserAct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ContentID" Nullable="false" />
+          <Property Type="Int32" Name="ContentType" Nullable="false" />
+          <Property Type="Int32" Name="ActType" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProgramAct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="ContentID" Nullable="false" />
+          <Property Type="Int32" Name="ContentType" Nullable="false" />
+          <Property Type="Int32" Name="ActType" Nullable="false" />
+          <Property Type="Int32" Name="ActCount" Nullable="false" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UserModelStoreContainer" CdmEntityContainer="UserEntities">
-          <EntitySetMapping Name="PortalCategory">
-            <EntityTypeMapping TypeName="UserModel.PortalCategory">
-              <MappingFragment StoreEntitySet="PortalCategory">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Seq" ColumnName="Seq" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserAct">
-            <EntityTypeMapping TypeName="UserModel.UserAct">
-              <MappingFragment StoreEntitySet="UserAct">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="ActType" ColumnName="ActType" />
-                <ScalarProperty Name="ActCount" ColumnName="ActCount" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserComment">
             <EntityTypeMapping TypeName="UserModel.UserComment">
               <MappingFragment StoreEntitySet="UserComment">
@@ -284,6 +253,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserAct">
+            <EntityTypeMapping TypeName="UserModel.UserAct">
+              <MappingFragment StoreEntitySet="UserAct">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ActType" ColumnName="ActType" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProgramAct">
+            <EntityTypeMapping TypeName="UserModel.UserProgramAct">
+              <MappingFragment StoreEntitySet="UserProgramAct">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="ActCount" ColumnName="ActCount" />
+                <ScalarProperty Name="ActType" ColumnName="ActType" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -305,12 +298,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="UserModel">
-        <EntityTypeShape EntityType="UserModel.PortalCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.UserAct" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3520719401041665" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.UserComment" Width="1.5" PointX="4.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserComment" Width="1.5" PointX="0.75" PointY="1.375" Height="2.5430916341145835" IsExpanded="true" />
         <EntityTypeShape EntityType="UserModel.UserFavorite" Width="1.5" PointX="0.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
         <EntityTypeShape EntityType="UserModel.UserFeel" Width="1.5" PointX="2.75" PointY="4.75" Height="2.1610522460937496" IsExpanded="true" />
         <EntityTypeShape EntityType="UserModel.UserInfo" Width="1.5" PointX="4.75" PointY="4.75" Height="3.8802294921874996" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.UserAct" Width="1.5" PointX="5.25" PointY="1.5" Height="2.1610522460937496" />
+        <EntityTypeShape EntityType="UserModel.UserProgramAct" Width="1.5" PointX="2.875" PointY="1.5" Height="2.1610522460937496" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -28,6 +28,19 @@ public class BasePage : System.Web.UI.Page
     /// 图片路径的前半部分URL
     /// </summary>
     public string ImageURL { get { return ConstantUtility.Site.ImageURLPath; } }
+    /// <summary>
+    /// 当前请求URL的根路径
+    /// </summary>
+    public string HttpUrlBase
+    {
+        get
+        {
+            string url = Request.Url.GetLeftPart(UriPartial.Authority);
+            if (Request.ApplicationPath != null && Request.ApplicationPath != "/")
+                url = url + Request.ApplicationPath;
+            return url;
+        }
+    }
 
     public BasePage()
     {

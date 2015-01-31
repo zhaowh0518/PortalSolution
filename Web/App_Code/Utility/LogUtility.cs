@@ -24,4 +24,14 @@ public static class LogUtility
             sw.Close();
         }
     }
+    /// <summary>
+    /// 记录调试的错误日志，每次只记录最新的日志
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="ex"></param>
+    public static void WritePortalDebugLog(string source, Exception ex)
+    {
+        string msg = string.Format("{0}:{1}<br/>", source, ex.InnerException == null ? ex.Message : ex.InnerException.Message);
+        HttpContext.Current.Application[ConstantUtility.Portal.ErrorMessageKey] = msg;
+    }
 }

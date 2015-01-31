@@ -14,17 +14,20 @@ public partial class Weixin_WebAuth : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string code = Request["code"];
-        url = weinxin.GetAccessTokenUrl(code);
-        result = RequestUtility.Get(url);
-        WXWebAccessToken token = JsonUtility.JsonDeserialize<WXWebAccessToken>(result);
-        if (token != null)
+        string result = string.Empty;
+        WXWebAccessToken accessToken = weinxin.GetAccessToken(code);
+        WXUserInfo userInfo = new WXUserInfo();
+        if (accessToken != null)
         {
-            url = weinxin.GetUserInfoUrl(token.access_token, token.openid);
-            result = RequestUtility.Get(url);
-            WXUserInfo userInfo = JsonUtility.JsonDeserialize<WXUserInfo>(result);
-            result = userInfo.nickname;
+            userInfo = weinxin.GetUserInfo(accessToken);
+            if (userInfo != null)
+            {
+                //保存用户到数据库
+
+                //在Session中记录用户信息
+            }
         }
-        Response.Write(result);
+        Response.Write(userInfo.nickname);
 
     }
     /// <summary>

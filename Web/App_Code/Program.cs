@@ -38,7 +38,9 @@ public class Program
     public DateTime CreateDate { get; set; }
 
     public int FeelCount { get; set; }
+    public bool IsUserFelt { get; set; }
     public int FavoriteCount { get; set; }
+    public bool IsUserHasFavorite { get; set; }
     /// <summary>
     /// 评论列表
     /// </summary>
@@ -125,12 +127,20 @@ public class Program
     /// </summary>
     private void GetUserData()
     {
-        List<UserAct> actList = _userBusiness.GetActList(ID, ContentType);
+        List<UserAct> actList = _userBusiness.GetUserActList(ID, ContentType);
         if (actList != null && actList.Count > 0)
         {
             var feel = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
-            FeelCount = feel == null ? 0 : feel.ActCount;
+            IsUserFelt = feel == null ? false : true;
             var favorite = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
+            IsUserHasFavorite = favorite == null ? false : true;
+        }
+        List<UserProgramAct> programActList = _userBusiness.GetProgramActList(ID, ContentType);
+        if (actList != null && actList.Count > 0)
+        {
+            var feel = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
+            FeelCount = feel == null ? 0 : feel.ActCount;
+            var favorite = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
             FavoriteCount = favorite == null ? 0 : favorite.ActCount;
         }
         CommentList = _userBusiness.GetCommentList(ID, ContentType);

@@ -31,4 +31,20 @@ public static class ConstantUtility
         /// </summary>
         public static int DefaultSeq { get { return 100; } }
     }
+    public static class Portal
+    {
+        /// <summary>
+        /// 异常信息Key
+        /// </summary>
+        public static string ErrorMessageKey { get { return "EXCEPTION_MESSAGE"; } }
+        /// <summary>
+        /// 用户ID
+        /// </summary>
+        public static string UserIDKey { get { return "PORTAL_USERID"; } }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public static string UserNameKey { get { return "PORTALUSERNAME"; } }
+
+    }
 }

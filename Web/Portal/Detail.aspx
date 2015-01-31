@@ -25,11 +25,11 @@
                         </div>
                     </div>
                     <div class="clear">
-                        &nbsp;
+                        &nbsp;<input id="txtImagUrl" type="hidden" value=" <%=HttpUrlBase + "/Resources/Images/" + CurrentProgram.ImageURL%>" />
                     </div>
                     <div>
                         <%=CurrentProgram.ContentType ==2 ? string.Empty : CurrentProgram.URL%></div>
-                    <div>
+                    <div id="divDescription">
                         <%=Server.HtmlDecode(CurrentProgram.Description)%>
                     </div>
                     <div class="col-xs-12 col-md-12 clear0 bot30">
@@ -41,7 +41,13 @@
                                 data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin"
                                     title="分享到微信"></a>
                         </div>
-                        <script>                            window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "32" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                        <script type="text/javascript">
+                            var text = document.getElementById("divDescription").innerHTML;
+                            var imgUrl = document.getElementById("txtImagUrl").value;
+
+                            window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": text, "bdMini": "2", "bdMiniList": false, "bdPic": imgUrl, "bdStyle": "0", "bdSize": "32" }, "share": {} };
+                            with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];           
+                        </script>
                     </div>
                 </div>
                 <div class="col-md-12 clear0">

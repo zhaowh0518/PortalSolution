@@ -68,38 +68,6 @@ namespace UserModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalCategory> PortalCategory
-        {
-            get
-            {
-                if ((_PortalCategory == null))
-                {
-                    _PortalCategory = base.CreateObjectSet<PortalCategory>("PortalCategory");
-                }
-                return _PortalCategory;
-            }
-        }
-        private ObjectSet<PortalCategory> _PortalCategory;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        public ObjectSet<UserAct> UserAct
-        {
-            get
-            {
-                if ((_UserAct == null))
-                {
-                    _UserAct = base.CreateObjectSet<UserAct>("UserAct");
-                }
-                return _UserAct;
-            }
-        }
-        private ObjectSet<UserAct> _UserAct;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<UserComment> UserComment
         {
             get
@@ -160,26 +128,42 @@ namespace UserModel
             }
         }
         private ObjectSet<UserInfo> _UserInfo;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<UserAct> UserAct
+        {
+            get
+            {
+                if ((_UserAct == null))
+                {
+                    _UserAct = base.CreateObjectSet<UserAct>("UserAct");
+                }
+                return _UserAct;
+            }
+        }
+        private ObjectSet<UserAct> _UserAct;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<UserProgramAct> UserProgramAct
+        {
+            get
+            {
+                if ((_UserProgramAct == null))
+                {
+                    _UserProgramAct = base.CreateObjectSet<UserProgramAct>("UserProgramAct");
+                }
+                return _UserProgramAct;
+            }
+        }
+        private ObjectSet<UserProgramAct> _UserProgramAct;
 
         #endregion
 
         #region AddTo 方法
-    
-        /// <summary>
-        /// 用于向 PortalCategory EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalCategory(PortalCategory portalCategory)
-        {
-            base.AddObject("PortalCategory", portalCategory);
-        }
-    
-        /// <summary>
-        /// 用于向 UserAct EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToUserAct(UserAct userAct)
-        {
-            base.AddObject("UserAct", userAct);
-        }
     
         /// <summary>
         /// 用于向 UserComment EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
@@ -212,6 +196,22 @@ namespace UserModel
         {
             base.AddObject("UserInfo", userInfo);
         }
+    
+        /// <summary>
+        /// 用于向 UserAct EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToUserAct(UserAct userAct)
+        {
+            base.AddObject("UserAct", userAct);
+        }
+    
+        /// <summary>
+        /// 用于向 UserProgramAct EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToUserProgramAct(UserProgramAct userProgramAct)
+        {
+            base.AddObject("UserProgramAct", userProgramAct);
+        }
 
         #endregion
 
@@ -220,207 +220,6 @@ namespace UserModel
     #endregion
 
     #region 实体
-    
-    /// <summary>
-    /// 没有元数据文档可用。
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="PortalCategory")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class PortalCategory : EntityObject
-    {
-        #region 工厂方法
-    
-        /// <summary>
-        /// 创建新的 PortalCategory 对象。
-        /// </summary>
-        /// <param name="id">ID 属性的初始值。</param>
-        public static PortalCategory CreatePortalCategory(global::System.Int32 id)
-        {
-            PortalCategory portalCategory = new PortalCategory();
-            portalCategory.ID = id;
-            return portalCategory;
-        }
-
-        #endregion
-
-        #region 基元属性
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Code
-        {
-            get
-            {
-                return _Code;
-            }
-            set
-            {
-                OnCodeChanging(value);
-                ReportPropertyChanging("Code");
-                _Code = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Code");
-                OnCodeChanged();
-            }
-        }
-        private global::System.String _Code;
-        partial void OnCodeChanging(global::System.String value);
-        partial void OnCodeChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ParentID
-        {
-            get
-            {
-                return _ParentID;
-            }
-            set
-            {
-                OnParentIDChanging(value);
-                ReportPropertyChanging("ParentID");
-                _ParentID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ParentID");
-                OnParentIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _ParentID;
-        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
-        partial void OnParentIDChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Seq
-        {
-            get
-            {
-                return _Seq;
-            }
-            set
-            {
-                OnSeqChanging(value);
-                ReportPropertyChanging("Seq");
-                _Seq = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Seq");
-                OnSeqChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Seq;
-        partial void OnSeqChanging(Nullable<global::System.Int32> value);
-        partial void OnSeqChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> State
-        {
-            get
-            {
-                return _State;
-            }
-            set
-            {
-                OnStateChanging(value);
-                ReportPropertyChanging("State");
-                _State = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("State");
-                OnStateChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _State;
-        partial void OnStateChanging(Nullable<global::System.Boolean> value);
-        partial void OnStateChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> CreateDate
-        {
-            get
-            {
-                return _CreateDate;
-            }
-            set
-            {
-                OnCreateDateChanging(value);
-                ReportPropertyChanging("CreateDate");
-                _CreateDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CreateDate");
-                OnCreateDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _CreateDate;
-        partial void OnCreateDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnCreateDateChanged();
-
-        #endregion
-
-    
-    }
     
     /// <summary>
     /// 没有元数据文档可用。
@@ -440,9 +239,8 @@ namespace UserModel
         /// <param name="contentID">ContentID 属性的初始值。</param>
         /// <param name="contentType">ContentType 属性的初始值。</param>
         /// <param name="actType">ActType 属性的初始值。</param>
-        /// <param name="actCount">ActCount 属性的初始值。</param>
-        /// <param name="updateDate">UpdateDate 属性的初始值。</param>
-        public static UserAct CreateUserAct(global::System.Int32 id, global::System.Int32 userID, global::System.Int32 contentID, global::System.Int32 contentType, global::System.Int32 actType, global::System.Int32 actCount, global::System.DateTime updateDate)
+        /// <param name="createDate">CreateDate 属性的初始值。</param>
+        public static UserAct CreateUserAct(global::System.Int32 id, global::System.Int32 userID, global::System.Int32 contentID, global::System.Int32 contentType, global::System.Int32 actType, global::System.DateTime createDate)
         {
             UserAct userAct = new UserAct();
             userAct.ID = id;
@@ -450,8 +248,7 @@ namespace UserModel
             userAct.ContentID = contentID;
             userAct.ContentType = contentType;
             userAct.ActType = actType;
-            userAct.ActCount = actCount;
-            userAct.UpdateDate = updateDate;
+            userAct.CreateDate = createDate;
             return userAct;
         }
 
@@ -587,48 +384,24 @@ namespace UserModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ActCount
+        public global::System.DateTime CreateDate
         {
             get
             {
-                return _ActCount;
+                return _CreateDate;
             }
             set
             {
-                OnActCountChanging(value);
-                ReportPropertyChanging("ActCount");
-                _ActCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ActCount");
-                OnActCountChanged();
+                OnCreateDateChanging(value);
+                ReportPropertyChanging("CreateDate");
+                _CreateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreateDate");
+                OnCreateDateChanged();
             }
         }
-        private global::System.Int32 _ActCount;
-        partial void OnActCountChanging(global::System.Int32 value);
-        partial void OnActCountChanged();
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime UpdateDate
-        {
-            get
-            {
-                return _UpdateDate;
-            }
-            set
-            {
-                OnUpdateDateChanging(value);
-                ReportPropertyChanging("UpdateDate");
-                _UpdateDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UpdateDate");
-                OnUpdateDateChanged();
-            }
-        }
-        private global::System.DateTime _UpdateDate;
-        partial void OnUpdateDateChanging(global::System.DateTime value);
-        partial void OnUpdateDateChanged();
+        private global::System.DateTime _CreateDate;
+        partial void OnCreateDateChanging(global::System.DateTime value);
+        partial void OnCreateDateChanged();
 
         #endregion
 
@@ -1711,6 +1484,193 @@ namespace UserModel
         private global::System.Boolean _State;
         partial void OnStateChanging(global::System.Boolean value);
         partial void OnStateChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="UserModel", Name="UserProgramAct")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserProgramAct : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 UserProgramAct 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="contentID">ContentID 属性的初始值。</param>
+        /// <param name="contentType">ContentType 属性的初始值。</param>
+        /// <param name="actType">ActType 属性的初始值。</param>
+        /// <param name="actCount">ActCount 属性的初始值。</param>
+        /// <param name="updateDate">UpdateDate 属性的初始值。</param>
+        public static UserProgramAct CreateUserProgramAct(global::System.Int32 id, global::System.Int32 contentID, global::System.Int32 contentType, global::System.Int32 actType, global::System.Int32 actCount, global::System.DateTime updateDate)
+        {
+            UserProgramAct userProgramAct = new UserProgramAct();
+            userProgramAct.ID = id;
+            userProgramAct.ContentID = contentID;
+            userProgramAct.ContentType = contentType;
+            userProgramAct.ActType = actType;
+            userProgramAct.ActCount = actCount;
+            userProgramAct.UpdateDate = updateDate;
+            return userProgramAct;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContentID
+        {
+            get
+            {
+                return _ContentID;
+            }
+            set
+            {
+                OnContentIDChanging(value);
+                ReportPropertyChanging("ContentID");
+                _ContentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentID");
+                OnContentIDChanged();
+            }
+        }
+        private global::System.Int32 _ContentID;
+        partial void OnContentIDChanging(global::System.Int32 value);
+        partial void OnContentIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ContentType
+        {
+            get
+            {
+                return _ContentType;
+            }
+            set
+            {
+                OnContentTypeChanging(value);
+                ReportPropertyChanging("ContentType");
+                _ContentType = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ContentType");
+                OnContentTypeChanged();
+            }
+        }
+        private global::System.Int32 _ContentType;
+        partial void OnContentTypeChanging(global::System.Int32 value);
+        partial void OnContentTypeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ActType
+        {
+            get
+            {
+                return _ActType;
+            }
+            set
+            {
+                OnActTypeChanging(value);
+                ReportPropertyChanging("ActType");
+                _ActType = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ActType");
+                OnActTypeChanged();
+            }
+        }
+        private global::System.Int32 _ActType;
+        partial void OnActTypeChanging(global::System.Int32 value);
+        partial void OnActTypeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ActCount
+        {
+            get
+            {
+                return _ActCount;
+            }
+            set
+            {
+                OnActCountChanging(value);
+                ReportPropertyChanging("ActCount");
+                _ActCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ActCount");
+                OnActCountChanged();
+            }
+        }
+        private global::System.Int32 _ActCount;
+        partial void OnActCountChanging(global::System.Int32 value);
+        partial void OnActCountChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime UpdateDate
+        {
+            get
+            {
+                return _UpdateDate;
+            }
+            set
+            {
+                OnUpdateDateChanging(value);
+                ReportPropertyChanging("UpdateDate");
+                _UpdateDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdateDate");
+                OnUpdateDateChanged();
+            }
+        }
+        private global::System.DateTime _UpdateDate;
+        partial void OnUpdateDateChanging(global::System.DateTime value);
+        partial void OnUpdateDateChanged();
 
         #endregion
 
