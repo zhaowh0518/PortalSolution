@@ -153,6 +153,10 @@ public class Program
         UserFeel item = new UserFeel();
         item.ContentID = ID;
         item.ContentType = ContentType;
+        item.ContentName = Name;
+        item.ContentImageURL = ImageURL;
+        item.ContentSummary = DisplayName;
+        item.ContentURL = URL;
         item.Feeling = 1;
         item.UserID = userID;
         _userBusiness.AddFeel(item);
@@ -163,8 +167,10 @@ public class Program
         UserFavorite item = new UserFavorite();
         item.ContentID = ID;
         item.ContentType = ContentType;
+        item.ContentName = Name;
         item.ContentImageURL = ImageURL;
         item.ContentSummary = DisplayName;
+        item.ContentURL = URL;
         item.UserID = userID;
         _userBusiness.AddFavorite(item);
         FavoriteCount++;

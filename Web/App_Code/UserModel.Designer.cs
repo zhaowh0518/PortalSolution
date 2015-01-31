@@ -84,54 +84,6 @@ namespace UserModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<UserFavorite> UserFavorite
-        {
-            get
-            {
-                if ((_UserFavorite == null))
-                {
-                    _UserFavorite = base.CreateObjectSet<UserFavorite>("UserFavorite");
-                }
-                return _UserFavorite;
-            }
-        }
-        private ObjectSet<UserFavorite> _UserFavorite;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        public ObjectSet<UserFeel> UserFeel
-        {
-            get
-            {
-                if ((_UserFeel == null))
-                {
-                    _UserFeel = base.CreateObjectSet<UserFeel>("UserFeel");
-                }
-                return _UserFeel;
-            }
-        }
-        private ObjectSet<UserFeel> _UserFeel;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
-        public ObjectSet<UserInfo> UserInfo
-        {
-            get
-            {
-                if ((_UserInfo == null))
-                {
-                    _UserInfo = base.CreateObjectSet<UserInfo>("UserInfo");
-                }
-                return _UserInfo;
-            }
-        }
-        private ObjectSet<UserInfo> _UserInfo;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<UserAct> UserAct
         {
             get
@@ -160,6 +112,54 @@ namespace UserModel
             }
         }
         private ObjectSet<UserProgramAct> _UserProgramAct;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<UserInfo> UserInfo
+        {
+            get
+            {
+                if ((_UserInfo == null))
+                {
+                    _UserInfo = base.CreateObjectSet<UserInfo>("UserInfo");
+                }
+                return _UserInfo;
+            }
+        }
+        private ObjectSet<UserInfo> _UserInfo;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<UserFavorite> UserFavorite
+        {
+            get
+            {
+                if ((_UserFavorite == null))
+                {
+                    _UserFavorite = base.CreateObjectSet<UserFavorite>("UserFavorite");
+                }
+                return _UserFavorite;
+            }
+        }
+        private ObjectSet<UserFavorite> _UserFavorite;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<UserFeel> UserFeel
+        {
+            get
+            {
+                if ((_UserFeel == null))
+                {
+                    _UserFeel = base.CreateObjectSet<UserFeel>("UserFeel");
+                }
+                return _UserFeel;
+            }
+        }
+        private ObjectSet<UserFeel> _UserFeel;
 
         #endregion
 
@@ -171,30 +171,6 @@ namespace UserModel
         public void AddToUserComment(UserComment userComment)
         {
             base.AddObject("UserComment", userComment);
-        }
-    
-        /// <summary>
-        /// 用于向 UserFavorite EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToUserFavorite(UserFavorite userFavorite)
-        {
-            base.AddObject("UserFavorite", userFavorite);
-        }
-    
-        /// <summary>
-        /// 用于向 UserFeel EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToUserFeel(UserFeel userFeel)
-        {
-            base.AddObject("UserFeel", userFeel);
-        }
-    
-        /// <summary>
-        /// 用于向 UserInfo EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToUserInfo(UserInfo userInfo)
-        {
-            base.AddObject("UserInfo", userInfo);
         }
     
         /// <summary>
@@ -211,6 +187,30 @@ namespace UserModel
         public void AddToUserProgramAct(UserProgramAct userProgramAct)
         {
             base.AddObject("UserProgramAct", userProgramAct);
+        }
+    
+        /// <summary>
+        /// 用于向 UserInfo EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToUserInfo(UserInfo userInfo)
+        {
+            base.AddObject("UserInfo", userInfo);
+        }
+    
+        /// <summary>
+        /// 用于向 UserFavorite EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToUserFavorite(UserFavorite userFavorite)
+        {
+            base.AddObject("UserFavorite", userFavorite);
+        }
+    
+        /// <summary>
+        /// 用于向 UserFeel EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToUserFeel(UserFeel userFeel)
+        {
+            base.AddObject("UserFeel", userFeel);
         }
 
         #endregion
@@ -852,6 +852,30 @@ namespace UserModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentURL
+        {
+            get
+            {
+                return _ContentURL;
+            }
+            set
+            {
+                OnContentURLChanging(value);
+                ReportPropertyChanging("ContentURL");
+                _ContentURL = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ContentURL");
+                OnContentURLChanged();
+            }
+        }
+        private global::System.String _ContentURL;
+        partial void OnContentURLChanging(global::System.String value);
+        partial void OnContentURLChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime CreateDate
@@ -1039,6 +1063,102 @@ namespace UserModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentName
+        {
+            get
+            {
+                return _ContentName;
+            }
+            set
+            {
+                OnContentNameChanging(value);
+                ReportPropertyChanging("ContentName");
+                _ContentName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ContentName");
+                OnContentNameChanged();
+            }
+        }
+        private global::System.String _ContentName;
+        partial void OnContentNameChanging(global::System.String value);
+        partial void OnContentNameChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentImageURL
+        {
+            get
+            {
+                return _ContentImageURL;
+            }
+            set
+            {
+                OnContentImageURLChanging(value);
+                ReportPropertyChanging("ContentImageURL");
+                _ContentImageURL = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ContentImageURL");
+                OnContentImageURLChanged();
+            }
+        }
+        private global::System.String _ContentImageURL;
+        partial void OnContentImageURLChanging(global::System.String value);
+        partial void OnContentImageURLChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentSummary
+        {
+            get
+            {
+                return _ContentSummary;
+            }
+            set
+            {
+                OnContentSummaryChanging(value);
+                ReportPropertyChanging("ContentSummary");
+                _ContentSummary = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ContentSummary");
+                OnContentSummaryChanged();
+            }
+        }
+        private global::System.String _ContentSummary;
+        partial void OnContentSummaryChanging(global::System.String value);
+        partial void OnContentSummaryChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ContentURL
+        {
+            get
+            {
+                return _ContentURL;
+            }
+            set
+            {
+                OnContentURLChanging(value);
+                ReportPropertyChanging("ContentURL");
+                _ContentURL = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ContentURL");
+                OnContentURLChanged();
+            }
+        }
+        private global::System.String _ContentURL;
+        partial void OnContentURLChanging(global::System.String value);
+        partial void OnContentURLChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 Feeling
@@ -1104,15 +1224,13 @@ namespace UserModel
         /// </summary>
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="openID">OpenID 属性的初始值。</param>
-        /// <param name="summary">Summary 属性的初始值。</param>
         /// <param name="createDate">CreateDate 属性的初始值。</param>
         /// <param name="state">State 属性的初始值。</param>
-        public static UserInfo CreateUserInfo(global::System.Int32 id, global::System.String openID, global::System.String summary, global::System.DateTime createDate, global::System.Boolean state)
+        public static UserInfo CreateUserInfo(global::System.Int32 id, global::System.String openID, global::System.DateTime createDate, global::System.Boolean state)
         {
             UserInfo userInfo = new UserInfo();
             userInfo.ID = id;
             userInfo.OpenID = openID;
-            userInfo.Summary = summary;
             userInfo.CreateDate = createDate;
             userInfo.State = state;
             return userInfo;
@@ -1248,7 +1366,7 @@ namespace UserModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Summary
         {
@@ -1260,7 +1378,7 @@ namespace UserModel
             {
                 OnSummaryChanging(value);
                 ReportPropertyChanging("Summary");
-                _Summary = StructuralObject.SetValidValue(value, false);
+                _Summary = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Summary");
                 OnSummaryChanged();
             }

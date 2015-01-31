@@ -10,15 +10,15 @@ function setActiveMenu() {
         }
     }
 }
-//设置分类选中的状态
-function setActiveCategory() {
-    var ulNav = document.getElementById("divCategory");
-    var liList = ulNav.getElementsByTagName("a");
+//设置选项菜单的选中
+function setActiveTabMenu(containerID, activeClass, defaultClass) {
+    var container = document.getElementById(containerID);
+    var menuList = container.getElementsByTagName("a");
     var currentUrl = window.location.href;
-    for (var i = 0; i < liList.length; i++) {
-        liList[i].className = "btn btn-default";
-        if (currentUrl == liList[i].href) {
-            liList[i].className = "btn btn-primary";
+    for (var i = 0; i < menuList.length; i++) {
+        menuList[i].className = defaultClass;
+        if (currentUrl == menuList[i].href) {
+            menuList[i].className = activeClass;
         }
     }
 }

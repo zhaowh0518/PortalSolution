@@ -39,16 +39,30 @@ public class UserBusiness
     {
         //先判断用户是否存在，根据openid
         var c = DBContext.UserInfo.Where(p => p.OpenID == user.OpenID).SingleOrDefault();
-        if (c == null || string.IsNullOrEmpty(c.OpenID))
+        if (c == null || c.ID == 0)
         {
             //设置主键
-            c = DBContext.UserInfo.OrderByDescending(p => p.ID).FirstOrDefault();
-            user.ID = c == null ? 1 : c.ID + 1;
+            var b = DBContext.UserInfo.OrderByDescending(p => p.ID).FirstOrDefault();
+
+            LogUtility.WriteLog(user.OpenID, b == null ? "NULL" : b.ID.ToString());
+
+            user.ID = b == null ? 1 : b.ID + 1;
             user.CreateDate = DateTime.Now;
+            user.State = true;
             DBContext.UserInfo.AddObject(user);
             DBContext.SaveChanges();
+            return user.ID;
         }
         return c.ID;
+    }
+    /// <summary>
+    /// 获取用户信息
+    /// </summary>
+    /// <param name="userID"></param>
+    /// <returns></returns>
+    public UserInfo GetUserInfo(int userID)
+    {
+        return DBContext.UserInfo.Where(p => p.ID == userID).SingleOrDefault();
     }
     #endregion
 
@@ -157,6 +171,25 @@ public class UserBusiness
             return true;
         }
         return false;
+    }
+    /// <summary>
+    /// 获取某个用户的所有关注的内容
+    /// </summary>
+    /// <param name="userID"></param>
+    /// <returns></returns>
+    public List<UserFeel> GetFeelList(int userID)
+    {
+        var c = from p in DBContext.UserFeel
+                where p.UserID == userID
+                select p;
+        if (c != null && c.Count() > 0)
+        {
+            return c.ToList();
+        }
+        else
+        {
+            return new List<UserFeel>();
+        }
     }
     #endregion
 

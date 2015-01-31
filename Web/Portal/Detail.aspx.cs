@@ -148,7 +148,9 @@ public partial class Portal_Detail : BasePage
                     userInfo.province = wxUser.province;
                     userInfo.Sex = string.IsNullOrEmpty(wxUser.sex) ? 0 : Convert.ToInt32(wxUser.sex);
                     userInfo.UnionID = wxUser.unionid;
+                    userInfo.Summary = string.Empty;
                     int userID = new UserBusiness().AddSycUser(userInfo);
+                    //LogUtility.WriteLog("finished add", "");
                     //在Session中记录用户信息
                     Session[ConstantUtility.Portal.UserIDKey] = userID;
                     Session[ConstantUtility.Portal.UserNameKey] = userInfo.NickName;

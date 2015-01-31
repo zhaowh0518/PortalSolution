@@ -56,6 +56,6 @@
         </div>
     </div>
     <script type="text/javascript">
-        setActiveCategory(); //选中导航菜单
+        setActiveTabMenu("divCategory", "btn btn-primary", "btn btn-default"); //选中导航菜单
     </script>
 </asp:Content>

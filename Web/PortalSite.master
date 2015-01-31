@@ -50,7 +50,7 @@
                     <li id="Index" class="active"><a href="Index.aspx">首页</a></li>
                     <li id="Category"><a href="Category.aspx?code=Video">影音</a></li>
                     <li id="BBS"><a href="BBS.aspx">社区</a></li>
-                    <li id="My"><a href="me.html">我的</a></li>
+                    <li id="My"><a href="i.aspx?type=2">我的</a></li>
                 </ul>
             </div>
             <!-- 		       

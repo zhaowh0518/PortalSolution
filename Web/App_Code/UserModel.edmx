@@ -47,7 +47,8 @@
           <Property Name="ContentType" Type="int" Nullable="false" />
           <Property Name="ContentName" Type="nvarchar" MaxLength="1024" />
           <Property Name="ContentImageURL" Type="nvarchar" MaxLength="1024" />
-          <Property Name="ContentSummary" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentSummary" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ContentURL" Type="nvarchar" MaxLength="1024" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="State" Type="bit" Nullable="false" />
         </EntityType>
@@ -59,6 +60,10 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="ContentID" Type="int" Nullable="false" />
           <Property Name="ContentType" Type="int" Nullable="false" />
+          <Property Name="ContentName" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentImageURL" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ContentSummary" Type="nvarchar" MaxLength="2048" />
+          <Property Name="ContentURL" Type="nvarchar" MaxLength="1024" />
           <Property Name="Feeling" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -71,7 +76,7 @@
           <Property Name="Pwd" Type="varchar" MaxLength="1024" />
           <Property Name="OpenID" Type="varchar" Nullable="false" MaxLength="1024" />
           <Property Name="NickName" Type="nvarchar" MaxLength="1024" />
-          <Property Name="Summary" Type="nvarchar" Nullable="false" MaxLength="2048" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="2048" />
           <Property Name="Sex" Type="int" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="province" Type="nvarchar" MaxLength="50" />
@@ -99,11 +104,11 @@
       <Schema Namespace="UserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="UserEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserComment" EntityType="UserModel.UserComment" />
-          <EntitySet Name="UserFavorite" EntityType="UserModel.UserFavorite" />
-          <EntitySet Name="UserFeel" EntityType="UserModel.UserFeel" />
-          <EntitySet Name="UserInfo" EntityType="UserModel.UserInfo" />
           <EntitySet Name="UserAct" EntityType="UserModel.UserAct" />
           <EntitySet Name="UserProgramAct" EntityType="UserModel.UserProgramAct" />
+          <EntitySet Name="UserInfo" EntityType="UserModel.UserInfo" />
+          <EntitySet Name="UserFavorite" EntityType="UserModel.UserFavorite" />
+          <EntitySet Name="UserFeel" EntityType="UserModel.UserFeel" />
         </EntityContainer>
         <EntityType Name="UserComment">
           <Key>
@@ -115,51 +120,6 @@
           <Property Name="ContentID" Type="Int32" Nullable="false" />
           <Property Name="ContentType" Type="Int32" />
           <Property Name="Comment" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
-          <Property Name="State" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserFavorite">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ContentID" Type="Int32" Nullable="false" />
-          <Property Name="ContentType" Type="Int32" Nullable="false" />
-          <Property Name="ContentName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="ContentImageURL" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="ContentSummary" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
-          <Property Name="State" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserFeel">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="ContentID" Type="Int32" Nullable="false" />
-          <Property Name="ContentType" Type="Int32" Nullable="false" />
-          <Property Name="Feeling" Type="Int32" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="Pwd" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
-          <Property Name="OpenID" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
-          <Property Name="NickName" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
-          <Property Name="Summary" Type="String" Nullable="false" MaxLength="2048" Unicode="true" FixedLength="false" />
-          <Property Name="Sex" Type="Int32" />
-          <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="province" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="HeadImgUrl" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
-          <Property Name="SubscribeTime" Type="DateTime" />
-          <Property Name="UnionID" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" />
           <Property Name="State" Type="Boolean" Nullable="false" />
         </EntityType>
@@ -185,6 +145,56 @@
           <Property Type="Int32" Name="ActCount" Nullable="false" />
           <Property Type="DateTime" Name="UpdateDate" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Pwd" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OpenID" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NickName" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Summary" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Sex" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="province" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HeadImgUrl" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="SubscribeTime" />
+          <Property Type="String" Name="UnionID" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="Boolean" Name="State" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFavorite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ContentID" Nullable="false" />
+          <Property Type="Int32" Name="ContentType" Nullable="false" />
+          <Property Type="String" Name="ContentName" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentImageURL" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentSummary" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentURL" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="Boolean" Name="State" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFeel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="ContentID" Nullable="false" />
+          <Property Type="Int32" Name="ContentType" Nullable="false" />
+          <Property Type="String" Name="ContentName" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentImageURL" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentSummary" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContentURL" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Feeling" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -200,54 +210,6 @@
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="State" ColumnName="State" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserFavorite">
-            <EntityTypeMapping TypeName="UserModel.UserFavorite">
-              <MappingFragment StoreEntitySet="UserFavorite">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
-                <ScalarProperty Name="ContentImageURL" ColumnName="ContentImageURL" />
-                <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="State" ColumnName="State" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserFeel">
-            <EntityTypeMapping TypeName="UserModel.UserFeel">
-              <MappingFragment StoreEntitySet="UserFeel">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInfo">
-            <EntityTypeMapping TypeName="UserModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
-                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="province" ColumnName="province" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="HeadImgUrl" ColumnName="HeadImgUrl" />
-                <ScalarProperty Name="SubscribeTime" ColumnName="SubscribeTime" />
-                <ScalarProperty Name="UnionID" ColumnName="UnionID" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
@@ -277,6 +239,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="UserModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UnionID" ColumnName="UnionID" />
+                <ScalarProperty Name="SubscribeTime" ColumnName="SubscribeTime" />
+                <ScalarProperty Name="HeadImgUrl" ColumnName="HeadImgUrl" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFavorite">
+            <EntityTypeMapping TypeName="UserModel.UserFavorite">
+              <MappingFragment StoreEntitySet="UserFavorite">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />
+                <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+                <ScalarProperty Name="ContentImageURL" ColumnName="ContentImageURL" />
+                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFeel">
+            <EntityTypeMapping TypeName="UserModel.UserFeel">
+              <MappingFragment StoreEntitySet="UserFeel">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Feeling" ColumnName="Feeling" />
+                <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />
+                <ScalarProperty Name="ContentSummary" ColumnName="ContentSummary" />
+                <ScalarProperty Name="ContentImageURL" ColumnName="ContentImageURL" />
+                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -299,11 +314,11 @@
     <Diagrams>
       <Diagram Name="UserModel">
         <EntityTypeShape EntityType="UserModel.UserComment" Width="1.5" PointX="0.75" PointY="1.375" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.UserFavorite" Width="1.5" PointX="0.75" PointY="4.75" Height="2.7341113281249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.UserFeel" Width="1.5" PointX="2.75" PointY="4.75" Height="2.1610522460937496" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.UserInfo" Width="1.5" PointX="4.75" PointY="4.75" Height="3.8802294921874996" IsExpanded="true" />
         <EntityTypeShape EntityType="UserModel.UserAct" Width="1.5" PointX="5.25" PointY="1.5" Height="2.1610522460937496" />
         <EntityTypeShape EntityType="UserModel.UserProgramAct" Width="1.5" PointX="2.875" PointY="1.5" Height="2.1610522460937496" />
+        <EntityTypeShape EntityType="UserModel.UserInfo" Width="1.5" PointX="5.375" PointY="4.75" Height="3.8802294921874996" />
+        <EntityTypeShape EntityType="UserModel.UserFavorite" Width="1.5" PointX="0.75" PointY="4.75" Height="2.9251310221354174" />
+        <EntityTypeShape EntityType="UserModel.UserFeel" Width="1.5" PointX="3" PointY="5.125" Height="2.9251310221354174" />
       </Diagram>
     </Diagrams>
   </Designer>
