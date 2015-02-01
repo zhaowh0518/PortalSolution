@@ -63,9 +63,11 @@ public partial class Portal_Detail : BasePage
         btnFeel.Enabled = false;
         try
         {
-            CurrentProgram.AddFeel(CurrentUserID);
-            CurrentProgram.FeelCount++;
-            ShowActInfo();
+            if (CurrentProgram.ID != 0)
+            {
+                CurrentProgram.AddFeel(CurrentUserID);
+                ShowActInfo();
+            }
         }
         catch (Exception ex)
         {
@@ -78,9 +80,11 @@ public partial class Portal_Detail : BasePage
         btnFavorite.Enabled = false;
         try
         {
-            CurrentProgram.AddFavorite(CurrentUserID);
-            CurrentProgram.FavoriteCount++;
-            ShowActInfo();
+            if (CurrentProgram.ID != 0)
+            {
+                CurrentProgram.AddFavorite(CurrentUserID);
+                ShowActInfo();
+            }
         }
         catch (Exception ex)
         {
@@ -94,8 +98,11 @@ public partial class Portal_Detail : BasePage
         {
             try
             {
-                CurrentProgram.AddComment(CurrentUserID, CurrentUserName, txtComment.InnerText);
-                btnSubmit.Enabled = false;
+                if (CurrentProgram.ID != 0)
+                {
+                    CurrentProgram.AddComment(CurrentUserID, CurrentUserName, txtComment.InnerText);
+                    btnSubmit.Enabled = false;
+                }
             }
             catch (Exception ex)
             {

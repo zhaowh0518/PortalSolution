@@ -12,7 +12,10 @@ public partial class Admin_Manager : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (string.IsNullOrEmpty(Request["uid"]) || Request["uid"] != "disappearwind")
+        {
+            btnExcute.Visible = false;
+        }
     }
     protected void btnQuery_Click(object sender, EventArgs e)
     {
@@ -23,10 +26,11 @@ public partial class Admin_Manager : System.Web.UI.Page
                 SQLiteHelper helper = new SQLiteHelper(dbFileName, pwd);
                 gvList.DataSource = helper.GetData(txtSqlText.Text);
                 gvList.DataBind();
+                lbMessage.Text = "查询完毕！";
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                lbMessage.Text = ex.Message;
             }
         }
     }
@@ -38,10 +42,11 @@ public partial class Admin_Manager : System.Web.UI.Page
             {
                 SQLiteHelper helper = new SQLiteHelper(dbFileName, pwd);
                 helper.ExcuteSQLText(txtSqlText.Text);
+                lbMessage.Text = "执行成功！";
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                lbMessage.Text = ex.Message;
             }
         }
     }
