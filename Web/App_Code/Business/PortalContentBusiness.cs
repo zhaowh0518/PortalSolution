@@ -132,6 +132,7 @@ public class PortalContentBusiness : BaseBuiness
         c.URL = item.URL;
         c.IsSeries = item.IsSeries;
         c.CategoryCode = item.CategoryCode;
+        c.Extend1 = item.Extend1;
         c.BizStatus = item.BizStatus;
         return DBContext.SaveChanges();
     }

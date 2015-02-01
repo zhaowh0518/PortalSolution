@@ -10,28 +10,25 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.30319</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AAE0B218-7279-4FB8-9A70-57945FC96D1B}</ProjectGuid>
+    <ProjectGuid>{086ABAAD-FD21-4194-95CE-E711104951F7}</ProjectGuid>
     <SourceWebPhysicalPath>..\Web</SourceWebPhysicalPath>
     <SourceWebProject>{A8E30081-8EF6-44BD-9758-55A50D55C010}|D:\project\PortalSolution\Web</SourceWebProject>
     <SourceWebVirtualPath>/Web</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <OutputPath>.\Debug</OutputPath>
     <EnableUpdateable>true</EnableUpdateable>
     <UseMerge>true</UseMerge>
-    <SingleAssemblyName>Portal</SingleAssemblyName>
-    <DeleteAppCodeCompiledFiles>true</DeleteAppCodeCompiledFiles>
-    <UseWebConfigReplacement>false</UseWebConfigReplacement>
-    <UseFixedNames>false</UseFixedNames>
+    <SingleAssemblyName>Web</SingleAssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>.\Release</OutputPath>
     <EnableUpdateable>true</EnableUpdateable>
     <UseMerge>true</UseMerge>
-    <SingleAssemblyName>Web_deploy</SingleAssemblyName>
+    <SingleAssemblyName>Web</SingleAssemblyName>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>

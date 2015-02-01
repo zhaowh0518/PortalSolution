@@ -56,7 +56,7 @@
 
             %>
             <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="<%=item.URL %>" class="thumbnail">
+                <a href="<%=item.URL.Replace("{id}",item.ID.ToString()) %>" class="thumbnail">
                     <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
                     <p>
                         <%=item.Name %></p>
@@ -78,7 +78,7 @@
 
             %>
             <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="<%=item.URL %>" class="thumbnail">
+                <a href="<%=item.URL.Replace("{id}",item.ID.ToString()) %>" class="thumbnail">
                     <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
                     <p class="tzzt">
                         <%=item.Name %></p>

@@ -22,7 +22,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web\", "{A8E30081-8E
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "Web_deploy", "Web_deploy\Web_deploy.wdproj", "{AAE0B218-7279-4FB8-9A70-57945FC96D1B}"
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "Web_deploy", "Web_deploy\Web_deploy.wdproj", "{086ABAAD-FD21-4194-95CE-E711104951F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,10 @@ Global
 		{A8E30081-8EF6-44BD-9758-55A50D55C010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E30081-8EF6-44BD-9758-55A50D55C010}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{A8E30081-8EF6-44BD-9758-55A50D55C010}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{AAE0B218-7279-4FB8-9A70-57945FC96D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAE0B218-7279-4FB8-9A70-57945FC96D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAE0B218-7279-4FB8-9A70-57945FC96D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAE0B218-7279-4FB8-9A70-57945FC96D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086ABAAD-FD21-4194-95CE-E711104951F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086ABAAD-FD21-4194-95CE-E711104951F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086ABAAD-FD21-4194-95CE-E711104951F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086ABAAD-FD21-4194-95CE-E711104951F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

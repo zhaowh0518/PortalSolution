@@ -105,6 +105,7 @@ public partial class Admin_PortalContent : BasePage
             content.IsSeries = cbIsSeries.Checked;
             content.Extend1 = txtExtend1.Text;
             content.Type = Convert.ToInt32(ddlType.SelectedValue);
+            content.BizStatus = cbBizStatus.Checked ? 1 : 0;
             if (fileImage.PostedFile != null && fileImage.PostedFile.ContentLength > 0)
             {
                 content.ImageURL = FileUtility.SaveImage(fileImage);
@@ -124,16 +125,19 @@ public partial class Admin_PortalContent : BasePage
 
             if (string.IsNullOrEmpty(hiddenID.Value)) //添加
             {
+                if (content.IsSeries)
+                {
+                    content.URL = ConstantUtility.Site.ListPageURL;
+                }
+                else
+                {
+                    content.URL = ConstantUtility.Site.DetailPageURL.Replace("{mold}", ((int)ConstantUtility.Site.Mold.Content).ToString());
+                }
                 hiddenID.Value = _portalContentBusiness.AddPortalContent(content).ToString();
             }
             else
             {
                 content.ID = Convert.ToInt32(hiddenID.Value);
-                //如果有内容集用户不填链接默认去List.aspx页面,需要添加后再保存
-                if (string.IsNullOrEmpty(txtURL.Text) && cbIsSeries.Checked)
-                {
-                    txtURL.Text = string.Format("List.aspx?contentid={0}", content.ID);
-                }
                 _portalContentBusiness.UpdatePortalContent(content);
             }
             lbMessage.Text = "保存成功！";
@@ -191,6 +195,8 @@ public partial class Admin_PortalContent : BasePage
                                 doc.PortalMenuCode = menu.Code;
                                 doc.State = true;
                                 doc.Seq = ConstantUtility.AdminConstant.DefaultSeq;
+                                doc.Extend1 = content.Extend1;
+                                doc.Type = content.Type;
                                 doc.URL = content.URL;
                                 _portalDocumentBuiness.AddPortalDocument(doc);
                             }

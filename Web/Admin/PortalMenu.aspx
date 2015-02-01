@@ -41,7 +41,7 @@
                         类型：
                     </td>
                     <td>
-                        <asp:DropDownList ID="ddlMenuType" runat="server" CssClass="ddl">
+                        <asp:DropDownList ID="ddlMenuType" runat="server" CssClass="select">
                             <asp:ListItem Selected="True" Value="0">父菜单</asp:ListItem>
                             <asp:ListItem Value="1">内容菜单</asp:ListItem>
                             <asp:ListItem Value="2">文档菜单</asp:ListItem>

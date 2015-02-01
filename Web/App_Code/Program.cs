@@ -10,6 +10,7 @@ using UserModel;
 /// </summary>
 public class Program
 {
+
     #region Business Class
     protected static PortalDocumentBusiness _portalDocumentBuiness = new PortalDocumentBusiness();
     protected static PortalContentBusiness _portalContentBusiness = new PortalContentBusiness();
@@ -22,7 +23,7 @@ public class Program
     /// <summary>
     /// 节目类型：0：Content;1：ContentItem;2：Document
     /// </summary>
-    public int Type { get; set; }
+    public ConstantUtility.Site.Mold Mold { get; set; }
     /// <summary>
     /// 内容类型：空的时候就是文本，0:视频；1：音频；
     /// </summary>
@@ -54,26 +55,25 @@ public class Program
         CommentList = new List<UserComment>();
     }
     /// <summary>
-    /// 构造方法，根据ID和Type获取信息
+    /// 构造方法，根据ID和Mold获取信息
     /// </summary>
     /// <param name="id"></param>
-    /// <param name="type"></param>
-    public static Program GetProgram(int id, int type)
+    /// <param name="mold"></param>
+    public static Program GetProgram(int id, ConstantUtility.Site.Mold mold)
     {
         Program p = new Program();
-        switch (type)
+        switch (mold)
         {
-            case 0:
+            case ConstantUtility.Site.Mold.Content:
                 p = new Program(_portalContentBusiness.GetPortalContent(id));
                 break;
-            case 1:
+            case ConstantUtility.Site.Mold.ContentItem:
                 p = new Program(_portalContentItemBusiness.GetPortalContentItem(id));
                 break;
-            case 2:
+            case ConstantUtility.Site.Mold.Doucment:
                 p = new Program(_portalDocumentBuiness.GetPortalDocument(id));
                 break;
         }
-
         return p;
     }
 

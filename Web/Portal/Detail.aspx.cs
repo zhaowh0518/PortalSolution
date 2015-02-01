@@ -29,11 +29,11 @@ public partial class Portal_Detail : BasePage
     {
         try
         {
-            if (!string.IsNullOrEmpty(Request["id"]) && !string.IsNullOrEmpty(Request["type"]))
+            if (!string.IsNullOrEmpty(Request["id"]) && !string.IsNullOrEmpty(Request["mold"]))
             {
                 int id = Convert.ToInt32(Request["id"]);
-                int type = Convert.ToInt32(Request["type"]);
-                CurrentProgram = Program.GetProgram(id, type);
+                int mold = Convert.ToInt32(Request["mold"]);
+                CurrentProgram = Program.GetProgram(id, (ConstantUtility.Site.Mold)mold);
                 if (CurrentProgram != null)
                 {
                     ShowActInfo();

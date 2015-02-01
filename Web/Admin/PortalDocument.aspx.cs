@@ -117,6 +117,10 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
                 }
                 if (string.IsNullOrEmpty(hiddenID.Value)) //添加
                 {
+                    if (string.IsNullOrEmpty(txtURL.Text))
+                    {
+                        doc.URL = ConstantUtility.Site.DetailPageURL.Replace("{mold}", ((int)ConstantUtility.Site.Mold.Doucment).ToString());
+                    }
                     hiddenID.Value = _portalDocumentBusiness.AddPortalDocument(doc).ToString();
                 }
                 else

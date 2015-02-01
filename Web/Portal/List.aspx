@@ -16,7 +16,7 @@
                 {
 
         %>
-        <a href="<%=item.URL %>">
+        <a href="<%=item.URL%>">
             <div class="row thumbnail mgb10">
                 <div class="col-xs-5 col-sm-3 col-md-3 ">
                     <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
@@ -37,7 +37,7 @@
                 foreach (var item in ContentItemList)
                 {
         %>
-        <a href="<%=item.URL %>">
+        <a href="<%=item.URL.Replace("{id}",item.ID.ToString()) %>">
             <div class="row thumbnail mgb10">
                 <div class="col-xs-5 col-sm-3 col-md-3 ">
                     <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">

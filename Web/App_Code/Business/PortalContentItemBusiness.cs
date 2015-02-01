@@ -76,6 +76,7 @@ public class PortalContentItemBusiness : BaseBuiness
         c.State = item.State;
         c.URL = item.URL;
         c.Seq = item.Seq;
+        c.Extend1 = item.Extend1;
         return DBContext.SaveChanges();
     }
     /// <summary>

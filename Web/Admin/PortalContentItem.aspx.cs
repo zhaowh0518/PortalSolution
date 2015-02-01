@@ -109,6 +109,7 @@ public partial class Admin_PortalContentItem : BasePage
 
             if (string.IsNullOrEmpty(hiddenID.Value)) //添加
             {
+                item.URL = ConstantUtility.Site.DetailPageURL.Replace("{mold}", ((int)ConstantUtility.Site.Mold.ContentItem).ToString());
                 hiddenID.Value = _portalContentItemBusiness.AddPortalContentItem(item).ToString();
             }
             else
