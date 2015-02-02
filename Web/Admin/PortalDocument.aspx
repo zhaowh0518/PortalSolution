@@ -2,10 +2,10 @@
     CodeFile="PortalDocument.aspx.cs" Inherits="Admin_PortalDocument" ValidateRequest="false"
     EnableEventValidation="false" Theme="AdminTheme" %>
 
-<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <script src="../Library/ckeditor/ckeditor.js" type="text/javascript"></script>
     <div class="divNavList">
         <asp:TreeView ID="tvMenuList" runat="server">
         </asp:TreeView>
@@ -74,9 +74,8 @@
                             描述：
                         </td>
                         <td>
-                            <CKEditor:CKEditorControl ID="richEditor" runat="server" BasePath="../Library/ckeditor/"
-                                Width="595px" Skin="office2003">
-                            </CKEditor:CKEditorControl>
+                            <textarea runat="server" clientidmode="Static" id="txtDescription" name="txtDescription"
+                                rows="10" cols="40"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -119,4 +118,10 @@
             </asp:Panel>
         </div>
     </div>
+    <script type="text/javascript">
+        var editor = document.getElementById("txtDescription");
+        if (editor != "undefine" && editor != null) {
+            CKEDITOR.replace('txtDescription');
+        }
+    </script>
 </asp:Content>

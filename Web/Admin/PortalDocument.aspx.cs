@@ -59,7 +59,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtURL.Text = string.Empty;
         txtDisplayName.Text = string.Empty;
         txtExtend1.Text = string.Empty;
-        richEditor.Text = string.Empty;
+        txtDescription.Value = string.Empty;
         hiddenImageURL.Value = string.Empty;
         linkViewImage.HRef = string.Empty;
         cbState.Checked = true;
@@ -74,7 +74,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
         txtURL.Text = doc.URL;
         txtDisplayName.Text = doc.DisplayName;
         txtExtend1.Text = doc.Extend1;
-        richEditor.Text = doc.Description;
+        txtDescription.Value = doc.Description;
         hiddenImageURL.Value = doc.ImageURL;
         linkViewImage.HRef = string.Format("{0}{1}", ConstantUtility.Site.ImageURLPath, doc.ImageURL);
         cbState.Checked = doc.State;
@@ -103,7 +103,7 @@ public partial class Admin_PortalDocument : System.Web.UI.Page
                 doc.Seq = Convert.ToInt32(txtSeq.Text);
                 doc.URL = txtURL.Text;
                 doc.State = cbState.Checked;
-                doc.Description = richEditor.Text;
+                doc.Description = txtDescription.Value;
                 doc.DisplayName = txtDisplayName.Text;
                 doc.Extend1 = txtExtend1.Text;
                 doc.Type = Convert.ToInt32(ddlType.SelectedValue);
