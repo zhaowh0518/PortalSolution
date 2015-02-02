@@ -121,7 +121,8 @@
                             链接：
                         </td>
                         <td>
-                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox"></asp:TextBox>
+                            <asp:TextBox ID="txtURL" runat="server" CssClass="textbox" Width="500px"></asp:TextBox>&nbsp;&nbsp;
+                            <a href="Demo.aspx" target="_blank" runat="server">代码示例</a>
                         </td>
                     </tr>
                     <tr>
