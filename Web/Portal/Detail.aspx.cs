@@ -151,7 +151,7 @@ public partial class Portal_Detail : BasePage
             if (accessToken != null)
             {
                 wxUser = wxWeb.GetUserInfo(accessToken);
-                if (wxUser != null)
+                if (wxUser != null & !string.IsNullOrEmpty(wxUser.openid))
                 {
                     //保存用户到数据库
                     UserInfo userInfo = new UserInfo();

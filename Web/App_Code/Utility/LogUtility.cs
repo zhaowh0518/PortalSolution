@@ -31,7 +31,7 @@ public static class LogUtility
     /// <param name="ex"></param>
     public static void WritePortalDebugLog(string source, Exception ex)
     {
-        string msg = string.Format("{0}:{1}<br/>", source, ex.InnerException == null ? ex.Message : ex.InnerException.Message);
+        string msg = string.Format("{0}:<br/>{1}<br/>{2}<br/>", source, ex.InnerException == null ? ex.Message : ex.InnerException.Message, ex.StackTrace);
         HttpContext.Current.Application[ConstantUtility.Portal.ErrorMessageKey] = msg;
     }
 }

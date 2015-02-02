@@ -16,15 +16,21 @@
         <div class="divTitle">
             示例</div>
         <div id="divVideoShow" runat="server">
-            <embed src="http://player.youku.com/player.php/sid/XODUzNjk2NzUy/v.swf" allowfullscreen="true"
-                quality="high" width="480" height="400" align="middle" allowscriptaccess="always"
-                type="application/x-shockwave-flash"></embed>
+            <iframe class="iframevd top20" height="500" width="500" src="http://player.youku.com/embed/XNzgwNDc2OTc2"
+                frameborder="0" allowfullscreen></iframe>
         </div>
         <div>
             &nbsp;</div>
         <div id="divAudioShow" runat="server">
-            <embed src="http://app.yuantengfei.org/ytf/upload/mp3/zhg/4.mp3" width="480" height="40"
-                volume="0" loop="-1" autostart="0"> </embed>
+            <div class="bot20">
+                <audio preload="auto" controls>
+                <source src="http://app.yuantengfei.org/ytf/upload/mp3/zhg/4.mp3">
+              </audio>
+                <script src="../Portal/js/jquery.js" type="text/javascript"></script>
+                <script src="../Portal/js/audioplayer.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    $(function () { $('audio').audioPlayer(); });</script>
+            </div>
         </div>
         <div>
             <asp:TextBox ID="txtCode" TextMode="MultiLine" runat="server" Width="650px" Height="50px"></asp:TextBox>
