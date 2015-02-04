@@ -22,6 +22,6 @@ public partial class Portal_BBS : BasePage
 
     protected override void GetData()
     {
-        PortalDocumentList = _portalDocumentBuiness.GetMenuPortalDocumentList(Keyword);
+        PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
     }
 }

@@ -8,12 +8,17 @@ using PortalModel;
 
 public partial class Portal_Index : BasePage
 {
+    public string Keyword = "Index";
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             GetData();
+            if (!string.IsNullOrEmpty(Request["keyword"]))
+            {
+                Keyword = Request["keyword"];
+            }
         }
     }
     /// <summary>
@@ -21,7 +26,7 @@ public partial class Portal_Index : BasePage
     /// </summary>
     protected override void GetData()
     {
-        PortalMenuList = _portalMenuBuiness.GetPortalMenuList();
-        PortalDocumentList = _portalDocumentBuiness.GetMenuPortalDocumentList("Index");
+        PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
+        PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
     }
 }

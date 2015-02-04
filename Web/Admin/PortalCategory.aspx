@@ -26,6 +26,7 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtName" runat="server" CssClass="textbox"></asp:TextBox>
+                        <asp:RequiredFieldValidator ControlToValidate="txtName" runat="server" Text="*" CssClass="required"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -34,6 +35,8 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtCode" runat="server" CssClass="textbox"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtCode"
+                            runat="server" Text="*" CssClass="required"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>

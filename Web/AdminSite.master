@@ -26,7 +26,9 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
                     IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
+                        <asp:MenuItem NavigateUrl="~/Admin/PortalCategory.aspx" Text="分类管理" />
                         <asp:MenuItem NavigateUrl="~/Admin/PortalContent.aspx" Text="内容管理" />
+                        <asp:MenuItem NavigateUrl="~/Admin/PortalMenu.aspx" Text="栏目管理" />
                         <asp:MenuItem NavigateUrl="~/Admin/PortalDocument.aspx" Text="文档管理" />
                         <asp:MenuItem NavigateUrl="~/Portal/Index.aspx" Text="前台网站" Target="_blank" />
                     </Items>

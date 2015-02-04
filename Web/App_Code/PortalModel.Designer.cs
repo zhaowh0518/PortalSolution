@@ -100,22 +100,6 @@ namespace PortalModel
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        public ObjectSet<PortalMenu> PortalMenu
-        {
-            get
-            {
-                if ((_PortalMenu == null))
-                {
-                    _PortalMenu = base.CreateObjectSet<PortalMenu>("PortalMenu");
-                }
-                return _PortalMenu;
-            }
-        }
-        private ObjectSet<PortalMenu> _PortalMenu;
-    
-        /// <summary>
-        /// 没有元数据文档可用。
-        /// </summary>
         public ObjectSet<PortalMenuItem> PortalMenuItem
         {
             get
@@ -192,6 +176,22 @@ namespace PortalModel
             }
         }
         private ObjectSet<PortalDocument> _PortalDocument;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<PortalMenu> PortalMenu
+        {
+            get
+            {
+                if ((_PortalMenu == null))
+                {
+                    _PortalMenu = base.CreateObjectSet<PortalMenu>("PortalMenu");
+                }
+                return _PortalMenu;
+            }
+        }
+        private ObjectSet<PortalMenu> _PortalMenu;
 
         #endregion
 
@@ -211,14 +211,6 @@ namespace PortalModel
         public void AddToSysConfig(SysConfig sysConfig)
         {
             base.AddObject("SysConfig", sysConfig);
-        }
-    
-        /// <summary>
-        /// 用于向 PortalMenu EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
-        /// </summary>
-        public void AddToPortalMenu(PortalMenu portalMenu)
-        {
-            base.AddObject("PortalMenu", portalMenu);
         }
     
         /// <summary>
@@ -259,6 +251,14 @@ namespace PortalModel
         public void AddToPortalDocument(PortalDocument portalDocument)
         {
             base.AddObject("PortalDocument", portalDocument);
+        }
+    
+        /// <summary>
+        /// 用于向 PortalMenu EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddToPortalMenu(PortalMenu portalMenu)
+        {
+            base.AddObject("PortalMenu", portalMenu);
         }
 
         #endregion
@@ -2128,6 +2128,30 @@ namespace PortalModel
         private Nullable<global::System.Int32> _Type;
         partial void OnTypeChanging(Nullable<global::System.Int32> value);
         partial void OnTypeChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Style
+        {
+            get
+            {
+                return _Style;
+            }
+            set
+            {
+                OnStyleChanging(value);
+                ReportPropertyChanging("Style");
+                _Style = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Style");
+                OnStyleChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Style;
+        partial void OnStyleChanging(Nullable<global::System.Int32> value);
+        partial void OnStyleChanged();
     
         /// <summary>
         /// 没有元数据文档可用。

@@ -135,6 +135,7 @@
           <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="1024" />
           <Property Name="Description" Type="nvarchar" MaxLength="2048" />
           <Property Name="Type" Type="int" />
+          <Property Name="Style" Type="int" />
           <Property Name="ParentID" Type="int" Nullable="false" />
           <Property Name="ParentCode" Type="nvarchar" MaxLength="1024" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="1024" />
@@ -179,12 +180,12 @@
         <EntityContainer Name="PortalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PortalManager" EntityType="PortalModel.PortalManager" />
           <EntitySet Name="SysConfig" EntityType="PortalModel.SysConfig" />
-          <EntitySet Name="PortalMenu" EntityType="PortalModel.PortalMenu" />
           <EntitySet Name="PortalMenuItem" EntityType="PortalModel.PortalMenuItem" />
           <EntitySet Name="PortalCategory" EntityType="PortalModel.PortalCategory" />
           <EntitySet Name="PortalContent" EntityType="PortalModel.PortalContent" />
           <EntitySet Name="PortalContentItem" EntityType="PortalModel.PortalContentItem" />
           <EntitySet Name="PortalDocument" EntityType="PortalModel.PortalDocument" />
+          <EntitySet Name="PortalMenu" EntityType="PortalModel.PortalMenu" />
         </EntityContainer>
         <EntityType Name="PortalManager">
           <Key>
@@ -214,24 +215,6 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Value" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="1024" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PortalMenu">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="Type" />
-          <Property Type="Int32" Name="ParentID" Nullable="false" />
-          <Property Type="String" Name="ParentCode" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DisplayName" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="URL" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ImageUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="Seq" Nullable="false" />
-          <Property Type="Boolean" Name="State" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
         </EntityType>
         <EntityType Name="PortalMenuItem">
           <Key>
@@ -320,6 +303,25 @@
           <Property Type="String" Name="Extend2" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Extend3" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PortalMenu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Type" />
+          <Property Type="Int32" Name="Style" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" />
+          <Property Type="String" Name="ParentCode" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DisplayName" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="URL" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Seq" Nullable="false" />
+          <Property Type="Boolean" Name="State" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -343,25 +345,6 @@
               <MappingFragment StoreEntitySet="SysConfig">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PortalMenu">
-            <EntityTypeMapping TypeName="PortalModel.PortalMenu">
-              <MappingFragment StoreEntitySet="PortalMenu">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Seq" ColumnName="Seq" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -460,6 +443,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PortalMenu">
+            <EntityTypeMapping TypeName="PortalModel.PortalMenu">
+              <MappingFragment StoreEntitySet="PortalMenu">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -483,12 +486,12 @@
       <Diagram Name="Model">
         <EntityTypeShape EntityType="PortalModel.PortalManager" Width="1.5" PointX="0.875" PointY="8.25" Height="2.1610522460937496" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.SysConfig" Width="1.5" PointX="4.375" PointY="8.25" Height="1.9700325520833326" />
-        <EntityTypeShape EntityType="PortalModel.PortalMenu" Width="1.5" PointX="0.625" PointY="4.125" Height="3.4981901041666674" />
         <EntityTypeShape EntityType="PortalModel.PortalMenuItem" Width="1.5" PointX="2.875" PointY="5" Height="2.3520719401041674" />
         <EntityTypeShape EntityType="PortalModel.PortalCategory" Width="1.5" PointX="0.875" PointY="0.625" Height="2.3520719401041674" />
         <EntityTypeShape EntityType="PortalModel.PortalContent" Width="1.5" PointX="3.125" PointY="0.5" Height="4.2622688802083317" />
         <EntityTypeShape EntityType="PortalModel.PortalContentItem" Width="1.5" PointX="7" PointY="0.75" Height="3.8802294921875031" />
         <EntityTypeShape EntityType="PortalModel.PortalDocument" Width="1.5" PointX="5.625" PointY="4.75" Height="4.0712491861979174" />
+        <EntityTypeShape EntityType="PortalModel.PortalMenu" Width="1.5" PointX="0.625" PointY="3.75" Height="3.6892097981770817" />
       </Diagram>
     </Diagrams>
   </Designer>

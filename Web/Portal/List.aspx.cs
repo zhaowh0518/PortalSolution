@@ -34,8 +34,8 @@ public partial class Portal_List : BasePage
         //文档列表
         if (!string.IsNullOrEmpty(Keyword))
         {
-            PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList();
-            PortalDocumentList = _portalDocumentBuiness.GetMenuPortalDocumentList(Keyword);
+            PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
+            PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
         }
         //内容集列表
         else

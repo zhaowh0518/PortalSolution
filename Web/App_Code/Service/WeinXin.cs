@@ -82,7 +82,7 @@ public class WeinXin
             //repParms.Add("MsgType", "text");
             //repParms.Add("Content", "欢迎与袁老师一起交流！<a href='http://182.92.155.19/portal/index.aspx'>点击进入</a>");
             repParms.Add("MsgType", "news");
-            List<PortalModel.PortalDocument> docList = new PortalDocumentBusiness().GetMenuPortalDocumentList("Index");
+            List<PortalModel.PortalDocument> docList = new PortalDocumentBusiness().GetValidMenuPortalDocumentList("Index");
             docList = docList.Where(p => p.PortalMenuCode == "Index_NewWorks").ToList();
             Dictionary<string, string> article = new Dictionary<string, string>();
             string articleListXml = string.Empty;

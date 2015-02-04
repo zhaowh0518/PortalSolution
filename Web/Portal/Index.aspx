@@ -15,9 +15,9 @@
         <!-- 轮播（Carousel）项目 -->
         <div class="carousel-inner">
             <%
-                List<PortalModel.PortalDocument> newWorksList = PortalDocumentList.Where(p => p.PortalMenuCode == "Index_AD").ToList();
+                List<PortalModel.PortalDocument> adList = PortalDocumentList.Where(p => p.PortalMenuCode == "Index_AD").ToList();
                 bool isActive = true;
-                foreach (var item in newWorksList)
+                foreach (var item in adList)
                 {
 
             %>
@@ -39,21 +39,28 @@
         $("#myCarousel").carousel('cycle');
     });
 });             </script>
-    <script src="js/audioplayer.js"></script>
+    <script src="js/audioplayer.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row" id="thumbnails_container">
+        <%               
+                foreach (var menu in PortalMenuList)
+                {
+                    if(menu.Style >0)
+                    {
+        %>
         <div class="col-md-12 ">
             <h3>
-                <%=PortalMenuList.Single(p=>p.Code=="Index_NewWorks").Name %>
+                <%=menu.Name %>
             </h3>
         </div>
         <div class="row">
             <%
-                List<PortalModel.PortalDocument> newWorksList = PortalDocumentList.Where(p => p.PortalMenuCode == "Index_NewWorks").ToList();
-                foreach (var item in newWorksList)
-                {
-
+                    List<PortalModel.PortalDocument> documentList = PortalDocumentList.Where(p => p.PortalMenuID == menu.ID).ToList();
+                    foreach (var item in documentList)
+                    {
+                        if(menu.Style == 1)
+                        {
             %>
             <div class="col-xs-6 col-sm-3 col-md-3">
                 <a href="<%=item.URL.Replace("{id}",item.ID.ToString()) %>" class="thumbnail">
@@ -64,36 +71,8 @@
             </div>
             <%
                 }
-            %>
-        </div>
-        <div class="col-md-12">
-            <h3>
-                <%=PortalMenuList.Single(p => p.Code == "Index_FinishedAlbum").Name%></h3>
-        </div>
-        <div class="row">
-            <%
-                List<PortalModel.PortalDocument> finishedAlbumList = PortalDocumentList.Where(p => p.PortalMenuCode == "Index_FinishedAlbum").ToList();
-                foreach (var item in finishedAlbumList)
+                else if(menu.Style == 2)
                 {
-
-            %>
-            <div class="col-xs-6 col-sm-3 col-md-3">
-                <a href="<%=item.URL.Replace("{id}",item.ID.ToString()) %>" class="thumbnail">
-                    <img src="<%=ImageURL + item.ImageURL %>" alt="<%=item.Name %>" class="img-responsive">
-                    <p class="tzzt">
-                        <%=item.Name %></p>
-                </a>
-            </div>
-            <%
-                }
-            %>
-        </div>
-        <div class="col-md-9 clear0">
-            <%
-                List<PortalModel.PortalDocument> bbsList = PortalDocumentList.Where(p => p.PortalMenuCode == "Index_BBS").ToList();
-                foreach (var item in bbsList)
-                {
-
             %>
             <a href="<%=item.URL %>">
                 <div class="row thumbnail mgb10">
@@ -117,8 +96,13 @@
             </a>
             <%
                 }
+               }
             %>
         </div>
+        <%
+            }
+                }
+        %>
     </div>
     <!-- thumbnail area -->
 </asp:Content>

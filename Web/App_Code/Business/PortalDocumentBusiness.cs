@@ -49,7 +49,7 @@ public class PortalDocumentBusiness : BaseBuiness
     /// 获取指定菜单下以及菜单的子类下的所有文档
     /// </summary>
     /// <returns></returns>
-    public List<PortalDocument> GetMenuPortalDocumentList(string menuCode)
+    public List<PortalDocument> GetValidMenuPortalDocumentList(string menuCode)
     {
         var c = from p in DBContext.PortalDocument
                 join q in DBContext.PortalMenu on p.PortalMenuID equals q.ID

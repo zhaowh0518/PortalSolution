@@ -123,6 +123,11 @@ h1
     line-height: 30px;
     font-size: 16px;
 }
+.divEdit .required
+{
+    margin-left: 3px;
+    color: Red;
+}
 .divEdit .select
 {
     padding: 3px;

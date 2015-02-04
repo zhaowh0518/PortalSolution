@@ -26,6 +26,8 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtName" runat="server" CssClass="textbox"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtName"
+                            runat="server" Text="*" CssClass="required"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -34,6 +36,8 @@
                     </td>
                     <td>
                         <asp:TextBox ID="txtCode" runat="server" CssClass="textbox"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="txtCode"
+                            runat="server" Text="*" CssClass="required"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -45,6 +49,18 @@
                             <asp:ListItem Selected="True" Value="0">父菜单</asp:ListItem>
                             <asp:ListItem Value="1">内容菜单</asp:ListItem>
                             <asp:ListItem Value="2">文档菜单</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        风格：
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlStyle" runat="server" CssClass="select">
+                            <asp:ListItem Selected="True" Value="0">目录类</asp:ListItem>
+                            <asp:ListItem Value="1">内容类</asp:ListItem>
+                            <asp:ListItem Value="2">社区类</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>

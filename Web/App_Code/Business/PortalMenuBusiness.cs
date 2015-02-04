@@ -27,13 +27,15 @@ public class PortalMenuBusiness : BaseBuiness
         }
     }
     /// <summary>
-    /// 获取状态为1的菜单
+    /// 获取某个菜单下所有可见的菜单
     /// </summary>
+    /// <param name="rootMenuCode"></param>
     /// <returns></returns>
-    public List<PortalMenu> GetValidPortalMenuList()
+    public List<PortalMenu> GetValidPortalMenuList(string rootMenuCode)
     {
         var c = from p in DBContext.PortalMenu
-                where p.State == true
+                where p.State == true & p.ParentCode == rootMenuCode
+                orderby p.Seq
                 select p;
         if (c != null && c.Count() > 0)
         {
@@ -93,6 +95,7 @@ public class PortalMenuBusiness : BaseBuiness
         c.Seq = item.Seq;
         c.State = item.State;
         c.Type = item.Type;
+        c.Style = item.Style;
         c.URL = item.URL;
         return DBContext.SaveChanges();
     }
