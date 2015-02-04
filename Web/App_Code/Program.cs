@@ -36,19 +36,35 @@ public class Program
     public string ImageURL { get; set; }
     public string ImageURL2 { get; set; }
     public string URL { get; set; }
-    public string Code { get; set; }
     public DateTime CreateDate { get; set; }
 
+    /// <summary>
+    /// 总计点赞的次数
+    /// </summary>
     public int FeelCount { get; set; }
+    /// <summary>
+    /// 当前用户是否赞过
+    /// </summary>
     public bool IsUserFelt { get; set; }
+    /// <summary>
+    /// 总计被收藏的次数
+    /// </summary>
     public int FavoriteCount { get; set; }
+    /// <summary>
+    /// 是否被当前用户收藏过
+    /// </summary>
     public bool IsUserHasFavorite { get; set; }
+    /// <summary>
+    /// 播放器代码
+    /// </summary>
+    public string PlayCode { get; set; }
     /// <summary>
     /// 评论列表
     /// </summary>
     public List<UserComment> CommentList { get; set; }
     #endregion
 
+    #region Constructor
     public Program()
     {
         ID = 0;
@@ -87,7 +103,7 @@ public class Program
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
         URL = item.URL;
-        Code = item.Extend1;
+        PlayCode = GetPlayCode(item.Type, item.Extend1);
         ContentType = item.Type;
         CreateDate = item.CreateDate;
 
@@ -102,7 +118,7 @@ public class Program
         Description = item.Description;
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
-        Code = item.Extend1;
+        PlayCode = GetPlayCode((int)item.Type, item.Extend1);
         URL = item.URL;
         ContentType = (int)item.Type;
         CreateDate = item.CreateDate;
@@ -118,38 +134,14 @@ public class Program
         Description = item.Description;
         ImageURL = item.ImageURL;
         ImageURL2 = item.ImageURL2;
-        Code = item.Extend1;
+        PlayCode = GetPlayCode(item.Type, item.Extend1);
         URL = item.URL;
         CreateDate = item.CreateDate;
         ContentType = 2;
 
         GetUserData();
     }
-
-    /// <summary>
-    /// 用户互动的数据
-    /// </summary>
-    private void GetUserData()
-    {
-        List<UserAct> actList = _userBusiness.GetUserActList(ID, ContentType);
-        if (actList != null && actList.Count > 0)
-        {
-            var feel = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
-            IsUserFelt = feel == null ? false : true;
-            var favorite = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
-            IsUserHasFavorite = favorite == null ? false : true;
-        }
-        List<UserProgramAct> programActList = _userBusiness.GetProgramActList(ID, ContentType);
-        if (actList != null && actList.Count > 0)
-        {
-            var feel = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
-            FeelCount = feel == null ? 0 : feel.ActCount;
-            var favorite = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
-            FavoriteCount = favorite == null ? 0 : favorite.ActCount;
-        }
-        CommentList = _userBusiness.GetCommentList(ID, ContentType);
-        CommentList = CommentList == null ? new List<UserComment>() : CommentList;
-    }
+    #endregion
 
     #region Action
     public void AddFeel(int userID)
@@ -192,4 +184,46 @@ public class Program
         FeelCount++;
     }
     #endregion
+
+    /// <summary>
+    /// 用户互动的数据
+    /// </summary>
+    private void GetUserData()
+    {
+        List<UserAct> actList = _userBusiness.GetUserActList(ID, ContentType);
+        if (actList != null && actList.Count > 0)
+        {
+            var feel = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
+            IsUserFelt = feel == null ? false : true;
+            var favorite = actList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
+            IsUserHasFavorite = favorite == null ? false : true;
+        }
+        List<UserProgramAct> programActList = _userBusiness.GetProgramActList(ID, ContentType);
+        if (actList != null && actList.Count > 0)
+        {
+            var feel = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Feel).SingleOrDefault();
+            FeelCount = feel == null ? 0 : feel.ActCount;
+            var favorite = programActList.Where(p => p.ActType == (int)UserBusiness.ActType.Favorite).SingleOrDefault();
+            FavoriteCount = favorite == null ? 0 : favorite.ActCount;
+        }
+        CommentList = _userBusiness.GetCommentList(ID, ContentType);
+        CommentList = CommentList == null ? new List<UserComment>() : CommentList;
+    }
+    /// <summary>
+    /// 根据类容类型返回播放代码
+    /// </summary>
+    /// <returns></returns>
+    private string GetPlayCode(int type, string path)
+    {
+        string code = string.Empty;
+        if (type == 0) //视频
+        {
+            code = string.Format("<iframe class=\"iframevd top20\" height=500 width=500 src=\"{0}\" frameborder=0 allowfullscreen ></iframe>", path);
+        }
+        else if (type == 1) //音频
+        {
+            code = string.Format("<div class=\"bot20\"><audio preload=\"auto\" controls><source src=\"{0}\"></audio><script src=\"js/jquery.js\" type=\"text/javascript\"></script><script src=\"js/audioplayer.js\" type=\"text/javascript\"></script><script type=\"text/javascript\">$(function () {{ $('audio').audioPlayer(); }});</script></div>", path);
+        }
+        return code;
+    }
 }

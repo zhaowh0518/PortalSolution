@@ -28,7 +28,7 @@
                         &nbsp;<input id="txtImagUrl" type="hidden" value=" <%=HttpUrlBase + "/Resources/Images/" + CurrentProgram.ImageURL%>" />
                     </div>
                     <div>
-                        <%=CurrentProgram.ContentType ==2 ? string.Empty : CurrentProgram.Code%></div>
+                        <%=CurrentProgram.PlayCode%></div>
                     <div id="divDescription">
                         <%=Server.HtmlDecode(CurrentProgram.Description)%>
                     </div>
