@@ -18,9 +18,15 @@ public partial class Portal_i : BasePage
     {
         if (!Page.IsPostBack)
         {
+            //从微信返回来
+            string code = Request["code"];
+            if (!string.IsNullOrEmpty(code))
+            {
+                GetWXUser(code);
+            }
+            CheckUser();
             if (Session[ConstantUtility.Portal.UserIDKey] != null)
             {
-
                 GetData();
             }
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PortalModel;
+using UserModel;
 
 /// <summary>
 ///BasePage 的摘要说明
@@ -16,6 +17,7 @@ public class BasePage : System.Web.UI.Page
     protected PortalContentItemBusiness _portalContentItemBusiness = new PortalContentItemBusiness();
     protected PortalMenuItemBusiness _portalMenuItemBusiness = new PortalMenuItemBusiness();
 
+    WeinxinWeb wxWeb = new WeinxinWeb();
 
     /// <summary>
     /// 当前页面的菜单
@@ -63,5 +65,52 @@ public class BasePage : System.Web.UI.Page
     protected string GetErrorMessage(Exception ex)
     {
         return ex.InnerException == null ? ex.Message : ex.InnerException.Message;
+    }
+
+
+    protected void CheckUser()
+    {
+        if (Session[ConstantUtility.Portal.UserIDKey] == null)
+        {
+            //如果用户ID为空则去做微信认证
+            string redirect_url = Request.Url.AbsoluteUri;
+            Response.Redirect(wxWeb.GetAuthorizeUrl(redirect_url, "auth"));
+        }
+    }
+
+    protected void GetWXUser(string code)
+    {
+        try
+        {
+            WXWebAccessToken accessToken = wxWeb.GetAccessToken(code);
+            WXUserInfo wxUser = new WXUserInfo();
+            if (accessToken != null)
+            {
+                wxUser = wxWeb.GetUserInfo(accessToken);
+                if (wxUser != null & !string.IsNullOrEmpty(wxUser.openid))
+                {
+                    //保存用户到数据库
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.City = wxUser.city;
+                    userInfo.Country = wxUser.country;
+                    userInfo.HeadImgUrl = wxUser.headimgurl;
+                    userInfo.NickName = wxUser.nickname;
+                    userInfo.OpenID = wxUser.openid;
+                    userInfo.province = wxUser.province;
+                    userInfo.Sex = string.IsNullOrEmpty(wxUser.sex) ? 0 : Convert.ToInt32(wxUser.sex);
+                    userInfo.UnionID = wxUser.unionid;
+                    userInfo.Summary = string.Empty;
+                    int userID = new UserBusiness().AddSycUser(userInfo);
+
+                    //在Session中记录用户信息
+                    Session[ConstantUtility.Portal.UserIDKey] = userID;
+                    Session[ConstantUtility.Portal.UserNameKey] = userInfo.NickName;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            LogUtility.WritePortalDebugLog("GetWXUser", ex);
+        }
     }
 }

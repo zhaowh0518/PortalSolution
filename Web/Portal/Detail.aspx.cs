@@ -13,12 +13,12 @@ public partial class Portal_Detail : BasePage
     public int CurrentUserID = 0;
     public string CurrentUserName = string.Empty;
 
-    WeinxinWeb wxWeb = new WeinxinWeb();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //从微信返回来
         string code = Request["code"];
-        if (!string.IsNullOrEmpty(code)) //从微信返回来
+        if (!string.IsNullOrEmpty(code))
         {
             GetWXUser(code);
         }
@@ -149,49 +149,4 @@ public partial class Portal_Detail : BasePage
         }
     }
 
-    private void CheckUser()
-    {
-        if (Session[ConstantUtility.Portal.UserIDKey] == null)
-        {
-            //如果用户ID为空则去做微信认证
-            string redirect_url = Request.Url.AbsoluteUri;
-            Response.Redirect(wxWeb.GetAuthorizeUrl(redirect_url, "auth"));
-        }
-    }
-
-    private void GetWXUser(string code)
-    {
-        try
-        {
-            WXWebAccessToken accessToken = wxWeb.GetAccessToken(code);
-            WXUserInfo wxUser = new WXUserInfo();
-            if (accessToken != null)
-            {
-                wxUser = wxWeb.GetUserInfo(accessToken);
-                if (wxUser != null & !string.IsNullOrEmpty(wxUser.openid))
-                {
-                    //保存用户到数据库
-                    UserInfo userInfo = new UserInfo();
-                    userInfo.City = wxUser.city;
-                    userInfo.Country = wxUser.country;
-                    userInfo.HeadImgUrl = wxUser.headimgurl;
-                    userInfo.NickName = wxUser.nickname;
-                    userInfo.OpenID = wxUser.openid;
-                    userInfo.province = wxUser.province;
-                    userInfo.Sex = string.IsNullOrEmpty(wxUser.sex) ? 0 : Convert.ToInt32(wxUser.sex);
-                    userInfo.UnionID = wxUser.unionid;
-                    userInfo.Summary = string.Empty;
-                    int userID = new UserBusiness().AddSycUser(userInfo);
-
-                    //在Session中记录用户信息
-                    Session[ConstantUtility.Portal.UserIDKey] = userID;
-                    Session[ConstantUtility.Portal.UserNameKey] = userInfo.NickName;
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            LogUtility.WritePortalDebugLog("GetWXUser", ex);
-        }
-    }
 }
