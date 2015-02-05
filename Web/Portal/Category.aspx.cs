@@ -26,12 +26,24 @@ public partial class Portal_Category : BasePage
     {
         if (!Page.IsPostBack)
         {
+            GetData();
+        }
+    }
+
+    protected override void GetData()
+    {
+        try
+        {
             CategoryList = _portalCategoryBusiness.GetValidPortalCategoryList();
             if (!string.IsNullOrEmpty(Request["code"]))
             {
                 ContentList = _portalContentBusiness.GetPortalContentList(Request["code"]);
                 CurrentCategoryID = CategoryList.SingleOrDefault(p => p.Code == Request["code"]).ID;
             }
+        }
+        catch (Exception ex)
+        {
+            LogUtility.WritePortalDebugLog("Category", ex);
         }
     }
 }

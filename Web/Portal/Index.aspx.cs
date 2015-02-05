@@ -26,7 +26,14 @@ public partial class Portal_Index : BasePage
     /// </summary>
     protected override void GetData()
     {
-        PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
-        PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
+        try
+        {
+            PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
+            PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
+        }
+        catch (Exception ex)
+        {
+            LogUtility.WritePortalDebugLog("Index", ex);
+        }
     }
 }

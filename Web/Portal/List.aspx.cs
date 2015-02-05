@@ -31,18 +31,25 @@ public partial class Portal_List : BasePage
 
     protected override void GetData()
     {
-        //文档列表
-        if (!string.IsNullOrEmpty(Keyword))
+        try
         {
-            PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
-            PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
+            //文档列表
+            if (!string.IsNullOrEmpty(Keyword))
+            {
+                PortalMenuList = _portalMenuBuiness.GetValidPortalMenuList(Keyword);
+                PortalDocumentList = _portalDocumentBuiness.GetValidMenuPortalDocumentList(Keyword);
+            }
+            //内容集列表
+            else
+            {
+                int contentID = Convert.ToInt32(Request["contentid"]);
+                ContentItemList = new PortalContentItemBusiness().GetPortalContentItemList(contentID);
+                ContentName = new PortalContentBusiness().GetPortalContent(contentID).Name;
+            }
         }
-        //内容集列表
-        else
+        catch (Exception ex)
         {
-            int contentID = Convert.ToInt32(Request["contentid"]);
-            ContentItemList = new PortalContentItemBusiness().GetPortalContentItemList(contentID);
-            ContentName = new PortalContentBusiness().GetPortalContent(contentID).Name;
+            LogUtility.WritePortalDebugLog("BBS", ex);
         }
     }
 }
