@@ -29,19 +29,36 @@ public partial class Portal_Detail : BasePage
     {
         try
         {
+            int id = 0;
+            int mold = -1;
+            //防止微信返回来的url中少参数
             if (!string.IsNullOrEmpty(Request["id"]) && !string.IsNullOrEmpty(Request["mold"]))
             {
-                int id = Convert.ToInt32(Request["id"]);
-                int mold = Convert.ToInt32(Request["mold"]);
+                id = Convert.ToInt32(Request["id"]);
+                mold = Convert.ToInt32(Request["mold"]);
+                Session["ProgramID"] = id;
+                Session["PogramMold"] = mold;
+            }
+            else
+            {
+                id = Session["ProgramID"] == null ? 0 : Convert.ToInt32(Session["ProgramID"]);
+                mold = Session["ProgramID"] == null ? -1 : Convert.ToInt32(Session["PogramMold"]);
+            }
+            if (id != 0 && mold != -1)
+            {
                 CurrentProgram = Program.GetProgram(id, (ConstantUtility.Site.Mold)mold);
-                if (CurrentProgram != null)
-                {
-                    ShowActInfo();
-                }
-                else
-                {
-                    CurrentProgram = new Program();
-                }
+            }
+            if (CurrentProgram != null)
+            {
+                ShowActInfo();
+            }
+            else
+            {
+                CurrentProgram = new Program();
+                //当出现内容取不到的情况，记录下参数，供后续调查
+                string msg = string.Format("URL:{0}\tUser:{1}\t{2}", Request.Url.AbsoluteUri,
+                    Session[ConstantUtility.Portal.UserIDKey], Session[ConstantUtility.Portal.UserNameKey]);
+                LogUtility.WriteLog("Portal->Detail->CurrentProgram", msg);
             }
             if (Session[ConstantUtility.Portal.UserIDKey] != null)
             {
